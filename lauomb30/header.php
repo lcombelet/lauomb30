@@ -1,5 +1,5 @@
 <div class="header">
-  <i class="fas fa-spinner fa-spin"></i><h1>LauOmb webserver</h1>
+  <h1><i class="fas fa-spinner fa-spin"></i> LauOmb webserver</h1>
   <p>A hobby gone full-nerd..</p>
 </div>
 
