@@ -45,7 +45,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	  <tr><td>Registered to:</td><td><?php echo htmlspecialchars($_SESSION['useremail']); ?></td></tr>
 	  <tr><td>Member since:</td><td><?php echo htmlspecialchars($_SESSION['usercreated_at']); ?></td></tr>
 	  </table>
-	  <p><a href="logout.php">Sign Out</a></p>
     </div>
     <div class="card">
       <h3>POPULAIR POSTS</h3>

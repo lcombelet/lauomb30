@@ -21,5 +21,8 @@
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   echo "<a href=\"login.php\" style=\"float:right\">Login</a>
   <a href=\"register.php\" style=\"float:right\">Register</a>";
-} ?>
+}
+else {
+  echo "<a href=\"logout.php\" style=\"float:right\">Logout</a>";
+}?>
 </div>
