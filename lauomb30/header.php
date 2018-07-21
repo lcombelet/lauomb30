@@ -19,10 +19,7 @@
 
 <?php
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  echo "<a href=\"login.php\" style=\"float:right\">Login</a>";
-}
-?>
-
-<a href="login.php" style="float:right">Login</a>
-<a href="register.php" style="float:right">Register</a>
+  echo "<a href=\"login.php\" style=\"float:right\">Login</a>
+  <a href=\"register.php\" style=\"float:right\">Register</a>";
+} ?>
 </div>
