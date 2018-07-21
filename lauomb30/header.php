@@ -16,6 +16,13 @@
       <a href="link3.php">Link 3</a>
     </div>
   </div>
+
+<?php
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  echo "<a href=\"login.php\" style=\"float:right\">Login</a>";
+}
+?>
+
 <a href="login.php" style="float:right">Login</a>
 <a href="register.php" style="float:right">Register</a>
 </div>
