@@ -108,7 +108,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   </div>
   <div class="rightcolumn">
     <?php include 'aboutme.php';?>
-    <?php include 'popular.php';?>
     <?php include 'social.php';?>
   </div>
 </div>
