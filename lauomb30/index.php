@@ -23,7 +23,7 @@
       <p>One word beforehand, I am definitely not the most technical skilled person! I just like to learn new things and mess around with code programming until I get frustrated and throw everything away. There are a billion people on this planet that can do things faster and better. I am in it for the fun.</p>
       <p>So here we go..</p>
       <p>Basic stuff first: this website uses a combination of HTML, PHP, MySQL and CSS. For me this is complex enough, and provides me with all that I currently need as far as functionality goes. There are some javascript functions included, but they are mainly taken from templates and I am still learning how to write that code. All the other languages I learnt from <a href="https://www.w3schools.com/" target="_blank">W3 Schools</a> and <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a>. </p>
-      <p>Then with regards to external sources that I use. They are:
+      <p>With regards to external sources that I use. They are:
         <ul>
           <li>The font (Karla) is taken from <a href="https://fonts.google.com/specimen/Karla" target="_blank">Google Fonts</a>, integrated through CSS. It's simple, clearly readable and looks nice.</li>
           <li>The icons I use everywhere are taken from <a href="https://fontawesome.com" target="_blank">Font Awesome</a>, also through CSS. The interface is very easy to use, and since all icons are font-based they remain sharp even when scaled.</li>
