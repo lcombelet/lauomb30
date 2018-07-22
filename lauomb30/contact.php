@@ -1,4 +1,7 @@
 <?php
+// Include config file
+require_once 'config.php';
+
 //Define variables and initialize with empty values
 $first_name = $last_name = $email_from = $type = $comments = "";
 $first_name_err = $last_name_err = $email_from_err = $type_err = $comments_err = "";
