@@ -10,9 +10,9 @@
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <h2>WELCOME</h2>
+      <h2>WELCOME TO MY WEBSITE</h2>
       <h5>A note from the nerd</h5>
-      <p>Welcome to my website. You are currently looking at the landing page of a project that started way back in 2001 or so, when there was an urge to make an database accessible over the web. Now, <?php $timepassed=date('Y')-2001; echo $timepassed; ?> years later, we are here. As the subtitle so subtly suggests, this website is a hobby gone full-nerd!</p>
+      <p>You are looking at the landing page of a project that started way back in 2001 or so, when there was an urge to make an database accessible over the web. Now, <?php $timepassed=date('Y')-2001; echo $timepassed; ?> years later, we are here. As the subtitle so subtly suggests, this website is a hobby gone full-nerd!</p>
       <p>Whilst there are a many nice things that I would love to show you, please go ahead and create an account first. I need to know who is looking at my stuff right <i class="far fa-smile-wink"></i>.</p>
       <p>Also you can contact me with feedback or cool stuff that I should also include. Drop me a message <a href="contact.php">here</a>.</p>
     </div>
