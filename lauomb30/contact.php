@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $last_name = trim($_POST['last_name']);
   }
 
-  //Validate enmail
+  //Validate email
   if(empty(trim($_POST['email_from']))){
     $email_from_err = "Please enter your email address.";
   } elseif(filter_var(trim($_POST['email_from']), FILTER_VALIDATE_EMAIL)) {
