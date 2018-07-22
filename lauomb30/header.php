@@ -4,12 +4,10 @@
 </div>
 
 <div class="topnav">
-<a href="index.php"><i class="fas fa-home"></i> Home</a>
+  <a href="index.php"><i class="fas fa-home"></i> Home</a>
   <a href="news.php"><i class="far fa-newspaper"></i> News</a>
   <div class="dropdown">
-    <button class="dropbtn"><i class="far fa-list-alt"></i> Dropdown
-      <i class="fa fa-caret-down"></i>
-    </button>
+    <button class="dropbtn"><i class="far fa-list-alt"></i> Dropdown <i class="fa fa-caret-down"></i></button>
     <div class="dropdown-content">
       <a href="link1.php">Link 1</a>
       <a href="link2.php">Link 2</a>

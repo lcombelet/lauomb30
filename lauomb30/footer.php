@@ -1,4 +1,4 @@
 <div class="footer">
-  <h2>Footer</h2>
-  <p> Copyright <i class="far fa-copyright"></i> 2000-<?php echo date('Y'); ?> L. Ombelet. All rights reserved.</p>
+  <p> Copyright <i class="far fa-copyright"></i> 2000-<?php echo date('Y'); ?>.</p>
+  <p>L. Ombelet. All rights reserved. <a href="contact.php"><i class="far fa-envelope"></i> Contact me</a></p>
 </div>
