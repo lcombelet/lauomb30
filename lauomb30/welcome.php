@@ -39,7 +39,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   </div>
   <div class="rightcolumn">
     <div class="card">
-      <h2>ABOUT YOU</h2>
+      <h2><i class="far fa-address-card"></i> ABOUT YOU</h2>
 	  <table>
 	  <tr><td>Username:</td><td><?php echo htmlspecialchars($_SESSION['username']); ?></td></tr>
 	  <tr><td>Registered to:</td><td><?php echo htmlspecialchars($_SESSION['useremail']); ?></td></tr>
@@ -47,13 +47,13 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	  </table>
     </div>
     <div class="card">
-      <h3>POPULAIR POSTS</h3>
+      <h3><i class="far fa-thumbs-up"></i> POPULAIR POSTS</h3>
       <div class="fakeimg"><p>Image</p></div>
       <div class="fakeimg"><p>Image</p></div>
       <div class="fakeimg"><p>Image</p></div>
     </div>
     <div class="card">
-      <h3>FOLLOW ME</h3>
+      <h3><i class="far fa-share-square"></i> FOLLOW ME</h3>
       <p>Some text..</p>
     </div>
   </div>
