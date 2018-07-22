@@ -4,10 +4,10 @@
 </div>
 
 <div class="topnav">
-<a href="index.php">Home</a>
-  <a href="news.php">News</a>
+<a href="index.php"><i class="fas fa-home"></i> Home</a>
+  <a href="news.php"><i class="far fa-newspaper"></i> News</a>
   <div class="dropdown">
-    <button class="dropbtn">Dropdown
+    <button class="dropbtn"><i class="far fa-list-alt"></i> Dropdown
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
@@ -19,10 +19,10 @@
 
 <?php
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  echo "<a href=\"login.php\" style=\"float:right\">Login</a>
-  <a href=\"register.php\" style=\"float:right\">Register</a>";
+  echo "<a href=\"login.php\" style=\"float:right\"><i class=\"fas fa-sign-in-alt\"></i> Login</a>
+  <a href=\"register.php\" style=\"float:right\"><i class=\"far fa-plus-square\"></i> Register</a>";
 }
 else {
-  echo "<a href=\"logout.php\" style=\"float:right\">Logout</a>";
+  echo "<a href=\"logout.php\" style=\"float:right\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>";
 }?>
 </div>
