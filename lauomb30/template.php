@@ -36,9 +36,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     </div>
   </div>
   <div class="rightcolumn">
-<?php include 'aboutme.php';?>
-<?php include 'popular.php';?>
-<?php include 'social.php';?>
+    <?php include 'aboutme.php';?>
+    <?php include 'popular.php';?>
+    <?php include 'social.php';?>
   </div>
 </div>
 

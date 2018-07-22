@@ -13,12 +13,12 @@
       <h2>WELCOME</h2>
       <h5>A note from the nerd, Jul 10, 2018</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      <p>Welcome to my website. The pages that this website contains are all built from scratch, using a lot of freely available tools and templates. As the subtitle suggests, this is my hobby that's gone supernerd!</p>
+      <p>Whilst there are a few nice things that I would love to show you, please go ahead and create an account first. I need to know who islooking at my stuff right :-). Also you can contact me with feedback or cool stuff that I should also include. Drop me a message <a href="contact.php">here</a>.</p>
     </div>
     <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
+      <h2>IN ORDER TO AVOID ISSUES..</h2>
+      <h5>A list of things that make up this website, Jul 22, 2018</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
