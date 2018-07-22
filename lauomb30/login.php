@@ -109,21 +109,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2>ABOUT ME</h2>
-      <div class="fakeimg" style="height:100px;">Image</div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-    </div>
-    <div class="card">
-      <h3>POPULAIR POSTS</h3>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
-    </div>
-    <div class="card">
-      <h3>FOLLOW ME</h3>
-      <p>Some text..</p>
-    </div>
+    <?php include 'aboutme.php';?>
+    <?php include 'popular.php';?>
+    <?php include 'social.php';?>
   </div>
 </div>
 

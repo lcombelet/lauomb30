@@ -38,24 +38,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     </div>
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2><i class="far fa-address-card"></i> ABOUT YOU</h2>
-	  <table>
-	  <tr><td>Username:</td><td><?php echo htmlspecialchars($_SESSION['username']); ?></td></tr>
-	  <tr><td>Registered to:</td><td><?php echo htmlspecialchars($_SESSION['useremail']); ?></td></tr>
-	  <tr><td>Member since:</td><td><?php echo htmlspecialchars($_SESSION['usercreated_at']); ?></td></tr>
-	  </table>
-    </div>
-    <div class="card">
-      <h3><i class="far fa-thumbs-up"></i> POPULAIR POSTS</h3>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
-    </div>
-    <div class="card">
-      <h3><i class="far fa-share-square"></i> FOLLOW ME</h3>
-      <p>Some text..</p>
-    </div>
+    <?php include 'aboutyou.php';?>
+    <?php include 'popular.php';?>
+    <?php include 'social.php';?>
   </div>
 </div>
 

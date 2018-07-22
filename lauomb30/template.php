@@ -27,21 +27,9 @@
     </div>
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2><i class="far fa-user"></i> ABOUT ME</h2>
-      <div class="fakeimg" style="height:100px;">Image</div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-    </div>
-    <div class="card">
-      <h3><i class="far fa-thumbs-up"></i> POPULAIR POSTS</h3>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
-      <div class="fakeimg"><p>Image</p></div>
-    </div>
-    <div class="card">
-      <h3><i class="far fa-share-square"></i> FOLLOW ME</h3>
-      <p>Some text..</p>
-    </div>
+<?php include 'aboutme.php';?>
+<?php include 'popular.php';?>
+<?php include 'social.php';?>
   </div>
 </div>
 
