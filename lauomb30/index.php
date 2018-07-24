@@ -17,7 +17,7 @@
       <p>After your account has been activated, you can also contact me with feedback or cool stuff that I should also include.</p>
     </div>
     <div class="card">
-      <h2>IN ORDER TO AVOID CLAIMS..</h2>
+      <h2>IN ORDER TO AVOID ANY CLAIMS..</h2>
       <h5>A list of things that make up this website</h5>
       <p>This never-ending project started officially in <a href="https://products.office.com/en/access" target="_blank">MS Access</a>. Teaching myself pretty much everything byt the use of online tutorials, below you find a list of functionalities, languages, programmes and features all combined for my, euhm your, entertainment.</p>
       <p>One word beforehand, I am definitely not the most technical skilled person! I just like to learn new things and mess around with code programming until I get frustrated and throw everything away. There are a billion people on this planet that can do things faster and better. I am in it for the fun.</p>
