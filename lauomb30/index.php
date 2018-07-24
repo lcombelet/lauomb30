@@ -33,7 +33,7 @@
           <li>I used <a href="https://www.highcharts.com/" target="_blank">Highcharts</a> in the past for table formatting. As I started all over with the current layout I am considering customizing my own table layout. It worked for me in the past but at the moment not a priority.</li>
           <li><a href="https://developers.google.com/chart/" target="_blank">Google Charts</a> everywhere! Pretty much all database integrations are focused on data visualizations. Still learning to work with the required format but over time only this channel will be used.</li>
           <li>Everything is built in <a href="https://atom.io/" target="_blank">Atom</a> in a DEV environment. This is a Windows based machine with locally installed servers for testing.</li>
-          <li>When a functionality is finished, I use <a href="https://github.com/" target="_blank">GitHUB</a> integration for versioning and push the functionality to the PROD environment.</li>
+          <li>When a functionality is finished, I use <a href="https://github.com/" target="_blank">GitHub</a> integration for versioning and push the functionality to the PROD environment.</li>
           <li>The PROD environment is a Linux based (<a href="https://www.ubuntu.com/" target="_blank">Ubuntu</a>) server running a <a href="https://www.nginx.com/" target="_blank">Nginx</a> webserver.</li>
         </ul>
       </p>
