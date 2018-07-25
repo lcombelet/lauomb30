@@ -52,9 +52,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Attempt to execute the prepared statement
         if($stmt->execute()){
             // Success
-            echo "Success";
+            $query_result = "<p>Got it, thanks for your feedback!</p>";
         } else{
-            echo "Could not execute query. Please try again later";
+            $query_result = "<p>Oops.. Could not execute query. Please try again later.</p>";
         }
     }
 
@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //Reset all variables to empty so the page shows empty again
     $type = $comments = "";
   } else{
-    echo "Something went wrong. Please try again later.";
+    echo "Something went really wrong. Please try again later.";
   }
 
   // Close connection
@@ -91,6 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="card">
       <h2>CONTACT FORM</h2>
       <h5>Leave me a comment, or improvement</h5>
+      <?php echo $query_result; ?>
       <p>Please fill in all fields and click Submit. Much appreciated!</p>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <table>
