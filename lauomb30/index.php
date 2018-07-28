@@ -19,7 +19,7 @@
     <div class="card">
       <h2>IN ORDER TO AVOID ANY CLAIMS..</h2>
       <h5>A list of things that make up this website</h5>
-      <p>This never-ending project started officially in <a href="https://products.office.com/en/access" target="_blank">MS Access</a>. Teaching myself pretty much everything byt the use of online tutorials, below you find a list of functionalities, languages, programmes and features all combined for my, euhm your, entertainment.</p>
+      <p>This never-ending project started officially in <a href="https://products.office.com/en/access" target="_blank">MS Access</a>. Teaching myself pretty much everything through online tutorials, below you find a list of functionalities, languages, programmes and features all combined for my, euhm your, entertainment.</p>
       <p>One word beforehand, I am definitely not the most technical skilled person! I just like to learn new things and mess around with code programming until I get frustrated and throw everything away. There are a billion people on this planet that can do things faster and better. I am in it for the fun.</p>
       <p>So here we go..</p>
       <p>Basic stuff first: this website uses a combination of HTML, PHP, MySQL and CSS. For me this is complex enough, and provides me with all that I currently need as far as functionality goes. There are some javascript functions included, but they are mainly taken from templates and I am still learning how to write that code. All the other languages I learnt from <a href="https://www.w3schools.com/" target="_blank">W3 Schools</a> and <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a>. </p>
