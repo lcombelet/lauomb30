@@ -84,13 +84,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <h2>HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h2>
-      <h5> Welcome to my site.</h5>
+      <h2><i class="far fa-hand-spock"></i> HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h2>
+      <h5>In peace to you I come</h5>
       <p>Some text here.</p>
     </div>
     <div class="card">
-      <h2>CONTACT FORM</h2>
-      <h5>Leave me a comment, or improvement</h5>
+      <h2><i class="fas fa-headset"></i> CONTACT FORM</h2>
+      <h5>Leave me a comment</h5>
       <?php echo $query_result; ?>
       <p>Please fill in all fields and click Submit. Much appreciated!</p>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
