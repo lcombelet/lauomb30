@@ -75,7 +75,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html>
 <head>
-  <?php include 'head.php';?>
+  <?php $title= "LauOmb Webserver";
+  include 'head.php'; ?>
 </head>
 <body>
 

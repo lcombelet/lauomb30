@@ -12,7 +12,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <!DOCTYPE html>
 <html>
 <head>
-  <?php include 'head.php';?>
+  <?php $title= "LauOmb Webserver";
+  include 'head.php'; ?>
 </head>
 <body>
 

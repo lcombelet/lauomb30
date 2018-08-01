@@ -19,7 +19,7 @@ else {
       <a href=\"finances.php\"><i class=\"far fa-credit-card\"></i> Finances</a>
     </div>
   </div>
-  <a href=\"Media.php\"><i class=\"far fa-images\"></i> Media</a>
+  <a href=\"media.php\"><i class=\"far fa-images\"></i> Media</a>
   <a href=\"logout.php\" style=\"float:right\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>
   <a href=\"admin.php\" style=\"float:right\"><i class=\"far fa-user\"></i> Admin stuff</a>";
 }?>
