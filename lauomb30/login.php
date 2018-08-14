@@ -48,8 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						if($status == 1){
 						/* Account is active, continue to validate the password */
 							if(password_verify($password, $hashed_password)){
-								/* Password is correct, so start a new session and
-								save the username to the session */
+								/* Password is correct, start a new session and save the username to the session */
 								session_start();
 								$_SESSION['username'] = $username;
 								$_SESSION['useremail'] = $email;
