@@ -8,17 +8,24 @@ body {
     background: #f1f1f1;
 }
 
+.headercontainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 145px;
+  background: white;
+}
+
 /* Header/Blog Title */
 .header {
-    padding: 30px;
     text-align: center;
-    background: white;
 }
 
 .header h1 {
-	font-weight: bold;
-    font-size: 50px;
-	color: #4CAF50;
+    font-weight: bold;
+    font-size: 40px;
+    color: #4CAF50;
 }
 
 /* Style the top navigation bar */
@@ -115,6 +122,10 @@ h2, h3, h4 {
     background-color: white;
     padding: 20px;
     margin-top: 20px;
+}
+
+.row {
+  margin-top: 160px;
 }
 
 /* Clear floats after the columns */
