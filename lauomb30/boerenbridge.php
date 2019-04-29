@@ -35,7 +35,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         $_SESSION['players'] = $_POST['players'];
       }
       if(isset($_POST['addPlayer'])) {
-        //code to add player to database here
+        //add player to db query
       } ?>
       <div class="card">
         <h2>Who is playing this game?</h2>
@@ -43,6 +43,8 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <table>
           <?php
+            //pull playernames from db and store in datalist that can be pulled in html
+
             $x = 1;
             while($x <= $_SESSION['players']) {
           ?>
