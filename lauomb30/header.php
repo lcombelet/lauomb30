@@ -15,10 +15,11 @@
   else {
     echo "<div class=\"dropdown\">
       <button class=\"dropbtn\"><i class=\"far fa-list-alt\"></i> Databases <i class=\"fa fa-caret-down\"></i></button>
-      <div class=\"dropdown-content\">
-        <a href=\"boerenbridge.php\"><i class=\"fas fa-chess-king\"></i> Boerenbridge</a>
-        <a href=\"finances.php\"><i class=\"far fa-credit-card\"></i> Finances</a>
-      </div>
+      <div class=\"dropdown-content\">";
+    if(in_array("5", $_SESSION['authorizations'])){ echo "<a href=\"boerenbridge.php\"><i class=\"fas fa-chess-king\"></i> Boerenbridge</a>"; }
+    if(in_array("6", $_SESSION['authorizations'])){ echo "<a href=\"finances.php\"><i class=\"far fa-credit-card\"></i> Finances</a>"; }
+    if(in_array("13", $_SESSION['authorizations'])){ echo "<a href=\"shrdfinances.php\"><i class=\"far fa-money-bill-alt\"></i> Shared finances</a>"; }
+    echo "</div>
     </div>
     <a href=\"portugal.php\"><i class=\"fas fa-suitcase\"></i> Portugal diary</a>
     <a href=\"media.php\"><i class=\"far fa-images\"></i> Media</a>

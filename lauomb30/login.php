@@ -50,9 +50,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							if(password_verify($password, $hashed_password)){
 								/* Password is correct, start a new session and save the username to the session */
 								session_start();
+
+                // Pull authorizations
+                $authorizations = array();
+
+                $sql = "SELECT `perm_id` FROM `vw_user_authorizations` WHERE `username` = '$param_username' ORDER BY `perm_id`";
+                if($stmt = $mysqli->query($sql)){
+                	while($row = mysqli_fetch_array($stmt)) {
+                		$authorizations[] = $row['perm_id']; // Multidimensional array required to pull results per counterpart
+                	}
+                	// Calculations
+                	} else{
+                	echo "Couldn't fetch authorizations. Please try again later.";
+                }
+
 								$_SESSION['username'] = $username;
 								$_SESSION['useremail'] = $email;
 								$_SESSION['usercreated_at'] = date("d-F Y", strtotime($created_at));
+                $_SESSION['authorizations'] = $authorizations;
 								header("location: welcome.php");
 							} else{
 								// Display an error message if password is not valid

@@ -8,6 +8,9 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   exit;
 }
 
+// Print authorizations
+// print_r($_SESSION['authorizations']);
+
 // Include config file
 require_once 'config.php';
 
@@ -111,6 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </ul>
       </p>
     </div>
+    <?php if(in_array("2", $_SESSION['authorizations'])){ ?>
     <div class="card">
       <h2><i class="fas fa-headset"></i> CONTACT FORM</h2>
       <h5>Leave me a comment</h5>
@@ -130,6 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       </table>
       </form>
     </div>
+  <?php } ?>
   </div>
   <div class="rightcolumn">
     <?php include 'aboutyou.php';?>
