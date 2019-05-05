@@ -115,6 +115,14 @@ $mysqli->close();
       <h5>Useless bit of text here..</h5>
       <p>This page provides an overview of expenses made to date, and calculates open balances.</p>
     </div>
+		<div class="card">
+      <h2>Stuff to work on</h2>
+      <ul>
+				<li>Yearplan - Overview of total expense per month (to track if we keep within the budget).</li>
+				<li>Expense overview - Graph of main categories with total expense for the month.</li>
+				<li>Balances - Total expense for the current month (to track if we keep within the budget).</li>
+			</ul>
+    </div>
     <div class="card">
       <a name="addexpense"></a><h2>Add an expense</h2>
       <?php echo $update_err; ?>
