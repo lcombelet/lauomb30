@@ -116,7 +116,7 @@ $mysqli->close();
 
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
-				['Category', 'Expenses'],
+				['', 'Expenses'], // ['Category', 'Expenses'] would show hAxis label
 				<?php echo $chartdata; ?>
 			]);
 
