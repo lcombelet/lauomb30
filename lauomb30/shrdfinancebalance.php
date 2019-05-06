@@ -16,7 +16,7 @@ $values = array();
 $balance = array();
 
 // Pull balance from db
-$sql = "SELECT * FROM `vw_fin_balance`";
+$sql = "SELECT * FROM `vw_fin_shared_balance`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		$balance[$row['counterpart']][$row['key']] = $row['amount']; // Multidimensional array required to pull results per counterpart

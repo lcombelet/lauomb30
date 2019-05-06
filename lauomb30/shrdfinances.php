@@ -26,12 +26,13 @@ if(isset($_POST['submit'])) {
 	$subcategory = $_POST['subcategory'];
 	$amount = $_POST['amount'];
 	$counterpart = $_POST['counterpart'];
+	$shared = 1;
 
 	// Update Expense table
-	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`) VALUES (?, ?, ?, ?, ?)";
+	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `shared`) VALUES (?, ?, ?, ?, ?, ?)";
 
 	if($stmt = $mysqli->prepare($sql)){
-		$stmt->bind_param("sssss", $date, $location, $description, $subcategory, $amount);
+		$stmt->bind_param("ssssss", $date, $location, $description, $subcategory, $amount, $shared);
 		$stmt->execute();
 	}
 
@@ -63,7 +64,7 @@ if(isset($_POST['submit'])) {
 $sql = "SELECT * FROM `vw_fin_subcategory`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
-		$values[] = "<option value=\"".$row['id']."\">".$row['description']." (".$row['category'].")</option>";
+		$values[] = "<option value=\"".$row['id']."\">".$row['category']." - ".$row['description']."</option>";
 	}
 
 	$subcategories = implode("",$values);
@@ -111,9 +112,9 @@ $mysqli->close();
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <h2>Finances</h2>
+      <h2>Shared finances</h2>
       <h5>Useless bit of text here..</h5>
-      <p>This page provides an overview of expenses made to date, and calculates open balances.</p>
+      <p>This page provides an overview of shared expenses made to date, and calculates open balances.</p>
     </div>
 		<div class="card">
       <h2>Stuff to work on</h2>

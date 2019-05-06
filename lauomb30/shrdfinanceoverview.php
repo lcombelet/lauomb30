@@ -26,7 +26,7 @@ if(isset($_POST['submit'])) {
 }
 
 // Pull Expenses
-$sql = "SELECT * FROM `vw_fin_expenses` WHERE (month(`date`) = '$month' AND year(`date`) = '$year')";
+$sql = "SELECT * FROM `vw_fin_shared_expenses` WHERE (month(`date`) = '$month' AND year(`date`) = '$year')";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		if($row['key'] == "Credit"){
@@ -50,7 +50,7 @@ $stmt->close();
 // Pull chart data
 $chart = array();
 
-$sql = "SELECT `category`,`counterpart`,`key`,`amount` FROM `vw_fin_monthly_overview` WHERE (`year` = '$year' AND `month` = '$month') ORDER BY `category`,`counterpart`,`key`";
+$sql = "SELECT `category`,`counterpart`,`key`,`amount` FROM `vw_fin_shared_monthly_overview` WHERE (`year` = '$year' AND `month` = '$month') ORDER BY `category`,`counterpart`,`key`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		// Negate credits
@@ -90,7 +90,7 @@ $stmt->close();
 
 // Pull months and years
 $values = array();
-$sql = "SELECT * FROM vw_fin_periods";
+$sql = "SELECT * FROM `vw_fin_periods`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		$period = $row['month'].".".$row['year'];
