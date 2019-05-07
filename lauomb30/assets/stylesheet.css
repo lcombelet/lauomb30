@@ -10,6 +10,7 @@ body {
 
 .headercontainer {
   position: fixed;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
@@ -159,7 +160,7 @@ h2, h3, h4 {
     }
 }
 
-table { 
+table {
     border-collapse: separate;
     border-spacing: 0px 5px;
 }

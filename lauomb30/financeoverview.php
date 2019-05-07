@@ -64,13 +64,25 @@ if($stmt = $mysqli->query($sql)){
 		} else{
 			$amount = $row['amount'];
 		}
-		// Split between counterparts
-		$chart[$row['category']][$row['counterpart']] = $amount;
+		// Split between keys
+		$chart[$row['category']][$row['key']] = $amount;
 	}
 
 	// Format to match Google Chart format;
 	foreach ($chart as $key => $value) {
-	  $chartdata = $chartdata . ",['" . $key . "'," . $value[1] . "]";
+		if(array_key_exists(1,$value)){
+			if(array_key_exists(2,$value)){
+				// Debit and credit exist
+				$values = $value[2] . "," . $value[1];
+			} else{
+				// Only credit exists
+				$values = "0," . $value[1];
+			}
+		} else{
+			// Only debit exists
+			$values = $value[2] . ",0";
+		}
+	  $chartdata = $chartdata . ",[{v:'" . $key . "', f:'" . $key . "'}," . $values . "]";
 	}
 
 	$chartdata = substr($chartdata, 1); // Trim first ','
@@ -111,27 +123,29 @@ $mysqli->close();
 	<?php $title = "LauOmb Webserver - Personal finances";
   include 'head.php'; ?>
 	<script type="text/javascript">
-	google.charts.load('current', {'packages':['bar']});
+	google.charts.load('current', {'packages':['corechart', 'bar']});
 	google.charts.setOnLoadCallback(drawChart);
 
-		function drawChart() {
-			var data = google.visualization.arrayToDataTable([
-				['', 'Expenses'], // ['Category', 'Expenses'] would show hAxis label
-				<?php echo $chartdata; ?>
-			]);
+	function drawChart() {
+		var data = new google.visualization.DataTable();
+    data.addColumn('string', '');
+    data.addColumn('number', 'Debit');
+    data.addColumn('number', 'Credit');
 
-			var options = {
-				legend: { position: 'none' },
-				chart: {
-					title: 'Expenses breakdown',
-					subtitle: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>'
-				}
-			};
+    data.addRows([
+			<?php echo $chartdata; ?>
+    ]);
 
-			var chart = new google.charts.Bar(document.getElementById('columnchart'));
+		var options = {
+			chart: {
+				title: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>'
+			}
+		};
 
-			chart.draw(data, google.charts.Bar.convertOptions(options));
-		}
+		var chart = new google.charts.Bar(document.getElementById('columnchart'));
+
+		chart.draw(data, options);
+	}
 	</script>
 </head>
 <body>
@@ -155,8 +169,8 @@ $mysqli->close();
       </form>
     </div>
   	<div class="card">
-      <h2>Graph</h2>
-      <p><div id="columnchart" style="width: 100%; height: 500px;"></div></p>
+      <h2>Expense breakdown</h2>
+      <p><div id="columnchart" style="z-index: 1; width: 100%; height: 500px;"></div></p>
     </div>
     <div class="card">
       <a name="monthlyoverview"></a><h2>Expense overview</h2>

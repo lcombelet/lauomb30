@@ -77,7 +77,7 @@ if($stmt = $mysqli->query($sql)){
 			// Only Irina exists
 			$values = "0," . $value[2];
 		}
-	  $chartdata = $chartdata . ",['" . $key . "'," . $values . "]";
+	  $chartdata = $chartdata . ",[{v:'" . $key . "', f:'" . $key . "'}," . $values . "]";
 	}
 
 	$chartdata = substr($chartdata, 1); // Trim first ','
@@ -118,26 +118,29 @@ $mysqli->close();
 	<?php $title = "LauOmb Webserver - Finance reporting";
   include 'head.php'; ?>
 	<script type="text/javascript">
-	google.charts.load('current', {'packages':['bar']});
+	google.charts.load('current', {'packages':['corechart', 'bar']});
 	google.charts.setOnLoadCallback(drawChart);
 
-		function drawChart() {
-			var data = google.visualization.arrayToDataTable([
-				['', 'Laurens', 'Irina'], // ['Category', 'Laurens', 'Irina'] would show hAxis label
-				<?php echo $chartdata; ?>
-			]);
+	function drawChart() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', '');
+		data.addColumn('number', 'Laurens');
+		data.addColumn('number', 'Irina');
 
-			var options = {
-				chart: {
-					title: 'Expenses breakdown',
-					subtitle: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>',
-				}
-			};
+		data.addRows([
+			<?php echo $chartdata; ?>
+		]);
 
-			var chart = new google.charts.Bar(document.getElementById('columnchart'));
+		var options = {
+			chart: {
+				title: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>'
+			}
+		};
 
-			chart.draw(data, google.charts.Bar.convertOptions(options));
-		}
+		var chart = new google.charts.Bar(document.getElementById('columnchart'));
+
+		chart.draw(data, options);
+	}
 	</script>
 </head>
 <body>
@@ -161,8 +164,8 @@ $mysqli->close();
       </form>
     </div>
   	<div class="card">
-      <h2>Graph</h2>
-      <p><div id="columnchart" style="width: 100%; height: 500px;"></div></p>
+      <h2>Expense breakdown</h2>
+      <p><div id="columnchart" style="z-index: 1; width: 100%; height: 500px;"></div></p>
     </div>
     <div class="card">
       <a name="monthlyoverview"></a><h2>Expense overview</h2>
