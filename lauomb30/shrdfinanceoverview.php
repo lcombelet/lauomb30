@@ -77,11 +77,9 @@ if($stmt = $mysqli->query($sql)){
 			// Only Irina exists
 			$values = "0," . $value[2];
 		}
-	  $chartdata = $chartdata . ",[{v:'" . $key . "', f:'" . $key . "'}," . $values . "]";
+	  $chartdata = $chartdata . ",['" . $key . "', " . $values . "]";
 	}
-
-	$chartdata = substr($chartdata, 1); // Trim first ','
-	} else{
+} else{
 	echo "Couldn't fetch chart data. Please try again later.";
 }
 
@@ -122,12 +120,8 @@ $mysqli->close();
 	google.charts.setOnLoadCallback(drawChart);
 
 	function drawChart() {
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', '');
-		data.addColumn('number', 'Laurens');
-		data.addColumn('number', 'Irina');
-
-		data.addRows([
+		var data = google.visualization.arrayToDataTable([
+          ['', 'Laurens', 'Irina']
 			<?php echo $chartdata; ?>
 		]);
 
@@ -139,7 +133,7 @@ $mysqli->close();
 
 		var chart = new google.charts.Bar(document.getElementById('columnchart'));
 
-		chart.draw(data, options);
+		chart.draw(data, google.charts.Bar.convertOptions(options));
 	}
 	</script>
 </head>

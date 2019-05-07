@@ -28,7 +28,7 @@ if($stmt = $mysqli->query($sql)){
 	$balance_split = round(($balance_total / 2),2);
 	$diff_lau = $balance_split - $total_lau;
 	$diff_iri = $balance_split - $total_iri;
-	$diff_total = round(($diff_lau + $diff_iri),2);
+	$diff_total = abs(round(($diff_lau + $diff_iri),2));
 
 	$payment = min(abs($diff_lau),abs($diff_iri));
 

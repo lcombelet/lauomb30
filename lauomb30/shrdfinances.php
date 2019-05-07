@@ -26,13 +26,13 @@ if(isset($_POST['submit'])) {
 	$subcategory = $_POST['subcategory'];
 	$amount = $_POST['amount'];
 	$counterpart = $_POST['counterpart'];
-	$shared = 1;
+	$type = 1;
 
 	// Update Expense table
-	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `shared`) VALUES (?, ?, ?, ?, ?, ?)";
+	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `type`) VALUES (?, ?, ?, ?, ?, ?)";
 
 	if($stmt = $mysqli->prepare($sql)){
-		$stmt->bind_param("ssssss", $date, $location, $description, $subcategory, $amount, $shared);
+		$stmt->bind_param("ssssss", $date, $location, $description, $subcategory, $amount, $type);
 		$stmt->execute();
 	}
 

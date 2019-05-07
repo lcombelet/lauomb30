@@ -12,7 +12,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'] || in_array("6",
 require_once 'config.php';
 
 // Define variables and initialize with empty values
-$update_err = $date_err = $location_err = $description_err = $category_err = $subcategory_err = $amount_err = $counterpart_err = $shared_err = $key_err = "";
+$update_err = $date_err = $location_err = $description_err = $category_err = $subcategory_err = $amount_err = $counterpart_err = $type_err = $key_err = "";
 $values = array();
 $balance = array();
 
@@ -27,13 +27,13 @@ if(isset($_POST['submit'])) {
 	$amount = $_POST['amount'];
 	$counterpart = 1;
 	$key = $_POST['key'];
-	$shared = $_POST['shared'];
+	$type = $_POST['type'];
 
 	// Update Expense table
-	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `shared`) VALUES (?, ?, ?, ?, ?, ?)";
+	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `type`) VALUES (?, ?, ?, ?, ?, ?)";
 
 	if($stmt = $mysqli->prepare($sql)){
-		$stmt->bind_param("ssssss", $date, $location, $description, $subcategory, $amount, $shared);
+		$stmt->bind_param("ssssss", $date, $location, $description, $subcategory, $amount, $type);
 		$stmt->execute();
 	}
 
@@ -114,7 +114,14 @@ $mysqli->close();
     <div class="card">
       <h2>Personal finances</h2>
       <h5>Useless bit of text here..</h5>
-      <p>This page provides an overview of personal expenses made to date.</p>
+      <p>This page provides an overview of my personal expenses.</p>
+    </div>
+		<div class="card">
+      <h2>Stuff to work on</h2>
+      <ul>
+				<li>Yearplan - Total income vs expense/savings (stacked) per month.</li>
+				<li>Balances - Total expense for the current month (to track if we keep within the budget).</li>
+			</ul>
     </div>
     <div class="card">
       <a name="addexpense"></a><h2>Add an expense</h2>
@@ -148,16 +155,18 @@ $mysqli->close();
 					<tr>
 						<td><label>Key:</label></td>
 						<td><select name="key">
-									<option value="2">Debit</option>
 									<option value="1">Credit</option>
+									<option value="2" selected>Debit</option>
+									<option value="3">Savings</option>
 								</select><?php echo $key_err; ?></td>
 					</tr>
 					<tr>
-						<td><label>Shared:</label></td>
-						<td><select name="shared">
-									<option value="0">No</option>
-									<option value="1">Yes</option>
-								</select><?php echo $shared_err; ?></td>
+						<td><label>Type:</label></td>
+						<td><select name="type">
+									<option value="0" selected>Personal</option>
+									<option value="1">Shared</option>
+									<option value="2">Business</option>
+								</select><?php echo $type_err; ?></td>
 					</tr>
 	        <tr>
 	        	<td><input type="submit" name="submit" value="Submit expense"></td>

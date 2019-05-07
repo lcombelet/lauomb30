@@ -34,7 +34,7 @@ if($stmt = $mysqli->query($sql)){
 		} else{
 			$amount = $row['amount'];
 		}
-		if($row['shared'] == 0){
+		if($row['type'] == 0){
 			$key = "No";
 		} else{
 			$key = "Yes";
@@ -55,17 +55,11 @@ $stmt->close();
 // Pull chart data
 $chart = array();
 
-$sql = "SELECT `category`,`counterpart`,`key`,`amount` FROM `vw_fin_personal_monthly_overview` WHERE (`year` = '$year' AND `month` = '$month') ORDER BY `category`,`counterpart`,`key`";
+$sql = "SELECT `category`,`counterpart`,`key`,`amount` FROM `vw_fin_personal_monthly_overview` WHERE (`year` = '$year' AND `month` = '$month' AND `key` < 3) ORDER BY `category`,`counterpart`,`key`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
-		// Negate credits
-		if($row['key'] == 1){
-			$amount = $row['amount'] * -1;
-		} else{
-			$amount = $row['amount'];
-		}
 		// Split between keys
-		$chart[$row['category']][$row['key']] = $amount;
+		$chart[$row['category']][$row['key']] = $row['amount'];
 	}
 
 	// Format to match Google Chart format;
@@ -73,7 +67,7 @@ if($stmt = $mysqli->query($sql)){
 		if(array_key_exists(1,$value)){
 			if(array_key_exists(2,$value)){
 				// Debit and credit exist
-				$values = $value[2] . "," . $value[1];
+				$values = $value[2] . ", " . $value[1];
 			} else{
 				// Only credit exists
 				$values = "0," . $value[1];
@@ -82,11 +76,9 @@ if($stmt = $mysqli->query($sql)){
 			// Only debit exists
 			$values = $value[2] . ",0";
 		}
-	  $chartdata = $chartdata . ",[{v:'" . $key . "', f:'" . $key . "'}," . $values . "]";
+	  $chartdata = $chartdata . ",['" . $key . "', " . $values . "]";
 	}
-
-	$chartdata = substr($chartdata, 1); // Trim first ','
-	} else{
+} else{
 	echo "Couldn't fetch chart data. Please try again later.";
 }
 
@@ -127,12 +119,8 @@ $mysqli->close();
 	google.charts.setOnLoadCallback(drawChart);
 
 	function drawChart() {
-		var data = new google.visualization.DataTable();
-    data.addColumn('string', '');
-    data.addColumn('number', 'Debit');
-    data.addColumn('number', 'Credit');
-
-    data.addRows([
+		var data = google.visualization.arrayToDataTable([
+          ['', 'Debit', 'Credit']
 			<?php echo $chartdata; ?>
     ]);
 
@@ -144,7 +132,7 @@ $mysqli->close();
 
 		var chart = new google.charts.Bar(document.getElementById('columnchart'));
 
-		chart.draw(data, options);
+		chart.draw(data, google.charts.Bar.convertOptions(options));
 	}
 	</script>
 </head>
@@ -183,7 +171,7 @@ $mysqli->close();
           <th>Category</th>
           <th>Subcategory</th>
           <th>Amount</th>
-          <th>"Shared"</th>
+          <th>Shared</th>
         </tr>
       	<?php echo $expenses; ?>
       </table>
