@@ -120,7 +120,7 @@ $mysqli->close();
       <h2>Stuff to work on</h2>
       <ul>
 				<li>Yearplan - Total income vs expense/savings (stacked) per month.</li>
-				<li>Balances - Total expense for the current month (to track if we keep within the budget).</li>
+				<li>Line chart per subcategory on progress of expense/income/savings over time.</li>
 			</ul>
     </div>
     <div class="card">
