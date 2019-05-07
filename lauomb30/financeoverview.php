@@ -126,7 +126,8 @@ $mysqli->close();
 
 		var options = {
 			chart: {
-				title: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>'
+				title: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>',
+				subtitle: 'Savings are not shown'
 			}
 		};
 

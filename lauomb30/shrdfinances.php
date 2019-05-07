@@ -27,8 +27,9 @@ if(isset($_POST['submit'])) {
 	$amount = $_POST['amount'];
 	$counterpart = $_POST['counterpart'];
 	$type = 1;
+	$key = 2;
 
-	// Update Expense table
+	// Update expense table
 	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `type`) VALUES (?, ?, ?, ?, ?, ?)";
 
 	if($stmt = $mysqli->prepare($sql)){
@@ -36,7 +37,7 @@ if(isset($_POST['submit'])) {
 		$stmt->execute();
 	}
 
-	// Pull ID from Expense table for updating Payments table
+	// Pull ID from expense table for updating Payments table
 	$sql = "SELECT * FROM `vw_fin_most_recent_transaction`";
 
 	if($stmt = $mysqli->query($sql)){
@@ -45,15 +46,35 @@ if(isset($_POST['submit'])) {
 		}
 	}
 
-	// Update Payment table
+	// Update payment table
 	$sql = "INSERT INTO `tbl_fin_payments` (`fin_expenses_id`, `counterpart`, `key`) VALUES (?, ?, ?)";
 
 	if($stmt = $mysqli->prepare($sql)){
-		$stmt->bind_param("sss", $fin_expense_id, $counterpart, $param_key);
-
-		$param_key = 2; // Set parameters
+		$stmt->bind_param("sss", $fin_expense_id, $counterpart, $key);
 		$stmt->execute();
+
 		$update_err = "<h5>Update complete!<h5>";
+	}
+
+	// Update payment table again in case of reimbursement
+	if($subcategory == 41){
+		// Switch counterpart
+		if($counterpart == 1){
+			$counterpart = 2;
+		} else{
+			$counterpart = 1;
+		}
+
+		$key = 1; // Switch posting key
+
+		$sql = "INSERT INTO `tbl_fin_payments` (`fin_expenses_id`, `counterpart`, `key`) VALUES (?, ?, ?)";
+
+		if($stmt = $mysqli->prepare($sql)){
+			$stmt->bind_param("sss", $fin_expense_id, $counterpart, $key);
+			$stmt->execute();
+
+			$update_err = "<h5>Reimbursement added!<h5>";
+		}
 	}
 
 	// Close statement
