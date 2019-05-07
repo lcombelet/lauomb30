@@ -120,7 +120,8 @@ $mysqli->close();
       <h2>Stuff to work on</h2>
       <ul>
 				<li>Yearplan - Total income vs expense/savings (stacked) per month.</li>
-				<li>Line chart per subcategory on progress of expense/income/savings over time.</li>
+				<li>Expense overview - Split expenses and income graphs, change to horizontal bar charts for readability and show side by side.</li>
+				<li>Time analysis - Line chart per subcategory on progress of expense/income/savings over time.</li>
 			</ul>
     </div>
     <div class="card">
