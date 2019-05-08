@@ -158,7 +158,6 @@ $mysqli->close();
 						<td><select name="key">
 									<option value="1">Credit</option>
 									<option value="2" selected>Debit</option>
-									<option value="3">Savings</option>
 								</select><?php echo $key_err; ?></td>
 					</tr>
 					<tr>
@@ -167,6 +166,7 @@ $mysqli->close();
 									<option value="0" selected>Personal</option>
 									<option value="1">Shared</option>
 									<option value="2">Business</option>
+									<option value="3">Savings</option>
 								</select><?php echo $type_err; ?></td>
 					</tr>
 	        <tr>
