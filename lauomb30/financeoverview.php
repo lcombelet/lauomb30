@@ -55,7 +55,7 @@ $stmt->close();
 // Pull chart data
 $chart = array();
 
-$sql = "SELECT `category`,`counterpart`,`key`,`amount` FROM `vw_fin_personal_monthly_overview` WHERE (`year` = '$year' AND `month` = '$month' AND `key` < 3) ORDER BY `category`,`counterpart`,`key`";
+$sql = "SELECT `category`,`counterpart`,`key`,`amount` FROM `vw_fin_personal_monthly_overview` WHERE (`year` = '$year' AND `month` = '$month') ORDER BY `amount` DESC,`category`,`counterpart`,`key`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		// Split between keys
@@ -65,18 +65,13 @@ if($stmt = $mysqli->query($sql)){
 	// Format to match Google Chart format;
 	foreach ($chart as $key => $value) {
 		if(array_key_exists(1,$value)){
-			if(array_key_exists(2,$value)){
-				// Debit and credit exist
-				$values = $value[2] . ", " . $value[1];
-			} else{
-				// Only credit exists
-				$values = "0," . $value[1];
-			}
-		} else{
-			// Only debit exists
-			$values = $value[2] . ",0";
+			// Credit exists
+			$creditpiechartdata = $creditpiechartdata . ",['" . $key . "', " . $value[1] . "]";
 		}
-	  $chartdata = $chartdata . ",['" . $key . "', " . $values . "]";
+		if(array_key_exists(2,$value)){
+			// Debit exist
+			$debitpiechartdata = $debitpiechartdata . ",['" . $key . "', " . $value[2] . "]";
+		}
 	}
 } else{
 	echo "Couldn't fetch chart data. Please try again later.";
@@ -116,25 +111,54 @@ $mysqli->close();
   include 'head.php'; ?>
 	<script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart', 'bar']});
-	google.charts.setOnLoadCallback(drawChart);
+	google.charts.setOnLoadCallback(drawDebitPieChart);
+	google.charts.setOnLoadCallback(drawCreditPieChart);
 
-	function drawChart() {
-		var data = google.visualization.arrayToDataTable([
-          ['', 'Debit', 'Credit']
-			<?php echo $chartdata; ?>
-    ]);
+	function drawDebitPieChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Category', 'Expenses']
+					<?php echo $debitpiechartdata; ?>
+        ]);
 
-		var options = {
-			chart: {
-				title: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>',
-				subtitle: 'Savings are not shown'
-			}
-		};
+      var options = {
+				title: 'Expenses',
+				fontName: 'Karla',
+				fontSize: 15,
+        titleTextStyle: {
+					fontSize: 20
+				},
+				legend: {
+					position: 'top',
+					maxLines: 3
+				}
+      };
 
-		var chart = new google.charts.Bar(document.getElementById('columnchart'));
+        var chart = new google.visualization.PieChart(document.getElementById('debitpiechart'));
+        chart.draw(data, options);
+    }
 
-		chart.draw(data, google.charts.Bar.convertOptions(options));
-	}
+		function drawCreditPieChart() {
+	        var data = google.visualization.arrayToDataTable([
+	          ['Category', 'Earnings']
+						<?php echo $creditpiechartdata; ?>
+	        ]);
+
+	      var options = {
+					title: 'Earnings',
+					fontName: 'Karla',
+					fontSize: 15,
+					titleTextStyle: {
+						fontSize: 20
+					},
+					legend: {
+						position: 'top',
+						maxLines: 3
+					}
+	      };
+
+	        var chart = new google.visualization.PieChart(document.getElementById('creditpiechart'));
+	        chart.draw(data, options);
+	    }
 	</script>
 </head>
 <body>
@@ -158,12 +182,13 @@ $mysqli->close();
       </form>
     </div>
   	<div class="card">
-      <h2>Expense breakdown</h2>
-      <p><div id="columnchart" style="z-index: 1; width: 100%; height: 500px;"></div></p>
+      <h2>Charts</h2>
+			<h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>
+      <p><div id="debitpiechart" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div>
+			<div id="creditpiechart" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div></p>
     </div>
     <div class="card">
       <a name="monthlyoverview"></a><h2>Expense overview</h2>
-      <h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>
       <table>
       	<tr>
           <th>Date</th>
