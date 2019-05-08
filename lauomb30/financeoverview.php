@@ -34,10 +34,10 @@ if($stmt = $mysqli->query($sql)){
 		} else{
 			$amount = $row['amount'];
 		}
-		if($row['type'] == 0){
-			$key = "No";
-		} else{
+		if($row['type'] == 1){
 			$key = "Yes";
+		} else{
+			$key = "No";
 		}
 		$values[] = "<tr><td>".$row['date']."</td><td>".$row['location']."</td><td>".$row['description']."</td><td>".$row['category']."</td><td>".$row['subcategory']."</td><td>".$amount."</td><td>".$key."</td></tr>";
 	}
