@@ -26,10 +26,10 @@ if(isset($_POST['submit'])) {
 }
 
 // Pull Expenses
-$sql = "SELECT * FROM `vw_fin_shared_expenses` WHERE (month(`date`) = '$month' AND year(`date`) = '$year')";
+$sql = "SELECT * FROM `vw_fin_expenses` WHERE (`type` = 1 AND month(`date`) = '$month' AND year(`date`) = '$year')";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
-		if($row['key'] == "Credit"){
+		if($row['key'] == 1){
 			$amount = "(".$row['amount'].")";
 		} else{
 			$amount = $row['amount'];

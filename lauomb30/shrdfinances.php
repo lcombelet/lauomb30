@@ -12,7 +12,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'] || in_array("13"
 require_once 'config.php';
 
 // Define variables and initialize with empty values
-$update_err = $date_err = $location_err = $description_err = $category_err = $subcategory_err = $amount_err = $counterpart_err = "";
+$update_err = $date_err = $location_err = $description_err = $category_err = $subcategory_err = $amount_err = $counterpart_err = $reimbursement_err = "";
 $values = array();
 $balance = array();
 
@@ -26,6 +26,7 @@ if(isset($_POST['submit'])) {
 	$subcategory = $_POST['subcategory'];
 	$amount = $_POST['amount'];
 	$counterpart = $_POST['counterpart'];
+	$reimbursement = $_POST['reimbursement'];
 	$type = 1;
 	$key = 2;
 
@@ -57,7 +58,7 @@ if(isset($_POST['submit'])) {
 	}
 
 	// Update payment table again in case of reimbursement
-	if($subcategory == 41){
+	if($reimbursement == 1){
 		// Switch counterpart
 		if($counterpart == 1){
 			$counterpart = 2;
@@ -176,6 +177,13 @@ $mysqli->close();
             <td><label>Paid by:</label></td>
             <td><select name="counterpart"><?php echo $counterparts; ?></select><?php echo $counterpart_err; ?></td>
 	        </tr>
+					<tr>
+						<td><label>Reimbursement:</label></td>
+						<td><select name="key">
+									<option value="0" selected>No</option>
+									<option value="1">Yes</option>
+								</select><?php echo $reimbursement_err; ?></td>
+					</tr>
 	        <tr>
 	        	<td><input type="submit" name="submit" value="Submit expense"></td>
 	        </tr>
