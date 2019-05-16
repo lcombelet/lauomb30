@@ -62,7 +62,11 @@ $mysqli->close();
 <?php include 'header.php';?>
 
 <div class="row">
-  <div class="leftcolumn">
+<div class="leftcolumn">
+	<?php include 'shrdfinanceside.php';?>
+	<?php include 'social.php';?>
+</div>
+  <div class="rightcolumn">
 		<div class="card">
 			<h2>Reimbursement</h2>
 			<?php echo "<p>" . $debtor; ?> to pay <?php echo $creditor . " " . $payment . ".</p>"; ?>
@@ -106,10 +110,6 @@ $mysqli->close();
       </table>
     </div>
   </div>
-<div class="rightcolumn">
-  <?php include 'shrdfinanceside.php';?>
-  <?php include 'social.php';?>
-</div>
 </div>
 
 <?php include 'footer.php';?>

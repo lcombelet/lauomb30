@@ -10,6 +10,64 @@
 
 <div class="row">
   <div class="leftcolumn">
+    <?php include 'aboutme.php';?>
+    <?php include 'social.php';?>
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <div class="slideshow-container">
+
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+          <img src="/media/images/carousel/carousel1.jpg" style="width:100%">
+          <div class="text">China</div>
+        </div>
+
+        <div class="mySlides fade">
+          <img src="/media/images/carousel/carousel2.jpg" style="width:100%">
+          <div class="text">Australia</div>
+        </div>
+
+        <div class="mySlides fade">
+          <img src="/media/images/carousel/carousel3.jpg" style="width:100%">
+          <div class="text">New Zealand</div>
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <br>
+
+      <!-- The dots/circles -->
+      <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+
+      <script>
+      var slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 5000); // Change image every 2 seconds
+      }
+      </script>
+    </div>
     <div class="card">
       <h2>WELCOME TO MY WEBSITE</h2>
       <h5>A note from the nerd</h5>
@@ -18,10 +76,7 @@
       <p>After your account has been activated, you can also contact me with feedback or cool stuff that I should also include.</p>
     </div>
   </div>
-  <div class="rightcolumn">
-    <?php include 'aboutme.php';?>
-    <?php include 'social.php';?>
-  </div>
+
 </div>
 
 <?php include 'footer.php';?>

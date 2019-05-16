@@ -110,7 +110,10 @@ $mysqli->close();
 <?php include 'header.php';?>
 
 <div class="row">
-  <div class="leftcolumn">
+<div class="leftcolumn">
+<?php include 'financeside.php';?>
+</div>
+  <div class="rightcolumn">
     <div class="card">
       <h2>Personal finances</h2>
       <h5>Useless bit of text here..</h5>
@@ -176,9 +179,6 @@ $mysqli->close();
       </form>
     </div>
   </div>
-<div class="rightcolumn">
-  <?php include 'financeside.php';?>
-</div>
 </div>
 
 <?php include 'footer.php';?>

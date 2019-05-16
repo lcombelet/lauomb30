@@ -108,6 +108,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <div class="row">
   <div class="leftcolumn">
+    <?php include 'aboutme.php';?>
+    <?php include 'social.php';?>
+  </div>
+  <div class="rightcolumn">
     <div class="card">
       <h2>LOGIN</h2>
         <p>Please fill in your credentials to login.</p>
@@ -121,10 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </form>
     </div>
   </div>
-  <div class="rightcolumn">
-    <?php include 'aboutme.php';?>
-    <?php include 'social.php';?>
-  </div>
+
 </div>
 
 <?php include 'footer.php';?>

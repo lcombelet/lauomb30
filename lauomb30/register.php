@@ -117,7 +117,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php include 'header.php';?>
 
 <div class="row">
-  <div class="leftcolumn">
+<div class="leftcolumn">
+  <?php include 'aboutme.php';?>
+  <?php include 'social.php';?>
+</div>
+  <div class="rightcolumn">
     <div class="card">
       <h2>SIGN UP</h2>
 	<p>Please fill this form to create an account.</p>
@@ -132,10 +136,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<p>Already have an account? <a href="login.php">Login here</a>.</p>
 	</form>
     </div>
-  </div>
-  <div class="rightcolumn">
-    <?php include 'aboutme.php';?>
-    <?php include 'social.php';?>
   </div>
 </div>
 

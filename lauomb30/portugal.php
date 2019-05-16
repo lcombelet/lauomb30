@@ -20,7 +20,11 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <?php include 'header.php';?>
 
 <div class="row">
-  <div class="leftcolumn">
+<div class="leftcolumn">
+  <?php include 'portugalside.php';?>
+  <?php include 'social.php';?>
+</div>
+  <div class="rightcolumn">
     <div class="card">
       <h2>My trip to Portugal</h2>
       <h5>A diary of my summer holiday 2018</h5>
@@ -135,10 +139,6 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
       <div class="fakeimg" style="height:200px;">Image</div>
       <p>text</p>
     </div>
-  </div>
-  <div class="rightcolumn">
-    <?php include 'portugalside.php';?>
-    <?php include 'social.php';?>
   </div>
 </div>
 

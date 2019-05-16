@@ -334,21 +334,11 @@ $mysqli->close();
 <?php include 'header.php';?>
 
 <div class="row">
-  <div class="leftcolumn">
-  	<div class="card">
-      <h2>Select period</h2>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <table>
-        <tr>
-          <td><label>Period:</label></td>
-          <td><select name="period"><?php echo $periods; ?></select><?php echo $period_err; ?></td>
-        </tr>
-        <tr>
-        	<td><input type="submit" name="submit" value="Submit"></td>
-        </tr>
-      </table>
-      </form>
-    </div>
+<div class="leftcolumn">
+<?php include 'financeside.php';?>
+<?php include 'financeperiod.php';?>
+</div>
+  <div class="rightcolumn">
   	<div class="card">
       <h2>Personal</h2>
 			<h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>
@@ -385,9 +375,6 @@ $mysqli->close();
       </table>
     </div>
   </div>
-<div class="rightcolumn">
-  <?php include 'financeside.php';?>
-</div>
 </div>
 
 <?php include 'footer.php';?>
