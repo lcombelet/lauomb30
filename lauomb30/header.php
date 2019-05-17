@@ -6,8 +6,10 @@
 <?php
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   echo "<a href=\"index.php\"><i class=\"fas fa-home\"></i> Home</a>
-  <a href=\"login.php\" style=\"float:right\"><i class=\"fas fa-sign-in-alt\"></i> Login</a>
-  <a href=\"register.php\" style=\"float:right\"><i class=\"far fa-plus-square\"></i> Register</a>";
+  <div class=\"navbar-right\">
+    <a href=\"login.php\"><i class=\"fas fa-sign-in-alt\"></i> Login</a>
+  </div>
+  <a href=\"register.php\"><i class=\"far fa-plus-square\"></i> Register</a>";
 }
 else {
   echo "<a href=\"welcome.php\"><i class=\"fas fa-home\"></i> Home</a>
@@ -21,7 +23,9 @@ else {
   </div>
   <a href=\"portugal.php\"><i class=\"fas fa-suitcase\"></i> Portugal diary</a>
   <a href=\"media.php\"><i class=\"far fa-images\"></i> Media</a>
-  <a href=\"logout.php\" style=\"float:right\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>
-  <a href=\"admin.php\" style=\"float:right\"><i class=\"far fa-user\"></i> Admin stuff</a>";
+  <div class=\"navbar-right\">
+    <a href=\"logout.php\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>
+  </div>";
+  if(in_array("5", $_SESSION['authorizations'])){ echo "<div class=\"navbar-admin\"><a href=\"admin.php\"><i class=\"fas fa-user\"></i> Admin portal</a></div>"; }
 }?>
 </div>

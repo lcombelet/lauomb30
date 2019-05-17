@@ -174,7 +174,7 @@ $mysqli->close();
 					</div>
 				</div>
 
-				<button type="submit">Login</button>
+				<button type="submit" name="submit" value="submit">Login</button>
 
       </form>
     </div>

@@ -51,6 +51,24 @@ body {
   background-color: #4CAF50;
 }
 
+.navbar-right {
+  margin-left: auto;
+  padding: 14px 0;
+}
+
+/* Admin navbar */
+.navbar-admin {
+  padding: 14px 0;
+}
+
+.navbar-admin a{
+  color: red;
+}
+
+.navbar-admin a:hover {
+  background-color: inherit;
+}
+
 .dropdown {
   float: left;
   overflow: hidden;
