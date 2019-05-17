@@ -151,48 +151,48 @@ $mysqli->close();
     <div class="card">
       <a name="addexpense"></a><h2>Add an expense</h2>
       <?php echo $update_err; ?>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-	      <table>
-	        <tr>
-            <td><label>Date of expense:</label></td>
-            <td><input type="date" name="date"><?php echo $date_err; ?></td>
-	        </tr>
-	        <tr>
-            <td><label>Location:</label></td>
-            <td><input type="text" name="location" maxlength="45" size="50"><?php echo $location_err; ?></td>
-	        </tr>
-	        <tr>
-            <td><label>Description:</label></td>
-            <td><input type="text" name="description" maxlength="45" size="50"><?php echo $description_err; ?></td>
-	        </tr>
-	        <tr>
-            <td><label>Category:</label></td>
-            <td>xxx<?php echo $category_err; ?></td>
-	        </tr>
-	        <tr>
-            <td><label>Subcategory:</label></td>
-            <td><select name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?></td>
-	        </tr>
-	        <tr>
-            <td><label>Amount:</label></td>
-            <td><input type="number" name="amount" min="0" step="0.01"><?php echo $amount_err; ?></td>
-	        </tr>
-	        <tr>
-            <td><label>Paid by:</label></td>
-            <td><select name="counterpart"><?php echo $counterparts; ?></select><?php echo $counterpart_err; ?></td>
-	        </tr>
-					<tr>
-						<td><label>Reimbursement:</label></td>
-						<td><select name="key">
-									<option value="0" selected>No</option>
-									<option value="1">Yes</option>
-								</select><?php echo $reimbursement_err; ?></td>
-					</tr>
-	        <tr>
-	        	<td><input type="submit" name="submit" value="Submit expense"></td>
-	        </tr>
-        </table>
-      </form>
+			<div class="row">
+				<div class="col-50">
+					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<div class="input-container">
+							<i class="far fa-calendar-alt icon"></i>
+							<input class="input-field" type="date" name="date"><?php echo $date_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-location-arrow icon"></i>
+							<input class="input-field" type="text" name="location" placeholder="Location" maxlength="45" size="50"><?php echo $location_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-search icon"></i>
+							<input class="input-field" type="text" name="description" placeholder="Description" maxlength="45" size="50"><?php echo $description_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="far fa-list-alt icon"></i>
+							<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
+						</div>
+					</div>
+					<div class="col-50">
+						<div class="input-container">
+							<i class="fas fa-euro-sign icon"></i>
+							<input class="input-field" type="number" name="amount" placeholder="Amount" min="0" step="0.01"><?php echo $amount_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-balance-scale icon"></i>
+							<select class="input-field" name="counterpart"><?php echo $counterparts; ?></select><?php echo $counterpart_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-chart-bar icon"></i>
+							<select class="input-field" name="key">
+								<option value="0" selected>No</option>
+								<option value="1">Yes</option>
+							</select><?php echo $reimbursement_err; ?>
+						</div>
+					</div>
+				</div>
+
+				<button type="submit" name="submit" value="submit">Submit expense</button>
+
+			</form>
     </div>
   </div>
 </div>
