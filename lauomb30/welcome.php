@@ -90,7 +90,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <?php include 'aboutme.php';?>
   <?php include 'aboutyou.php';?>
   <?php include 'popular.php';?>
-  <?php include 'social.php';?>
 </div>
   <div class="col-75">
     <div class="card">
@@ -99,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <p>Some text here.</p>
     </div>
     <div class="card">
-      <h2>IN ORDER TO AVOID ANY CLAIMS..</h2>
+      <h2><i class="fas fa-ban"></i> IN ORDER TO AVOID ANY CLAIMS..</h2>
       <h5>A list of things that make up this website</h5>
       <p>This never-ending project started officially in <a href="https://products.office.com/en/access" target="_blank">MS Access</a>. Teaching myself pretty much everything through online tutorials, below you find a list of functionalities, languages, programmes and features all combined for my, euhm your, entertainment.</p>
       <p>One word beforehand, I am definitely not the most technical skilled person! I just like to learn new things and mess around with code programming until I get frustrated and throw everything away. There are a billion people on this planet that can do things faster and better. I am in it for the fun.</p>

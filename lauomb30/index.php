@@ -11,14 +11,8 @@
 <div class="row">
   <div class="col-25">
     <?php include 'aboutme.php';?>
-    <?php include 'social.php';?>
   </div>
   <div class="col-75">
-    <div class="card">
-      <h2>Title</h2>
-      <h5>Subtitle</h5>
-      <p>Text here</p>
-    </div>
     <div class="card">
       <h2>WELCOME TO MY WEBSITE</h2>
       <h5>A note from the nerd</h5>
