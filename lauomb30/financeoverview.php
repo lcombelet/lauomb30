@@ -334,11 +334,11 @@ $mysqli->close();
 <?php include 'header.php';?>
 
 <div class="row">
-<div class="leftcolumn">
+<div class="col-25">
 <?php include 'financeside.php';?>
 <?php include 'financeperiod.php';?>
 </div>
-  <div class="rightcolumn">
+  <div class="col-75">
   	<div class="card">
       <h2>Personal</h2>
 			<h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>

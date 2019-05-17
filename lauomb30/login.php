@@ -107,22 +107,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php include 'header.php';?>
 
 <div class="row">
-  <div class="leftcolumn">
+  <div class="col-25">
     <?php include 'aboutme.php';?>
     <?php include 'social.php';?>
   </div>
-  <div class="rightcolumn">
+  <div class="col-75">
     <div class="card">
       <h2>LOGIN</h2>
-        <p>Please fill in your credentials to login.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			<table>
-			<tr><td><label>Username</label></td><td><input type="text" name="username" value="<?php echo $username; ?>"><?php echo $username_err; ?></td></tr>
-			<tr><td><label>Password</label></td><td><input type="password" name="password"><?php echo $password_err; ?></td></tr>
-			<tr><td><input type="submit" value="Login"></td></tr>
-			</table>
-			<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-        </form>
+      <p>Please fill in your credentials to login.</p>
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
+        <div class="input-container">
+          <i class="fas fa-user icon"></i>
+          <input class="input-field" type="text" placeholder="Username" name="username" value="<?php echo $username; ?>"><?php echo $username_err; ?>
+        </div>
+        <div class="input-container">
+          <i class="fas fa-key icon"></i>
+          <input class="input-field" type="password" placeholder="Enter Password" name="password"><?php echo $password_err; ?>
+        </div>
+        <button type="submit">Login</button>
+      	<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+      </form>
     </div>
   </div>
 

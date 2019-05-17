@@ -62,11 +62,11 @@ $mysqli->close();
 <?php include 'header.php';?>
 
 <div class="row">
-<div class="leftcolumn">
+<div class="col-25">
 	<?php include 'shrdfinanceside.php';?>
 	<?php include 'social.php';?>
 </div>
-  <div class="rightcolumn">
+  <div class="col-75">
 		<div class="card">
 			<h2>Reimbursement</h2>
 			<?php echo "<p>" . $debtor; ?> to pay <?php echo $creditor . " " . $payment . ".</p>"; ?>

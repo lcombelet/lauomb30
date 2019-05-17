@@ -20,10 +20,10 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'] || in_array("5",
 <?php include 'header.php';?>
 
 <div class="row">
-<div class="leftcolumn">
+<div class="col-25">
   <?php include 'boerenbridgeside.php';?>
 </div>
-  <div class="rightcolumn">
+  <div class="col-75">
     <div class="card">
       <h2>Boerenbridge database</h2>
       <p>On this page I have built an application that you can use to record the scores for the game called 'Boerenbridge'.</p>

@@ -86,12 +86,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php include 'header.php';?>
 
 <div class="row">
-<div class="leftcolumn">
+<div class="col-25">
   <?php include 'aboutyou.php';?>
   <?php include 'popular.php';?>
   <?php include 'social.php';?>
 </div>
-  <div class="rightcolumn">
+  <div class="col-75">
     <div class="card">
       <h2><i class="far fa-hand-spock"></i> HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h2>
       <h5>In peace to you I come</h5>

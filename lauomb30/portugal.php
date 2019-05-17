@@ -20,11 +20,11 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 <?php include 'header.php';?>
 
 <div class="row">
-<div class="leftcolumn">
+<div class="col-25">
   <?php include 'portugalside.php';?>
   <?php include 'social.php';?>
 </div>
-  <div class="rightcolumn">
+  <div class="col-75">
     <div class="card">
       <h2>My trip to Portugal</h2>
       <h5>A diary of my summer holiday 2018</h5>

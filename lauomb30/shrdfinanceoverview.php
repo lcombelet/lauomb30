@@ -142,12 +142,12 @@ $mysqli->close();
 <?php include 'header.php';?>
 
 <div class="row">
-<div class="leftcolumn">
+<div class="col-25">
 	<?php include 'shrdfinanceside.php';?>
 	<?php include 'financeperiod.php';?>
 	<?php include 'social.php';?>
 </div>
-  <div class="rightcolumn">
+  <div class="col-75">
   	<div class="card">
       <h2>Expense breakdown</h2>
       <p><div id="columnchart" style="z-index: 1; width: 100%; height: 500px;"></div></p>
