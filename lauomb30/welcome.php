@@ -87,6 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <div class="row">
 <div class="col-25">
+  <?php include 'aboutme.php';?>
   <?php include 'aboutyou.php';?>
   <?php include 'popular.php';?>
   <?php include 'social.php';?>
@@ -125,18 +126,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <h5>Leave me a comment</h5>
       <?php echo $query_result; ?>
       <p>Please fill in all fields and click Submit. Much appreciated!</p>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <table>
-        <tr><td><label>Type</label></td><td><input list="type" name="type" value="<?php echo $type; ?>">
-          <datalist id="type">
-            <option value="Feedback">
-            <option value="Improvement">
-            <option value="Question">
-            <option value="Other">
-          </datalist><?php echo $type_err; ?></td></tr>
-        <tr><td><label>Comments</label></td><td><textarea  name="comments" maxlength="1000" cols="25" rows="6"></textarea><?php echo $comments_err; ?></td></tr>
-        <tr><td><input type="submit" value="Submit"></td></tr>
-      </table>
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:500px">
+        <div class="input-container">
+          <i class="fas fa-balance-scale icon"></i>
+          <select class="input-field" name="type" value="<?php echo $type; ?>">
+            <option value="Feedback">Feedback</option>
+            <option value="Improvement">Improvement</option>
+            <option value="Question">Question</option>
+            <option value="Other">Other</option>
+          </select><?php echo $type_err; ?>
+        </div>
+        <div class="input-container">
+          <i class="far fa-calendar-alt icon"></i>
+          <textarea class="input-field" name="comments" placeholder="Comments" maxlength="1000" cols="25" rows="6"></textarea><?php echo $comments_err; ?>
+        </div>
+
+        <button type="submit">Submit</button>
       </form>
     </div>
   <?php } ?>

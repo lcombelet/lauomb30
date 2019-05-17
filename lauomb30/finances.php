@@ -130,42 +130,48 @@ $mysqli->close();
     <div class="card">
       <a name="addexpense"></a><h2>Add an expense</h2>
       <?php echo $update_err; ?>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:400px">
-				<div class="input-container">
-					<i class="far fa-calendar-alt icon"></i>
-					<input class="input-field" type="date" name="date"><?php echo $date_err; ?>
-				</div>
-				<div class="input-container">
-					<i class="fas fa-location-arrow icon"></i>
-					<input class="input-field" type="text" name="location" placeholder="Location" maxlength="45" size="50"><?php echo $location_err; ?>
-				</div>
-				<div class="input-container">
-					<i class="fas fa-search icon"></i>
-					<input class="input-field" type="text" name="description" placeholder="Description" maxlength="45" size="50"><?php echo $description_err; ?>
-				</div>
-				<div class="input-container">
-					<i class="far fa-list-alt icon"></i>
-					<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
-				</div>
-				<div class="input-container">
-					<i class="fas fa-euro-sign icon"></i>
-					<input class="input-field" type="number" name="amount" placeholder="Amount" min="0" step="0.01"><?php echo $amount_err; ?>
-				</div>
-				<div class="input-container">
-					<i class="fas fa-balance-scale icon"></i>
-					<select class="input-field" name="key">
-						<option value="1">Credit</option>
-						<option value="2" selected>Debit</option>
-					</select><?php echo $key_err; ?>
-				</div>
-				<div class="input-container">
-					<i class="fas fa-chart-bar icon"></i>
-					<select class="input-field" name="type">
-						<option value="0" selected>Personal</option>
-						<option value="1">Shared</option>
-						<option value="2">Business</option>
-						<option value="3">Savings</option>
-					</select><?php echo $type_err; ?>
+			<div class="row">
+      	<div class="col-50">
+		      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<div class="input-container">
+							<i class="far fa-calendar-alt icon"></i>
+							<input class="input-field" type="date" name="date"><?php echo $date_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-location-arrow icon"></i>
+							<input class="input-field" type="text" name="location" placeholder="Location" maxlength="45" size="50"><?php echo $location_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-search icon"></i>
+							<input class="input-field" type="text" name="description" placeholder="Description" maxlength="45" size="50"><?php echo $description_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="far fa-list-alt icon"></i>
+							<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
+						</div>
+					</div>
+	      	<div class="col-50">
+						<div class="input-container">
+							<i class="fas fa-euro-sign icon"></i>
+							<input class="input-field" type="number" name="amount" placeholder="Amount" min="0" step="0.01"><?php echo $amount_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-balance-scale icon"></i>
+							<select class="input-field" name="key">
+								<option value="1">Credit</option>
+								<option value="2" selected>Debit</option>
+							</select><?php echo $key_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-chart-bar icon"></i>
+							<select class="input-field" name="type">
+								<option value="0" selected>Personal</option>
+								<option value="1">Shared</option>
+								<option value="2">Business</option>
+								<option value="3">Savings</option>
+							</select><?php echo $type_err; ?>
+						</div>
+					</div>
 				</div>
 
 				<button type="submit">Login</button>

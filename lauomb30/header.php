@@ -2,17 +2,16 @@
   <a href="index.php"><h1><i class="fas fa-code-branch"></i> LauOmb Webserver</h1></a>
   <p>A hobby gone full-nerd..</p>
 </div>
-
 <div class="navbar">
-  <a href="index.php"><i class="fas fa-home"></i> Home</a>
-
 <?php
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  echo "<a href=\"login.php\" style=\"float:right\"><i class=\"fas fa-sign-in-alt\"></i> Login</a>
+  echo "<a href=\"index.php\"><i class=\"fas fa-home\"></i> Home</a>
+  <a href=\"login.php\" style=\"float:right\"><i class=\"fas fa-sign-in-alt\"></i> Login</a>
   <a href=\"register.php\" style=\"float:right\"><i class=\"far fa-plus-square\"></i> Register</a>";
 }
 else {
-  echo "<div class=\"dropdown\">
+  echo "<a href=\"welcome.php\"><i class=\"fas fa-home\"></i> Home</a>
+  <div class=\"dropdown\">
     <button class=\"dropbtn\"><i class=\"far fa-list-alt\"></i> Databases <i class=\"fa fa-caret-down\"></i></button>
     <div class=\"dropdown-content\">";
   if(in_array("5", $_SESSION['authorizations'])){ echo "<a href=\"boerenbridge.php\"><i class=\"fas fa-chess-king\"></i> Boerenbridge</a>"; }
