@@ -138,9 +138,7 @@ $mysqli->close();
 </div>
   <div class="col-75">
     <div class="card">
-      <h2>Shared finances</h2>
-      <h5>Useless bit of text here..</h5>
-      <p>This page provides an overview of shared expenses made to date, and calculates open balances.</p>
+      <h1><i class="far fa-money-bill-alt"></i> SHARED FINANCES</h1>
     </div>
 		<div class="card">
       <h2>Stuff to work on</h2>

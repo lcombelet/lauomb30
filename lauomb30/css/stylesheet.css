@@ -63,8 +63,8 @@ body {
 }
 
 .navbar-admin a{
-  text-align: center;
   color: red;
+  text-align: center;
 }
 
 .navbar-admin a:hover {
@@ -174,7 +174,7 @@ body {
   .row, .navbar {
   flex-direction: column;
   }
-  .navbar-right {
+  .navbar-right, .navbar-admin {
     margin: auto;
   }
 }

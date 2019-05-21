@@ -25,8 +25,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'] || in_array("5",
 </div>
   <div class="col-75">
     <div class="card">
-      <h2>Boerenbridge database</h2>
-      <p>On this page I have built an application that you can use to record the scores for the game called 'Boerenbridge'.</p>
+      <h1><i class="fas fa-chess-king"></i> BOERENBRIDGE</h1>
     </div>
     <?php if(isset($_POST['submitNames'])) { ?>
       <div class="card">

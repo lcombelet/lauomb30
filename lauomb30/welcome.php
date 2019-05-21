@@ -93,9 +93,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </div>
   <div class="col-75">
     <div class="card">
-      <h2><i class="far fa-hand-spock"></i> HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h2>
+      <h1><i class="far fa-hand-spock"></i> HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h1>
       <h5>In peace to you I come</h5>
-      <p>Some text here.</p>
     </div>
     <div class="card">
       <h2><i class="fas fa-ban"></i> IN ORDER TO AVOID ANY CLAIMS..</h2>

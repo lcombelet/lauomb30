@@ -68,6 +68,9 @@ $mysqli->close();
 </div>
   <div class="col-75">
 		<div class="card">
+			<h1><i class="far fa-money-bill-alt"></i> SHARED FINANCES</h1>
+		</div>
+		<div class="card">
 			<h2>Reimbursement</h2>
 			<?php echo "<p>" . $debtor; ?> to pay <?php echo $creditor . " " . $payment . ".</p>"; ?>
 		</div>

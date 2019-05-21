@@ -29,7 +29,10 @@ require_once 'config.php';
 <?php include 'mediaside.php';?>
 </div>
   <div class="col-75">
-    <div class="card">
+		<div class="card">
+      <h1><i class="far fa-images"></i> MEDIA</h1>
+		</div>
+		<div class="card">
       <h2>Let's bring some pictures into the show</h2>
       <h5>Because reading is only so so..</h5>
 			<div class="slideshow-container">

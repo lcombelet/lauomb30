@@ -148,9 +148,12 @@ $mysqli->close();
 	<?php include 'social.php';?>
 </div>
   <div class="col-75">
-  	<div class="card">
+		<div class="card">
+      <h1><i class="far fa-money-bill-alt"></i> SHARED FINANCES</h1>
+    </div>
+		<div class="card">
       <h2>Expense breakdown</h2>
-      <p><div id="columnchart" style="z-index: 1; width: 100%; height: 500px;"></div></p>
+      <p><div id="columnchart" style="z-index: 1; width: 99%; height: 500px;"></div></p>
     </div>
     <div class="card">
       <a name="monthlyoverview"></a><h2>Expense overview</h2>

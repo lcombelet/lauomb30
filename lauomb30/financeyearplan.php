@@ -30,6 +30,9 @@ require_once 'config.php';
 </div>
   <div class="col-75">
     <div class="card">
+      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
+    </div>
+		<div class="card">
       <h2>Year overview</h2>
       <h5>Useless bit of text here..</h5>
       <p>More to come here in the future.</p>

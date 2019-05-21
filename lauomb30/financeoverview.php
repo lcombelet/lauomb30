@@ -340,7 +340,7 @@ $mysqli->close();
 </div>
   <div class="col-75">
   	<div class="card">
-      <h2>Personal</h2>
+      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
 			<h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>
       <p><div id="persdebit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div>
 			<div id="perscredit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div></p>

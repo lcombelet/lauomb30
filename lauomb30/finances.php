@@ -115,9 +115,7 @@ $mysqli->close();
 </div>
   <div class="col-75">
     <div class="card">
-      <h2>Personal finances</h2>
-      <h5>Useless bit of text here..</h5>
-      <p>This page provides an overview of my personal expenses.</p>
+      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
     </div>
 		<div class="card">
       <h2>Stuff to work on</h2>
@@ -139,11 +137,21 @@ $mysqli->close();
 						</div>
 						<div class="input-container">
 							<i class="fas fa-location-arrow icon"></i>
-							<input class="input-field" type="text" name="location" placeholder="Location" maxlength="45" size="50"><?php echo $location_err; ?>
+							<input class="input-field" list="locations" name="location" placeholder="Location" maxlength="45" size="50">
+								<datalist id="locations">
+									<option value="location A">
+									<option value="location B">
+								</datalist>
+							<?php echo $location_err; ?>
 						</div>
 						<div class="input-container">
 							<i class="fas fa-search icon"></i>
-							<input class="input-field" type="text" name="description" placeholder="Description" maxlength="45" size="50"><?php echo $description_err; ?>
+							<input class="input-field" list="descriptions" name="description" placeholder="Description" maxlength="45" size="50">
+								<datalist id="descriptions">
+									<option value="description 1">
+									<option value="description 2">
+								</datalist>
+							<?php echo $description_err; ?>
 						</div>
 						<div class="input-container">
 							<i class="far fa-list-alt icon"></i>

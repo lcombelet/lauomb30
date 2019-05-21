@@ -26,7 +26,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 </div>
   <div class="col-75">
     <div class="card">
-      <h2>My trip to Portugal</h2>
+      <h1><i class="fas fa-suitcase"></i> PORTUGAL SUMMER 2018</h1>
       <h5>A diary of my summer holiday 2018</h5>
       <p>This page is going to contain my experiences from my trip around Portugal during the summer of 2018. Starting and ending in Lisbon, I will make my way by public transport and rental car through the country during a three week trip. I have not really planned anything beforehand, I only booked a couple of Airbnb's. SO pretty much everything is impromptu, let's see what this country has to offer me..</p>
       <p>Here we go!</p>
