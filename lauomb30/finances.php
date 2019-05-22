@@ -173,7 +173,7 @@ $mysqli->close();
 						</div>
 						<div class="input-container">
 							<i class="fas fa-location-arrow icon"></i>
-							<input class="input-field" list="locations" name="location" placeholder="Location" maxlength="45" size="50">
+							<input class="input-field" list="locations" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50">
 								<datalist id="locations">
 									<?php echo $locations; ?>
 								</datalist>
@@ -181,7 +181,7 @@ $mysqli->close();
 						</div>
 						<div class="input-container">
 							<i class="fas fa-search icon"></i>
-							<input class="input-field" list="descriptions" name="description" placeholder="Description" maxlength="45" size="50">
+							<input class="input-field" list="descriptions" name="description" placeholder="Description" autocomplete="off" maxlength="45" size="50">
 								<datalist id="descriptions">
 									<?php echo $descriptions; ?>
 								</datalist>
