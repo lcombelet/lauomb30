@@ -95,6 +95,42 @@ if($stmt = $mysqli->query($sql)){
 unset($values);
 $stmt->close();
 
+// Pull Locations
+$sql = "SELECT * FROM `vw_fin_locations`";
+if($stmt = $mysqli->query($sql)){
+	while($row = mysqli_fetch_array($stmt)) {
+		$values[] = "<option value=\"".$row['location']."\">";
+	}
+
+	$locations = implode("",$values);
+	unset($values);
+
+	} else{
+	echo "Couldn't fetch locations. Please try again later.";
+}
+
+// Clear variables
+unset($values);
+$stmt->close();
+
+// Pull Descriptions
+$sql = "SELECT * FROM `vw_fin_descriptions`";
+if($stmt = $mysqli->query($sql)){
+	while($row = mysqli_fetch_array($stmt)) {
+		$values[] = "<option value=\"".$row['description']."\">";
+	}
+
+	$descriptions = implode("",$values);
+	unset($values);
+
+	} else{
+	echo "Couldn't fetch descriptions. Please try again later.";
+}
+
+// Clear variables
+unset($values);
+$stmt->close();
+
 // Close connection
 $mysqli->close();
 ?>
@@ -139,8 +175,7 @@ $mysqli->close();
 							<i class="fas fa-location-arrow icon"></i>
 							<input class="input-field" list="locations" name="location" placeholder="Location" maxlength="45" size="50">
 								<datalist id="locations">
-									<option value="location A">
-									<option value="location B">
+									<?php echo $locations; ?>
 								</datalist>
 							<?php echo $location_err; ?>
 						</div>
@@ -148,8 +183,7 @@ $mysqli->close();
 							<i class="fas fa-search icon"></i>
 							<input class="input-field" list="descriptions" name="description" placeholder="Description" maxlength="45" size="50">
 								<datalist id="descriptions">
-									<option value="description 1">
-									<option value="description 2">
+									<?php echo $descriptions; ?>
 								</datalist>
 							<?php echo $description_err; ?>
 						</div>
