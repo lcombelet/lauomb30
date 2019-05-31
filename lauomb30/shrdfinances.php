@@ -224,7 +224,7 @@ $mysqli->close();
 						</div>
 						<div class="input-container">
 							<i class="fas fa-chart-bar icon"></i>
-							<select class="input-field" name="key">
+							<select class="input-field" name="reimbursement">
 								<option value="0" selected>No</option>
 								<option value="1">Yes</option>
 							</select><?php echo $reimbursement_err; ?>
