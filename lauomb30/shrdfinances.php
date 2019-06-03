@@ -223,7 +223,7 @@ $mysqli->close();
 							<select class="input-field" name="counterpart"><?php echo $counterparts; ?></select><?php echo $counterpart_err; ?>
 						</div>
 						<div class="input-container">
-							<i class="fas fa-chart-bar icon"></i>
+							<i class="fas fa-sync-alt icon"></i>
 							<select class="input-field" name="reimbursement">
 								<option value="0" selected>No</option>
 								<option value="1">Yes</option>
