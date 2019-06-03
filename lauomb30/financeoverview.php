@@ -71,19 +71,28 @@ if($stmt = $mysqli->query($sql)){
 		}
 	}
 
-	// Format to match Google Chart format;
+	// Personal expenses;
 	foreach ($perschart as $key => $value) {
+		$personallabel = $personallabel . ",'" . $key . "'";
 		if(array_key_exists(1,$value)){
 			// Credit exists
-			$perscreditdata = $perscreditdata . ",['" . $key . "', " . $value[1] . "]";
-			$perscredittotal = $perscredittotal + $value[1];
+			$personalcredit = $personalcredit . "," . $value[1];
+			$personalcredittotal = $personalcredittotal + $value[1];
+		}
+		else{
+			$personalcredit = $personalcredit . "," . '0';
 		}
 		if(array_key_exists(2,$value)){
 			// Debit exist
-			$persdebitdata = $persdebitdata . ",['" . $key . "', " . $value[2] . "]";
-			$persdebittotal = $persdebittotal + $value[2];
+			$personaldebit = $personaldebit . "," . $value[2];
+			$personaldebittotal = $personaldebittotal + $value[2];
+		}
+		else{
+			$personaldebit = $personaldebit . "," . '0';
 		}
 	}
+
+$personaldata = "['Category'" . $personallabel . "],['Expenses'" . $personaldebit . "],['Earnings'" . $personalcredit . "]";
 
 	// Format to match Google Chart format;
 	foreach ($sharchart as $key => $value) {
@@ -159,59 +168,29 @@ $mysqli->close();
   include 'head.php'; ?>
 	<script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart', 'bar']});
-	google.charts.setOnLoadCallback(drawPersDebit);
-	google.charts.setOnLoadCallback(drawPersCredit);
+	google.charts.setOnLoadCallback(drawPersonal);
 	google.charts.setOnLoadCallback(drawSharDebit);
 	google.charts.setOnLoadCallback(drawSharCredit);
 	google.charts.setOnLoadCallback(drawBusiDebit);
 	google.charts.setOnLoadCallback(drawBusiCredit);
 	google.charts.setOnLoadCallback(drawSaviDebit);
 
-	function drawPersDebit() {
-        var data = google.visualization.arrayToDataTable([
-          ['Category', 'Expenses']
-					<?php echo $persdebitdata; ?>
-        ]);
+	function drawPersonal() {
+		var data = google.visualization.arrayToDataTable([
+			<?php echo $personaldata; ?>
+		]);
 
-      var options = {
-				title: 'Expenses - <?php echo $persdebittotal; ?>',
-				fontName: 'Karla',
-				fontSize: 15,
-        titleTextStyle: {
-					fontSize: 20
-				},
-				legend: {
-					position: 'top',
-					maxLines: 3
-				}
-      };
-
-        var chart = new google.visualization.PieChart(document.getElementById('persdebit'));
-        chart.draw(data, options);
-    }
-
-		function drawPersCredit() {
-	        var data = google.visualization.arrayToDataTable([
-	          ['Category', 'Earnings']
-						<?php echo $perscreditdata; ?>
-	        ]);
-
-	      var options = {
-					title: 'Earnings - <?php echo $perscredittotal; ?>',
-					fontName: 'Karla',
-					fontSize: 15,
-					titleTextStyle: {
-						fontSize: 20
-					},
-					legend: {
-						position: 'top',
-						maxLines: 3
-					}
-	      };
-
-	        var chart = new google.visualization.PieChart(document.getElementById('perscredit'));
-	        chart.draw(data, options);
-	    }
+		var options = {
+			isStacked: 'percent',
+			legend: {position: 'top', maxLines: 3},
+			hAxis: {
+				minValue: 0,
+				ticks: [0, .25, .5, .75, 1]
+			}
+		};
+		var chart = new google.visualization.BarChart(document.getElementById('personal'));
+		chart.draw(data, options);
+	}
 
 			function drawSharDebit() {
 		        var data = google.visualization.arrayToDataTable([
@@ -342,8 +321,9 @@ $mysqli->close();
   	<div class="card">
       <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
 			<h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>
-      <p><div id="persdebit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div>
-			<div id="perscredit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div></p>
+      <div id="personal" style="z-index: 1; width: 90%; height: 500px; display: inline-block;"></div>
+			<p>Total expenses: <?php echo $personaldebittotal; ?></p>
+			<p>Total earnings: <?php echo $personalcredittotal; ?></p>
 		</div>
 		<div class="card">
       <h2>Shared</h2>
