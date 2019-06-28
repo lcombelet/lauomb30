@@ -166,7 +166,7 @@ $mysqli->close();
           <th>Category</th>
           <th>Subcategory</th>
           <th>Amount</th>
-          <th>Paid by</th>
+          <th>Counterpart</th>
         </tr>
       	<?php echo $expenses; ?>
       </table>

@@ -51,27 +51,23 @@ $stmt->close();
 // Pull chart data
 $chart = array();
 
-$sql = "SELECT `category`,`counterpart`,`key`,`type`,`amount` FROM `vw_fin_monthly_overview` WHERE (`counterpart`= 1 AND `year` = '$year' AND `month` = '$month') ORDER BY `amount` DESC,`category`,`counterpart`,`key`,`type`";
+$sql = "SELECT `category`,`counterpart`,`key`,`type`,`amount` FROM `vw_fin_monthly_overview` WHERE (`counterpart`= 1 AND `year` = '$year' AND `month` = '$month') ORDER BY `category`,`amount` DESC,`counterpart`,`key`,`type`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 
 		// Split expenses into different tables
 		switch ($row['type']) {
-			case 3: // savings
-				$savichart[$row['category']][$row['key']] = $row['amount'];
-				break;
 			case 2: // business
 				$busichart[$row['category']][$row['key']] = $row['amount'];
 				break;
-			case 1: // shared
-				$sharchart[$row['category']][$row['key']] = $row['amount'];
-				break;
-			default: // personal
+			default: // personal, shared, savings
 				$perschart[$row['category']][$row['key']] = $row['amount'];
 		}
 	}
 
 	// Personal expenses;
+	$personalcredittotal = $personaldebittotal = 0; // Initialize empty columns to draw chart
+
 	foreach ($perschart as $key => $value) {
 		$personallabel = $personallabel . ",'" . $key . "'";
 		if(array_key_exists(1,$value)){
@@ -94,42 +90,31 @@ if($stmt = $mysqli->query($sql)){
 
 $personaldata = "['Category'" . $personallabel . "],['Expenses'" . $personaldebit . "],['Earnings'" . $personalcredit . "]";
 
-	// Format to match Google Chart format;
-	foreach ($sharchart as $key => $value) {
-		if(array_key_exists(1,$value)){
-			// Credit exists
-			$sharcreditdata = $sharcreditdata . ",['" . $key . "', " . $value[1] . "]";
-			$sharcredittotal = $sharcredittotal + $value[1];
-		}
-		if(array_key_exists(2,$value)){
-			// Debit exist
-			$shardebitdata = $shardebitdata . ",['" . $key . "', " . $value[2] . "]";
-			$shardebittotal = $shardebittotal + $value[2];
-		}
-	}
+// Business expenses;
+$busicredittotal = $busidebittotal = 0; // Initialize empty columns to draw chart
 
-	// Format to match Google Chart format;
-	foreach ($busichart as $key => $value) {
-		if(array_key_exists(1,$value)){
-			// Credit exists
-			$busicreditdata = $busicreditdata . ",['" . $key . "', " . $value[1] . "]";
-			$busicredittotal = $busicredittotal + $value[1];
-		}
-		if(array_key_exists(2,$value)){
-			// Debit exist
-			$busidebitdata = $busidebitdata . ",['" . $key . "', " . $value[2] . "]";
-			$busidebittotal = $busidebittotal + $value[2];
-		}
+foreach ($busichart as $key => $value) {
+	$busilabel = $busilabel . ",'" . $key . "'";
+	if(array_key_exists(1,$value)){
+		// Credit exists
+		$busicredit = $busicredit . "," . $value[1];
+		$busicredittotal = $busicredittotal + $value[1];
 	}
+	else{
+		$busicredit = $busicredit . "," . '0';
+	}
+	if(array_key_exists(2,$value)){
+		// Debit exist
+		$busidebit = $busidebit . "," . $value[2];
+		$busidebittotal = $busidebittotal + $value[2];
+	}
+	else{
+		$busidebit = $busidebit . "," . '0';
+	}
+}
 
-	// Format to match Google Chart format;
-	foreach ($savichart as $key => $value) {
-		if(array_key_exists(2,$value)){
-			// Debit exist
-			$savidebitdata = $savidebitdata . ",['" . $key . "', " . $value[2] . "]";
-			$savidebittotal = $savidebittotal + $value[2];
-		}
-	}
+$busidata = "['Category'" . $busilabel . "],['Expenses'" . $busidebit . "],['Earnings'" . $busicredit . "]";
+
 } else{
 	echo "Couldn't fetch chart data. Please try again later.";
 }
@@ -168,12 +153,23 @@ $mysqli->close();
   include 'head.php'; ?>
 	<script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawOverview);
 	google.charts.setOnLoadCallback(drawPersonal);
-	google.charts.setOnLoadCallback(drawSharDebit);
-	google.charts.setOnLoadCallback(drawSharCredit);
-	google.charts.setOnLoadCallback(drawBusiDebit);
-	google.charts.setOnLoadCallback(drawBusiCredit);
-	google.charts.setOnLoadCallback(drawSaviDebit);
+	google.charts.setOnLoadCallback(drawBusiness);
+
+	function drawOverview() {
+		var data = google.visualization.arrayToDataTable([
+			['Category','Expenses','Earnings'],
+			['Personal',<?php echo $personaldebittotal; ?>,<?php echo $personalcredittotal; ?>],
+			['Business',<?php echo $busidebittotal; ?>,<?php echo $busicredittotal; ?>]
+		]);
+
+		var options = {
+			legend: {position: 'top', maxLines: 3}
+		};
+		var chart = new google.visualization.ColumnChart(document.getElementById('overview'));
+		chart.draw(data, options);
+	}
 
 	function drawPersonal() {
 		var data = google.visualization.arrayToDataTable([
@@ -192,120 +188,22 @@ $mysqli->close();
 		chart.draw(data, options);
 	}
 
-			function drawSharDebit() {
-		        var data = google.visualization.arrayToDataTable([
-		          ['Category', 'Expenses']
-							<?php echo $shardebitdata; ?>
-		        ]);
+	function drawBusiness() {
+		var data = google.visualization.arrayToDataTable([
+			<?php echo $busidata; ?>
+		]);
 
-		      var options = {
-						title: 'Expenses - <?php echo $shardebittotal; ?>',
-						fontName: 'Karla',
-						fontSize: 15,
-		        titleTextStyle: {
-							fontSize: 20
-						},
-						legend: {
-							position: 'top',
-							maxLines: 3
-						}
-		      };
-
-		        var chart = new google.visualization.PieChart(document.getElementById('shardebit'));
-		        chart.draw(data, options);
-		    }
-
-				function drawSharCredit() {
-			        var data = google.visualization.arrayToDataTable([
-			          ['Category', 'Earnings']
-								<?php echo $sharcreditdata; ?>
-			        ]);
-
-			      var options = {
-							title: 'Earnings - <?php echo $sharcredittotal; ?>',
-							fontName: 'Karla',
-							fontSize: 15,
-							titleTextStyle: {
-								fontSize: 20
-							},
-							legend: {
-								position: 'top',
-								maxLines: 3
-							}
-			      };
-
-			        var chart = new google.visualization.PieChart(document.getElementById('sharcredit'));
-			        chart.draw(data, options);
-			    }
-
-			function drawBusiDebit() {
-						var data = google.visualization.arrayToDataTable([
-							['Category', 'Expenses']
-							<?php echo $busidebitdata; ?>
-						]);
-
-					var options = {
-						title: 'Expenses - <?php echo $busidebittotal; ?>',
-						fontName: 'Karla',
-						fontSize: 15,
-						titleTextStyle: {
-							fontSize: 20
-						},
-						legend: {
-							position: 'top',
-							maxLines: 3
-						}
-					};
-
-						var chart = new google.visualization.PieChart(document.getElementById('busidebit'));
-						chart.draw(data, options);
-				}
-
-				function drawBusiCredit() {
-							var data = google.visualization.arrayToDataTable([
-								['Category', 'Earnings']
-								<?php echo $busicreditdata; ?>
-							]);
-
-						var options = {
-							title: 'Earnings - <?php echo $busicredittotal; ?>',
-							fontName: 'Karla',
-							fontSize: 15,
-							titleTextStyle: {
-								fontSize: 20
-							},
-							legend: {
-								position: 'top',
-								maxLines: 3
-							}
-						};
-
-							var chart = new google.visualization.PieChart(document.getElementById('busicredit'));
-							chart.draw(data, options);
-					}
-
-					function drawSaviDebit() {
-								var data = google.visualization.arrayToDataTable([
-									['Category', 'Expenses']
-									<?php echo $savidebitdata; ?>
-								]);
-
-							var options = {
-								title: 'Savings - <?php echo $savidebittotal; ?>',
-								fontName: 'Karla',
-								fontSize: 15,
-								titleTextStyle: {
-									fontSize: 20
-								},
-								legend: {
-									position: 'top',
-									maxLines: 3
-								}
-							};
-
-								var chart = new google.visualization.PieChart(document.getElementById('savidebit'));
-								chart.draw(data, options);
-						}
+		var options = {
+			isStacked: 'percent',
+			legend: {position: 'top', maxLines: 3},
+			hAxis: {
+				minValue: 0,
+				ticks: [0, .25, .5, .75, 1]
+			}
+		};
+		var chart = new google.visualization.BarChart(document.getElementById('business'));
+		chart.draw(data, options);
+	}
 	</script>
 </head>
 <body>
@@ -318,26 +216,24 @@ $mysqli->close();
 <?php include 'financeperiod.php';?>
 </div>
   <div class="col-75">
-  	<div class="card">
+		<div class="card">
       <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
-			<h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>
-      <div id="personal" style="z-index: 1; width: 90%; height: 500px; display: inline-block;"></div>
-			<p>Total expenses: <?php echo $personaldebittotal; ?></p>
+    </div>
+		<div class="card">
+      <h2>Overview for <?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h2>
+      <div id="overview" style="z-index: 1; width: 100%; height: 500px; display: inline-block;"></div>
+		</div>
+		<div class="card">
+      <h2>Details - Personal</h2>
+			<div id="personal" style="z-index: 1; width: 100%; height: 500px; display: inline-block;"></div>
+			<p>Total expenses: <?php echo $personaldebittotal; ?><br />
 			<p>Total earnings: <?php echo $personalcredittotal; ?></p>
 		</div>
 		<div class="card">
-      <h2>Shared</h2>
-			<p><div id="shardebit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div>
-			<div id="sharcredit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div></p>
-		</div>
-		<div class="card">
-      <h2>Business</h2>
-			<p><div id="busidebit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div>
-			<div id="busicredit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div></p>
-		</div>
-		<div class="card">
-			<h2>Savings</h2>
-			<p><div id="savidebit" style="z-index: 1; width: 49%; height: 500px; display: inline-block;"></div></p>
+			<h2>Details - Business</h2>
+			<div id="business" style="z-index: 1; width: 100%; height: 500px; display: inline-block;"></div>
+			<p>Total expenses: <?php echo $busidebittotal; ?><br />
+			<p>Total earnings: <?php echo $busicredittotal; ?></p>
 		</div>
 		<div class="card">
 			<h2>Expense overview</h2>

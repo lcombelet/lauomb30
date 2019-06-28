@@ -3,7 +3,7 @@
     <ul>
       <li><a href="finances.php">Home</a></li>
       <li><a href="finances.php#addexpense">Add expense</a></li>
-      <li><a href="financeoverview.php">Expense overview</a></li>
-      <li><a href="financeyearplan.php">Yearplan</a></li>
+      <li><a href="financeoverview.php">Monthly overview</a></li>
+      <li><a href="financeyearplan.php">Year overview</a></li>
     </ul>
 </div>
