@@ -56,8 +56,8 @@ $values = array();
 $sql = "SELECT * FROM `vw_fin_years`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
-		$year = $row['year'];
-		$values[] = "<option value=\"" . $year . "\">" . $year . "</option>";
+		$sqlyear = $row['year'];
+		$values[] = "<option value=\"" . $sqlyear . "\">" . $sqlyear . "</option>";
 	}
 
 	$years = implode("",$values);

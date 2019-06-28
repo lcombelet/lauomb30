@@ -12,7 +12,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'] || in_array("6",
 require_once 'config.php';
 
 // Define variables and initialize with empty values
-$update_err = $date_err = $location_err = $description_err = $category_err = $subcategory_err = $amount_err = $counterpart_err = $type_err = $key_err = "";
+$update_err = $date_err = $location_err = $description_err = $category_err = $currency_err = $amount_err = $counterpart_err = $curramount_err = $key_err = "";
 $values = array();
 $balance = array();
 
@@ -23,11 +23,18 @@ if(isset($_POST['submit'])) {
 	$date = $_POST['date'];
 	$location = $_POST['location'];
 	$description = $_POST['description'];
-	$subcategory = $_POST['subcategory'];
 	$amount = $_POST['amount'];
-	$counterpart = 1;
 	$key = $_POST['key'];
-	$type = $_POST['type'];
+	$currency = $_POST['currency'];
+	$curramount = $_POST['curramount'];
+	$counterpart = 1;
+	$subcategory = 59;
+	$type = 0;
+
+	// Negate amount in case of sell
+	if($key == 1){
+		$curramount = $curramount * -1;
+	}
 
 	// Update Expense table
 	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `type`) VALUES (?, ?, ?, ?, ?, ?)";
@@ -56,6 +63,16 @@ if(isset($_POST['submit'])) {
 		$update_err = "<h5>Update complete!<h5>";
 	}
 
+	// Update Crypto table
+	$sql = "INSERT INTO `tbl_crypto_transactions` (`fin_expenses_id`, `tbl_crypto_id`, `amount`) VALUES (?, ?, ?)";
+
+	if($stmt = $mysqli->prepare($sql)){
+		$stmt->bind_param("sss", $fin_expense_id, $currency, $curramount);
+		$stmt->execute();
+
+		$update_err = "<h5>Update complete!<h5>";
+	}
+
 	// Close statement
 	$stmt->close();
 }
@@ -77,25 +94,25 @@ if($stmt = $mysqli->query($sql)){
 unset($values);
 $stmt->close();
 
-// Pull Counterparts
-$sql = "SELECT * FROM `vw_fin_counterparts`";
+// Pull currencies
+$sql = "SELECT * FROM `vw_crypto_currencies`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
-		$values[] = "<option value=\"".$row['id']."\">".$row['name']."</option>";
+		$values[] = "<option value=\"".$row['id']."\">".$row['code']." - ".$row['description']."</option>";
 	}
 
-	$counterparts = implode("",$values);
+	$currencies = implode("",$values);
 	unset($values);
 
 	} else{
-	echo "Couldn't fetch subcategories. Please try again later.";
+	echo "Couldn't fetch currencies. Please try again later.";
 }
 
 // Clear variables
 unset($values);
 $stmt->close();
 
-// Pull Locations
+// Pull locations
 $sql = "SELECT * FROM `vw_fin_locations`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
@@ -113,7 +130,7 @@ if($stmt = $mysqli->query($sql)){
 unset($values);
 $stmt->close();
 
-// Pull Descriptions
+// Pull descriptions
 $sql = "SELECT * FROM `vw_fin_descriptions`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
@@ -138,7 +155,7 @@ $mysqli->close();
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Personal finances";
+	<?php $title = "LauOmb Webserver - Crypto currencies";
   include 'head.php'; ?>
 </head>
 <body>
@@ -147,22 +164,25 @@ $mysqli->close();
 
 <div class="row">
 <div class="col-25">
-<?php include 'financeside.php';?>
+<?php include 'cryptoside.php';?>
 </div>
   <div class="col-75">
     <div class="card">
-      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
+      <h1><i class="fab fa-btc"></i> CRYPTO CURRENCIES</h1>
     </div>
 		<div class="card">
       <h2>Stuff to work on</h2>
       <ul>
-				<li>Yearly overview, show graph for entire year and not only for the months in which data is available.</li>
-				<li>Expense overview - Split expenses and income graphs, change to horizontal bar charts for readability and show side by side.</li>
-				<li>Time analysis - Line chart per subcategory on progress of expense/income/savings over time.</li>
+				<li>Current value of portfolio, connect to Coinbase API</li>
+				<li>Historical transaction overview</li>
 			</ul>
     </div>
-    <div class="card">
-      <a name="addexpense"></a><h2>Add an expense</h2>
+		<div class="card">
+      <h2>Current portfolio</h2>
+      <p>Stuff here.</p>
+    </div>
+		<div class="card">
+      <a name="addtransaction"></a><h2>Add a transaction</h2>
       <?php echo $update_err; ?>
 			<div class="row">
       	<div class="col-50">
@@ -189,34 +209,29 @@ $mysqli->close();
 						</div>
 						<div class="input-container">
 							<i class="far fa-list-alt icon"></i>
-							<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
+							<select class="input-field" name="currency"><?php echo $currencies; ?></select><?php echo $currency_err; ?>
 						</div>
 					</div>
 	      	<div class="col-50">
 						<div class="input-container">
 							<i class="fas fa-euro-sign icon"></i>
-							<input class="input-field" type="number" name="amount" placeholder="Amount" min="0" step="0.01"><?php echo $amount_err; ?>
+							<input class="input-field" type="number" name="curramount" placeholder="Amount" min="0" step="0.00000001"><?php echo $curramount_err; ?>
+						</div>
+						<div class="input-container">
+							<i class="fas fa-euro-sign icon"></i>
+							<input class="input-field" type="number" name="amount" placeholder="Value" min="0" step="0.01"><?php echo $amount_err; ?>
 						</div>
 						<div class="input-container">
 							<i class="fas fa-balance-scale icon"></i>
 							<select class="input-field" name="key">
-								<option value="1">Credit</option>
-								<option value="2" selected>Debit</option>
+								<option value="1">Sell crypto</option>
+								<option value="2" selected>Buy crypto</option>
 							</select><?php echo $key_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="fas fa-chart-bar icon"></i>
-							<select class="input-field" name="type">
-								<option value="2">Business</option>
-								<option value="0" selected>Personal</option>
-								<option value="1">Shared</option>
-								<option value="3">Savings</option>
-							</select><?php echo $type_err; ?>
 						</div>
 					</div>
 				</div>
 
-				<button type="submit" name="submit" value="submit">Submit expense</button>
+				<button type="submit" name="submit" value="submit">Submit transaction</button>
 
       </form>
     </div>

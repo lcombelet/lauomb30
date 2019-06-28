@@ -17,6 +17,7 @@ else {
     <button class=\"dropbtn\"><i class=\"far fa-list-alt\"></i> Databases <i class=\"fa fa-caret-down\"></i></button>
     <div class=\"dropdown-content\">";
   if(in_array("5", $_SESSION['authorizations'])){ echo "<a href=\"boerenbridge.php\"><i class=\"fas fa-chess-king\"></i> Boerenbridge</a>"; }
+  if(in_array("6", $_SESSION['authorizations'])){ echo "<a href=\"crypto.php\"><i class=\"fab fa-btc\"></i> Crypto currencies</a>"; }
   if(in_array("6", $_SESSION['authorizations'])){ echo "<a href=\"finances.php\"><i class=\"far fa-credit-card\"></i> Personal finances</a>"; }
   if(in_array("13", $_SESSION['authorizations'])){ echo "<a href=\"shrdfinances.php\"><i class=\"far fa-money-bill-alt\"></i> Shared finances</a>"; }
   echo "</div>
