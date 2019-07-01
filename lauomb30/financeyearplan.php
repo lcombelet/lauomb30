@@ -112,7 +112,7 @@ $mysqli->close();
 		</div>
 		<div class="card">
 			<h2>Year overview for <?php echo $year; ?></h2>
-			<div id="chart" style="z-index: 1; width: 100%; height: 500px; display: inline-block;"></div>
+			<div id="chart" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
 		</div>
   </div>
 </div>
