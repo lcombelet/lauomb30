@@ -25,30 +25,7 @@ if(isset($_POST['submit'])) {
 
 $chartdata = array();
 $calchartdata = array();
-
-// Pull data for calendar chart
-$sql = "SELECT `date`,`year`,`month`,`key`,`amount` FROM `vw_fin_personal_yearoverview` WHERE (`year` = '$year') ORDER BY `date`, `key` DESC";
-if($stmt = $mysqli->query($sql)){
-	while($row = mysqli_fetch_array($stmt)) {
-
-		// Build multidimensional array
-		$calchart[$row['date']][$row['key']] = $row['amount'];
-	}
-
-	foreach ($calchart as $key => $value) {
-		$calyear = date("Y", strtotime($key));
-		$calmonth = date("m", strtotime($key)) - 1; // Javascript months start at 0 for january
-		$calday = date("d", strtotime($key));
-		$dayresult = ($value[1] + 0) - ($value[2] + 0);
-
-		$calchartdata[] = "[new Date(" . $calyear . ", " . $calmonth . ", " . $calday . "), " . $dayresult . "]";
-	}
-
-$caldata = implode(",", $calchartdata);
-
-} else{
-	echo "Couldn't fetch chart data. Please try again later.";
-}
+$caltranschartdata = array();
 
 // Pull chart data
 $sql = "SELECT `month`,`year`,`key`,`amount` FROM `vw_fin_personal_yearplan` WHERE (`year` = '$year') ORDER BY `month`, `key` DESC";
@@ -71,6 +48,53 @@ $data = implode(",", $chartdata);
 
 } else{
 	echo "Couldn't fetch chart data. Please try again later.";
+}
+
+// Clear variables
+$stmt->close();
+
+// Pull data for calendar chart
+$sql = "SELECT `date`,`year`,`month`,`key`,`amount` FROM `vw_fin_personal_daily_overview` WHERE (`year` = '$year') ORDER BY `date`, `key` DESC";
+if($stmt = $mysqli->query($sql)){
+	while($row = mysqli_fetch_array($stmt)) {
+
+		// Build multidimensional array
+		$calchart[$row['date']][$row['key']] = $row['amount'];
+	}
+
+	foreach ($calchart as $key => $value) {
+		$calyear = date("Y", strtotime($key));
+		$calmonth = date("m", strtotime($key)) - 1; // Javascript months start at 0 for january
+		$calday = date("d", strtotime($key));
+		$dayresult = ($value[1] + 0) - ($value[2] + 0);
+
+		$calchartdata[] = "[new Date(" . $calyear . ", " . $calmonth . ", " . $calday . "), " . $dayresult . "]";
+	}
+
+$caldata = implode(",", $calchartdata);
+
+} else{
+	echo "Couldn't fetch caldendar data. Please try again later.";
+}
+
+// Clear variables
+$stmt->close();
+
+// Pull data for transactions chart
+$sql = "SELECT `date`,`year`,`month`,`transactions` FROM `vw_fin_personal_daily_transactions` WHERE (`year` = '$year') ORDER BY `date`";
+if($stmt = $mysqli->query($sql)){
+	while($row = mysqli_fetch_array($stmt)) {
+		$calyear = date("Y", strtotime($row['date']));
+		$calmonth = date("m", strtotime($row['date'])) - 1; // Javascript months start at 0 for january
+		$calday = date("d", strtotime($row['date']));
+
+		$caltranschartdata[] = "[new Date(" . $calyear . ", " . $calmonth . ", " . $calday . "), " . $row['transactions'] . "]";
+	}
+
+$caltransdata = implode(",", $caltranschartdata);
+
+} else{
+	echo "Couldn't fetch transaction data. Please try again later.";
 }
 
 // Clear variables
@@ -106,29 +130,9 @@ $mysqli->close();
   include 'head.php'; ?>
 	<script type="text/javascript">
 		google.charts.load('current', {'packages':['corechart', 'bar', 'calendar']});
-		google.charts.setOnLoadCallback(drawCalendar);
 		google.charts.setOnLoadCallback(drawChart);
-
-		function drawCalendar() {
-			var dataTable = new google.visualization.DataTable();
-       dataTable.addColumn({ type: 'date', id: 'Date' });
-       dataTable.addColumn({ type: 'number', id: 'Result' });
-       dataTable.addRows([
-          <?php echo $caldata; ?>
-        ]);
-
-				var options = {
- 			          title: "",
-								calendar: { cellSize: 20 },
-								colorAxis: {
-									colors:['#3366CC','white','#109618'],
-									values:[-2500,0,2500]
-								},
- 			        };
-
-       var chart = new google.visualization.Calendar(document.getElementById('calendar'));
-       chart.draw(dataTable, options);
-		}
+		google.charts.setOnLoadCallback(drawCalendar);
+		google.charts.setOnLoadCallback(drawTransactions);
 
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
@@ -147,6 +151,60 @@ $mysqli->close();
 			var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
 			chart.draw(data, options);
 		}
+
+		function drawCalendar() {
+			var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'Result' });
+       dataTable.addRows([
+          <?php echo $caldata; ?>
+        ]);
+
+				var options = {
+ 			          title: "",
+								calendar: {
+									cellSize: 20,
+									yearLabel: {
+										fontSize: 10,
+										color: 'white'
+									}
+								},
+								colorAxis: {
+									colors:['#3366CC','white','#109618'],
+									values:[-1000,0,1000]
+								},
+ 			        };
+
+       var chart = new google.visualization.Calendar(document.getElementById('calendar'));
+       chart.draw(dataTable, options);
+		}
+
+		function drawTransactions() {
+			var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'Transactions' });
+       dataTable.addRows([
+          <?php echo $caltransdata; ?>
+        ]);
+
+				var options = {
+ 			          title: "",
+								calendar: {
+									cellSize: 20,
+									yearLabel: {
+										fontSize: 10,
+										color: 'white'
+									}
+								},
+								colorAxis: {
+									colors:['white','#3366CC'],
+									values:[0,10]
+								},
+ 			        };
+
+       var chart = new google.visualization.Calendar(document.getElementById('transactions'));
+       chart.draw(dataTable, options);
+		}
 	</script>
 </head>
 <body>
@@ -160,15 +218,18 @@ $mysqli->close();
 </div>
   <div class="col-75">
 		<div class="card">
-			<h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
+			<h1><i class="far fa-credit-card"></i> PERSONAL FINANCES - <?php echo $year; ?></h1>
 		</div>
 		<div class="card">
-			<h2>Results per day</h2>
-			<div id="calendar" style="z-index: 1; width: 99%; height: 250px; display: inline-block;"></div>
-		</div>
-		<div class="card">
-			<h2>Totals per month</h2>
+			<h2>Monthly summary</h2>
 			<div id="chart" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
+		</div>
+		<div class="card">
+			<h2>Daily overview</h2>
+			<h3>Net result</h3>
+			<div id="calendar" style="z-index: 1; width: 99%; height: 250px; display: inline-block;"></div>
+			<h3>Transactions</h3>
+			<div id="transactions" style="z-index: 1; width: 99%; height: 250px; display: inline-block;"></div>
 		</div>
   </div>
 </div>

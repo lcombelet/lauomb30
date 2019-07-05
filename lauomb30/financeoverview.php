@@ -29,6 +29,7 @@ if(isset($_POST['submit'])) {
 $sql = "SELECT * FROM `vw_fin_expenses` WHERE (`counterpart` = 1 AND month(`date`) = '$month' AND year(`date`) = '$year')";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
+		// Build table
 		if($row['key'] == 1){
 			$amount = "(".$row['amount'].")";
 		} else{
@@ -51,7 +52,7 @@ $stmt->close();
 // Pull chart data
 $chart = array();
 
-$sql = "SELECT `category`,`counterpart`,`key`,`type`,`amount` FROM `vw_fin_monthly_overview` WHERE (`counterpart`= 1 AND `year` = '$year' AND `month` = '$month') ORDER BY `category`,`amount` DESC,`counterpart`,`key`,`type`";
+$sql = "SELECT `category`,`counterpart`,`key`,`type`,`amount` FROM `vw_fin_personal_monthly_overview` WHERE (`counterpart`= 1 AND `year` = '$year' AND `month` = '$month') ORDER BY `category`,`amount` DESC,`counterpart`,`key`,`type`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 
@@ -221,20 +222,20 @@ $mysqli->close();
 </div>
   <div class="col-75">
 		<div class="card">
-      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
+      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES - <?php echo strtoupper(date('F Y', strtotime($year . "-" . $month . "-01"))); ?></h1>
     </div>
 		<div class="card">
-      <h2>Overview for <?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h2>
+      <h2>Total expenses</h2>
       <div id="overview" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
 		</div>
 		<div class="card">
-      <h2>Details - Personal</h2>
+      <h2>Breakdown personal expenses</h2>
 			<div id="personal" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
 			<p>Total expenses: <?php echo $personaldebittotal; ?><br />
 			<p>Total earnings: <?php echo $personalcredittotal; ?></p>
 		</div>
 		<div class="card">
-			<h2>Details - Business</h2>
+			<h2>Breakdown business expenses</h2>
 			<div id="business" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
 			<p>Total expenses: <?php echo $busidebittotal; ?><br />
 			<p>Total earnings: <?php echo $busicredittotal; ?></p>
