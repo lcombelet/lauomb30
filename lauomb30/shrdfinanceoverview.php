@@ -127,7 +127,7 @@ $mysqli->close();
 
 		var options = {
 			chart: {
-				title: '<?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?>'
+				title: ''
 			}
 		};
 
@@ -149,7 +149,7 @@ $mysqli->close();
 </div>
   <div class="col-75">
 		<div class="card">
-      <h1><i class="far fa-money-bill-alt"></i> SHARED FINANCES</h1>
+      <h1><i class="far fa-money-bill-alt"></i> SHARED FINANCES  - <?php echo strtoupper(date('F, Y', strtotime($year . "-" . $month . "-01"))); ?></h1>
     </div>
 		<div class="card">
       <h2>Expense breakdown</h2>
@@ -157,7 +157,6 @@ $mysqli->close();
     </div>
     <div class="card">
       <a name="monthlyoverview"></a><h2>Expense overview</h2>
-      <h5><?php echo date('F, Y', strtotime($year . "-" . $month . "-01")); ?></h5>
       <table>
       	<tr>
           <th>Date</th>
