@@ -165,6 +165,10 @@ $mysqli->close();
 		]);
 
 		var options = {
+			series: [
+			{color: '#3366CC'},
+			{color: '#109618'}
+		],
 			legend: {position: 'top', maxLines: 3}
 		};
 		var chart = new google.visualization.ColumnChart(document.getElementById('overview'));

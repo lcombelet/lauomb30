@@ -157,6 +157,7 @@ $mysqli->close();
       <h2>Stuff to work on</h2>
       <ul>
 				<li>Yearly overview, show graph for entire year and not only for the months in which data is available.</li>
+				<li><a href="https://developers.google.com/chart/interactive/docs/gallery/calendar">Calendar chart for year overview</a></li>
 				<li>Expense overview - Split expenses and income graphs, change to horizontal bar charts for readability and show side by side.</li>
 				<li>Time analysis - Line chart per subcategory on progress of expense/income/savings over time.</li>
 			</ul>
