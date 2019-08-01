@@ -117,7 +117,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
         <div class="input-container">
           <i class="fas fa-user icon"></i>
-          <input class="input-field" type="text" placeholder="Username" name="username" value="<?php echo $username; ?>"><?php echo $username_err; ?>
+          <input class="input-field" type="text" placeholder="Username" name="username" autofocus value="<?php echo $username; ?>"><?php echo $username_err; ?>
         </div>
         <div class="input-container">
           <i class="fas fa-key icon"></i>

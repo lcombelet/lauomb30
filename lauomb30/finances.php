@@ -208,8 +208,8 @@ $mysqli->close();
 							<select class="input-field" name="type">
 								<option value="2">Business</option>
 								<option value="0" selected>Personal</option>
-								<option value="1">Shared</option>
 								<option value="3">Savings</option>
+								<option value="1">Shared</option>
 							</select><?php echo $type_err; ?>
 						</div>
 					</div>

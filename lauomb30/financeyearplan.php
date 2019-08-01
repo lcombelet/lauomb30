@@ -89,9 +89,14 @@ if($stmt = $mysqli->query($sql)){
 		$calday = date("d", strtotime($row['date']));
 
 		$caltranschartdata[] = "[new Date(" . $calyear . ", " . $calmonth . ", " . $calday . "), " . $row['transactions'] . "]";
+		$maxtransactions[] = $row['transactions'];
 	}
 
 $caltransdata = implode(",", $caltranschartdata);
+
+//round up to nearest multiple of 5 for transactions graph
+$maxtransactions = max($maxtransactions);
+$maxtransactions = ceil($maxtransactions/5) * 5;
 
 } else{
 	echo "Couldn't fetch transaction data. Please try again later.";
@@ -198,7 +203,7 @@ $mysqli->close();
 								},
 								colorAxis: {
 									colors:['white','#3366CC'],
-									values:[0,10]
+									values:[0,<?php echo $maxtransactions; ?>]
 								},
  			        };
 
