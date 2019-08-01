@@ -124,14 +124,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="card">
       <h2>SIGN UP</h2>
 	<p>Please fill this form to create an account.</p>
-	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-		<table>
-		<tr><td><label>Username</label></td><td><input type="text" name="username" value="<?php echo $username; ?>"><?php echo $username_err; ?></td></tr>
-		<tr><td><label>Email</label></td><td><input type="text" name="email" value="<?php echo $email; ?>"><?php echo $email_err; ?></td></tr>
-		<tr><td><label>Password</label></td><td><input type="password" name="password" value="<?php echo $password; ?>"><?php echo $password_err; ?></td></tr>
-		<tr><td><label>Confirm Password</label></td><td><input type="password" name="confirm_password" value="<?php echo $confirm_password; ?>"><?php echo $confirm_password_err; ?></td></tr>
-		<tr><td><input type="submit" value="Submit"><input type="reset" value="Reset"></td></tr>
-		</table>
+	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
+    <div class="input-container">
+      <i class="fas fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="Username" name="username" autofocus value="<?php echo $username; ?>"><?php echo $username_err; ?>
+    </div>
+    <div class="input-container">
+      <i class="fas fa-at icon"></i>
+      <input class="input-field" type="text" placeholder="Email" name="email" value="<?php echo $email; ?>"><?php echo $email_err; ?>
+    </div>
+    <div class="input-container">
+      <i class="fas fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Choose password" name="password" value="<?php echo $password; ?>"><?php echo $password_err; ?>
+    </div>
+    <div class="input-container">
+      <i class="fas fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Confirm password" name="confirm_password" value="<?php echo $confirm_password; ?>"><?php echo $confirm_password_err; ?>
+    </div>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset form</button>
 	<p>Already have an account? <a href="login.php">Login here</a>.</p>
 	</form>
     </div>
