@@ -39,12 +39,15 @@ body {
 }
 
 /* Style the navigation bar links */
+.navbar a, .navbar-index a, .navbar-admin a, .navbar-right a {
+  text-align: center;
+  text-decoration: none;
+}
+
 .navbar a, .navbar-right a {
   font-size: 16px;
   color: white;
-  text-align: center;
   padding: 14px 16px;
-  text-decoration: none;
 }
 
 /* Change color on hover */
@@ -65,7 +68,6 @@ body {
 .navbar-index a {
   font-size: 24px;
   color: #4CAF50;
-  text-align: center;
 }
 
 .navbar-index a:hover {
@@ -80,7 +82,6 @@ body {
 
 .navbar-admin a{
   color: red;
-  text-align: center;
 }
 
 .navbar-admin a:hover {
@@ -190,7 +191,7 @@ body {
   .row, .navbar {
   flex-direction: column;
   }
-  .navbar-right, .navbar-admin {
+  .navbar-index, .navbar-right, .navbar-admin {
     margin: auto;
   }
 }
