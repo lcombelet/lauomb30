@@ -1,18 +1,18 @@
-<div class="header">
-  <a href="index.php"><h1><i class="fas fa-terminal"></i> LAUOMB</h1></a>
-  <p>A hobby gone full-nerd..</p>
-</div>
 <div class="navbar">
 <?php
 if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-  echo "<a href=\"index.php\"><i class=\"fas fa-code\"></i> Home</a>
+  echo "<div class=\"navbar-index\">
+    <a href=\"index.php\"><i class=\"fas fa-terminal\"></i> <b>LAUOMB</b></a>
+  </div>
   <div class=\"navbar-right\">
     <a href=\"login.php\"><i class=\"fas fa-sign-in-alt\"></i> Login</a>
   </div>
   <a href=\"register.php\"><i class=\"far fa-plus-square\"></i> Register</a>";
 }
 else {
-  echo "<a href=\"welcome.php\"><i class=\"fas fa-code\"></i> Home</a>
+  echo "<div class=\"navbar-index\">
+    <a href=\"welcome.php\"><i class=\"fas fa-terminal\"></i> <b>LAUOMB</b></a>
+  </div>
   <div class=\"dropdown\">
     <button class=\"dropbtn\"><i class=\"far fa-list-alt\"></i> Databases <i class=\"fa fa-caret-down\"></i></button>
     <div class=\"dropdown-content\">";
