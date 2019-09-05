@@ -28,6 +28,6 @@ else {
   <div class=\"navbar-right\">
     <a href=\"logout.php\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>
   </div>";
-  if(in_array("5", $_SESSION['authorizations'])){ echo "<div class=\"navbar-admin\"><a href=\"admin.php\"><i class=\"fas fa-user\"></i> Admin portal</a></div>"; }
+  if(in_array("4", $_SESSION['authorizations'])){ echo "<div class=\"navbar-admin\"><a href=\"admin.php\"><i class=\"fas fa-user\"></i> Admin portal</a></div>"; }
 }?>
 </div>
