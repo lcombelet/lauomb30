@@ -7,7 +7,8 @@ $username = $password = $confirm_password = $email = "";
 $username_err = $password_err = $confirm_password_err = $email_err = "";
 
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_POST['submit'])) {
+	unset($_POST['submit']);
 
     // Validate username
     if(empty(trim($_POST["username"]))){
@@ -75,18 +76,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO tbl_users (username, password, email, activation_code, status) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `tbl_users` (`username`, `firstname`, `lastname`, `password`, `email`, `activation_code`, `status`, `editable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sssss", $param_username, $param_password, $param_email, $param_activation_code, $param_status);
+            $stmt->bind_param("ssssssss", $param_username, $param_firstname, $param_lastname, $param_password, $param_email, $param_activation_code, $param_status, $param_edit);
 
             // Set parameters
             $param_username = $username;
+						$param_firstname = trim($_POST['firstname']);
+						$param_lastname = trim($_POST['lastname']);
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
       			$param_email = $email;
       			$param_activation_code = $activation_code;
       			$param_status = 0;
+						$param_edit = 1;
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -123,28 +127,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <div class="col-75">
     <div class="card">
       <h2>SIGN UP</h2>
-	<p>Please fill this form to create an account.</p>
-	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
-    <div class="input-container">
-      <i class="fas fa-user icon"></i>
-      <input class="input-field" type="text" placeholder="Username" name="username" autofocus value="<?php echo $username; ?>"><?php echo $username_err; ?>
-    </div>
-    <div class="input-container">
-      <i class="fas fa-at icon"></i>
-      <input class="input-field" type="text" placeholder="Email" name="email" value="<?php echo $email; ?>"><?php echo $email_err; ?>
-    </div>
-    <div class="input-container">
-      <i class="fas fa-key icon"></i>
-      <input class="input-field" type="password" placeholder="Choose password" name="password" value="<?php echo $password; ?>"><?php echo $password_err; ?>
-    </div>
-    <div class="input-container">
-      <i class="fas fa-key icon"></i>
-      <input class="input-field" type="password" placeholder="Confirm password" name="confirm_password" value="<?php echo $confirm_password; ?>"><?php echo $confirm_password_err; ?>
-    </div>
-    <button type="submit">Submit</button>
-    <button type="reset">Reset form</button>
-	<p>Already have an account? <a href="login.php">Login here</a>.</p>
-	</form>
+    	<p>Please fill this form to create an account.</p>
+
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:50%">
+        <div class="row">
+          <div class="col-50">
+            <div class="input-container">
+              <i class="fas fa-user-circle icon"></i>
+              <input class="input-field" type="text" placeholder="Username" name="username" autofocus autocomplete="off" value="<?php echo $username; ?>"><?php echo $username_err; ?>
+            </div>
+            <div class="input-container">
+              <i class="far fa-user icon"></i>
+              <input class="input-field" type="text" placeholder="First name" name="firstname" autocomplete="off" value="<?php echo $firstname; ?>"><?php echo $firstname_err; ?>
+            </div>
+            <div class="input-container">
+              <i class="fas fa-user icon"></i>
+              <input class="input-field" type="text" placeholder="Last name" name="lastname" autocomplete="off" value="<?php echo $lastname; ?>"><?php echo $lastname_err; ?>
+            </div>
+          </div>
+          <div class="col-50">
+            <div class="input-container">
+              <i class="fas fa-at icon"></i>
+              <input class="input-field" type="text" placeholder="Email" name="email" autocomplete="off" value="<?php echo $email; ?>"><?php echo $email_err; ?>
+            </div>
+            <div class="input-container">
+              <i class="fas fa-key icon"></i>
+              <input class="input-field" type="password" placeholder="Choose password" name="password" autocomplete="off" value="<?php echo $password; ?>"><?php echo $password_err; ?>
+            </div>
+            <div class="input-container">
+              <i class="fas fa-key icon"></i>
+              <input class="input-field" type="password" placeholder="Confirm password" name="confirm_password" autocomplete="off" value="<?php echo $confirm_password; ?>"><?php echo $confirm_password_err; ?>
+            </div>
+          </div>
+        <button type= "submit" name="submit">Submit form</button>
+        </div>
+      </form>
+      <p>Already have an account? <a href="login.php">Login here</a>.</p>
     </div>
   </div>
 </div>

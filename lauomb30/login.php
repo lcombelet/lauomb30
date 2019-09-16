@@ -116,7 +116,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <p>Please fill in your credentials to login.</p>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
         <div class="input-container">
-          <i class="fas fa-user icon"></i>
+          <i class="fas fa-user-circle icon"></i>
           <input class="input-field" type="text" placeholder="Username" name="username" autocomplete="off" autofocus value="<?php echo $username; ?>"><?php echo $username_err; ?>
         </div>
         <div class="input-container">

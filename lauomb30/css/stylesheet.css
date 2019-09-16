@@ -4,6 +4,7 @@
 
 body {
   font-family: 'Karla', serif;
+  font-size: 15px;
   margin: 0;
   background: #f1f1f1;
 }
@@ -249,12 +250,23 @@ tr:hover {
 
 button {
   background-color: #4CAF50;
+  font-family: 'Karla', serif;
+  font-size: 15px;
   color: white;
   padding: 10px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
+}
+
+/*Buttons in forms with no padding*/
+button.formupdate, button.formreset {
+  background-color: transparent;
+  color: black;
+  padding: 0;
+  text-decoration: none;
+  margin: 0;
 }
 
 /* Style the input container */
@@ -300,6 +312,16 @@ border-radius: 0;
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
+}
+
+button.formupdate:hover {
+  font-weight: bold;
+  color: #4285F4;
+}
+
+button.formreset:hover {
+  font-weight: bold;
+  color: #f44336;
 }
 
 /* Extra style for the cancel button (red) */

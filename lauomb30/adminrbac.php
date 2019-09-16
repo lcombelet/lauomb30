@@ -25,6 +25,7 @@ require_once 'config.php';
 <div class="row">
 <div class="col-25">
 <?php include 'adminside.php';?>
+<?php include 'serverdetails.php';?>
 </div>
   <div class="col-75">
     <div class="card">

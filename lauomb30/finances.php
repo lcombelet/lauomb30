@@ -53,7 +53,7 @@ if(isset($_POST['submit'])) {
 		$stmt->bind_param("sss", $fin_expense_id, $counterpart, $key);
 		$stmt->execute();
 
-		$update_err = "<h5>Update complete!<h5>";
+		$update_err = "<h5>Update complete!</h5>";
 	}
 
 	// Close statement
