@@ -29,8 +29,8 @@ if(isset($_POST['activate'])) {
 	if($stmt = $mysqli->prepare($sql)){
 		$stmt->bind_param("ss", $status, $id);
 		$stmt->execute();
-
-		$activate_err = "<h5>Update complete!</h5>";
+	} else{
+			$activate_err = "Something went wrong. Please try again later.";
 	}
 
 	// Close statement
@@ -127,7 +127,7 @@ if(isset($_POST['create'])) {
             if($stmt->execute()){
                 $create_err = "<h5>User created!</h5>";
             } else{
-                echo "Something went wrong. Please try again later.";
+                $create_err = "Something went wrong. Please try again later.";
             }
         }
 
@@ -143,29 +143,27 @@ if($stmt = $mysqli->query($sql)){
 
 		switch ($row['status']) {
 	   case 0:
-       $status = "Inactive";
-			 $action = 1;
-			 $label = "Activate";
+       $action = 1;
+			 $label = "<i class=\"fas fa-toggle-off\"></i>";
        break;
 	   case 1:
-       $status = "Active";
-			 $action = 0;
-			 $label = "Deactivate";
+       $action = 0;
+			 $label = "<i class=\"fas fa-toggle-on\"></i>";
        break;
 		}
 
 		$datecreated = date("d-M Y", strtotime($row['created']));
-		$updateform = "<form action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]). "\" method=\"post\">
+		$status = "<form action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]). "\" method=\"post\">
 										<input type=\"hidden\" name=\"id\" value=\"".$row['id']."\">
 										<input type=\"hidden\" name=\"status\" value=\"".$action."\">
 										<button class=\"formupdate\" type=\"submit\" name=\"activate\">".$label."</button>
 					      	</form>";
 		$maintainaccount = "<form action=\"adminrbac.php\" method=\"post\">
 										<input type=\"hidden\" name=\"id\" value=\"".$row['id']."\">
-										<button class=\"formreset\" type=\"submit\" name=\"maintain\">Manage</button>
+										<button class=\"formreset\" type=\"submit\" name=\"maintain\"><i class=\"far fa-edit\"></i></button>
 					      	</form>";
 
-		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td>".$status."</td><td>".$updateform."</td><td>".$maintainaccount."</td></tr>";
+		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td>".$status."</td><td>".$maintainaccount."</td></tr>";
 	}
 
 $users = implode("",$values);
@@ -209,8 +207,7 @@ $stmt->close();
 						<th>Email</th>
 						<th>Joined</th>
 						<th>Status</th>
-						<th>Change status</th>
-						<th>Maintenance</th>
+						<th>Edit</th>
 					</tr>
 					<?php echo $users; ?>
 				</table>
