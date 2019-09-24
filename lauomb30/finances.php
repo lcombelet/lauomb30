@@ -168,7 +168,7 @@ $mysqli->close();
 		      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 						<div class="input-container">
 							<i class="far fa-calendar-alt icon"></i>
-							<input class="input-field" type="date" name="date"><?php echo $date_err; ?>
+							<input class="input-field" type="date" name="date" autofocus><?php echo $date_err; ?>
 						</div>
 						<div class="input-container">
 							<i class="fas fa-location-arrow icon"></i>
