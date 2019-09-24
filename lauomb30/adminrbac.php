@@ -10,6 +10,27 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username']) || !in_array("4
 
 // Include config file
 require_once 'config.php';
+
+// Define variables and initialize with empty values
+$permission_err = "";
+$values = array();
+
+// Fetch permissions
+$sql = "SELECT * FROM `vw_user_roles`";
+if($stmt = $mysqli->query($sql)){
+	while($row = mysqli_fetch_array($stmt)) {
+		$values[] = "<tr><td><b>".$row['role']."</b></td><td>".$row['permission']."</td></tr>";
+	}
+
+$permissions = implode("",$values);
+
+	} else{
+	$permission_err = "Couldn't fetch permissions. Please try again later.";
+}
+
+// Clear variables and close connection
+unset($values);
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -32,19 +53,17 @@ require_once 'config.php';
       <h1><i class="fas fa-user"></i> ADMIN PORTAL</h1>
     </div>
 		<div class="card">
-			<h2>Role Based Access Control</h2>
-			<table>
-				<tr>
-					<th>Something</th>
-					<th>Something</th>
-				</tr>
-				<tr>
-					<td>Something</td>
-					<td>Something</td>
-				</tr>
-			</table>
+			<h2>Permissions</h2>
+			<div class="col-75">
+				<table style="max-width:75%">
+					<tr>
+						<th>Role</th>
+						<th>Permission</th>
+					</tr>
+					<?php echo $permission_err . $permissions; ?>
+				</table>
+			</div>
 		</div>
-
   </div>
 </div>
 

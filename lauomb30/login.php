@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							}
 						} else{
 							// Display an error message if email is not verified
-							$username_err = 'Verify your email address by clicking  the link in your mailbox.';
+							$username_err = 'Account not active, contact the administrator.';
 						}
                     }
                 } else{

@@ -158,9 +158,9 @@ if($stmt = $mysqli->query($sql)){
 										<input type=\"hidden\" name=\"status\" value=\"".$action."\">
 										<button class=\"formupdate\" type=\"submit\" name=\"activate\">".$label."</button>
 					      	</form>";
-		$maintainaccount = "<form action=\"adminrbac.php\" method=\"post\">
+		$maintainaccount = "<form action=\"adminuseredit.php\" method=\"post\">
 										<input type=\"hidden\" name=\"id\" value=\"".$row['id']."\">
-										<button class=\"formreset\" type=\"submit\" name=\"maintain\"><i class=\"far fa-edit\"></i></button>
+										<button class=\"formupdate\" type=\"submit\" name=\"maintain\"><i class=\"far fa-edit\"></i></button>
 					      	</form>";
 
 		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td>".$status."</td><td>".$maintainaccount."</td></tr>";
@@ -207,7 +207,7 @@ $stmt->close();
 						<th>Email</th>
 						<th>Joined</th>
 						<th>Status</th>
-						<th>Edit</th>
+						<th>Manage</th>
 					</tr>
 					<?php echo $users; ?>
 				</table>
