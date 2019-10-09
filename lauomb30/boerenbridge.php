@@ -27,6 +27,10 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username']) || !in_array("5
     <div class="card">
       <h1><i class="fas fa-chess-king"></i> BOERENBRIDGE</h1>
     </div>
+    <div class="card">
+      <h2>This is a work in progress</h2>
+      <h5>Don't try anything stupid, the world will end if you do...</h5>
+    </div>
     <?php if(isset($_POST['submitNames'])) { ?>
       <div class="card">
         <h2>xxx</h2>
