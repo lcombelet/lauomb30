@@ -33,8 +33,7 @@ require_once 'config.php';
       <h1><i class="far fa-images"></i> ALBUM DOWNLOADS</h1>
 		</div>
 		<?php
-		// Private albums
-		if(in_array("10", $_SESSION['authorizations'])){
+		if(in_array("10", $_SESSION['authorizations'])){ // Private albums
 		?>
 			<div class="card">
 	      <h2>Private photo albums</h2>
@@ -49,7 +48,7 @@ require_once 'config.php';
 						</a>
 				  </div>
 				  <div class="col-25">
-						<a href="/media/images/shared/2019_Ardennen.zip" download="First">
+						<a href="#" download="empty">
 							<div class="imgcontainer">
 								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
 								<div class="caption">Ardennen 2019</div>
@@ -74,10 +73,9 @@ require_once 'config.php';
 					</div>
 				</div>
 	    </div>
-		<?php ; } ?>
 		<?php
-		// Shared albums
-		if(in_array("9", $_SESSION['authorizations'])){
+		; } // End of private albums
+		if(in_array("9", $_SESSION['authorizations'])){ // Shared albums
 		?>
 			<div class="card">
 				<h2>Shared photo albums</h2>
@@ -117,7 +115,9 @@ require_once 'config.php';
 					</div>
 				</div>
 	    </div>
-		<?php ; } ?>
+		<?php
+		; } // End of shared albums
+		?>
   </div>
 </div>
 
