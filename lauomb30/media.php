@@ -39,7 +39,7 @@ require_once 'config.php';
 	      <h2>Private photo albums</h2>
 				<p>Click on the photo to download the album</p>
 				<div class="row">
-					<div class="col-25">
+					<div class="imgcol-25">
 						<a href="/media/images/private/2018_Wedding_RJ.zip" download="2018_Wedding_RJ">
 							<div class="imgcontainer">
 								<img src="/media/images/private/2018_Wedding_RJ.jpg" style="width:100%">
@@ -47,30 +47,15 @@ require_once 'config.php';
 							</div>
 						</a>
 				  </div>
-				  <div class="col-25">
-						<a href="#" download="empty">
-							<div class="imgcontainer">
-								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
-								<div class="caption">Ardennen 2019</div>
-							</div>
-						</a>
+					<div class="imgcol-25">
+						&nbsp
 				  </div>
-				  <div class="col-25">
-						<a href="/media/images/shared/2019_Ardennen.zip" download="First">
-							<div class="imgcontainer">
-								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
-								<div class="caption">Ardennen 2019</div>
-							</div>
-						</a>
+					<div class="imgcol-25">
+						&nbsp
 				  </div>
-					<div class="col-25">
-						<a href="/media/images/shared/2019_Ardennen.zip" download="First">
-							<div class="imgcontainer">
-								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
-								<div class="caption">Ardennen 2019</div>
-							</div>
-						</a>
-					</div>
+					<div class="imgcol-25">
+						&nbsp
+				  </div>
 				</div>
 	    </div>
 		<?php
@@ -81,7 +66,7 @@ require_once 'config.php';
 				<h2>Shared photo albums</h2>
 				<p>Click on the photo to download the album. Contact me for the password to open the archive.</p>
 				<div class="row">
-					<div class="col-25">
+					<div class="imgcol-25">
 						<a href="/media/images/shared/2019_Ardennen.zip" download="2019_Ardennen">
 							<div class="imgcontainer">
 								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
@@ -89,7 +74,7 @@ require_once 'config.php';
 							</div>
 						</a>
 				  </div>
-				  <div class="col-25">
+				  <div class="imgcol-25">
 						<a href="/media/images/shared/2018_Rabbit_hill.zip" download="2018_Rabbit_hill">
 							<div class="imgcontainer">
 								<img src="/media/images/shared/2018_Rabbit_hill.jpg" style="width:100%">
@@ -97,7 +82,7 @@ require_once 'config.php';
 							</div>
 						</a>
 				  </div>
-				  <div class="col-25">
+				  <div class="imgcol-25">
 						<a href="/media/images/shared/2019_Eline_newborn.zip" download="2019_Eline_newborn">
 							<div class="imgcontainer">
 								<img src="/media/images/shared/2019_Eline_newborn.jpg" style="width:100%">
@@ -105,7 +90,7 @@ require_once 'config.php';
 							</div>
 						</a>
 				  </div>
-					<div class="col-25">
+					<div class="imgcol-25">
 						<a href="/media/images/shared/2019_Daan_newborn.zip" download="2019_Daan_newborn">
 							<div class="imgcontainer">
 								<img src="/media/images/shared/2019_Daan_newborn.jpg" style="width:100%">

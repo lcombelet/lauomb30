@@ -32,63 +32,32 @@ body {
   text-decoration: none;
 }
 
-/* Style the top navigation bar */
+/* Top navigation bar */
 .navbar {
   display: flex;
   z-index: 490;
   background-color: #333;
 }
 
-/* Style the navigation bar links */
-.navbar a, .navbar-index a, .navbar-admin a, .navbar-right a {
-  text-align: center;
-  text-decoration: none;
-}
-
-.navbar a, .navbar-right a {
-  font-size: 16px;
-  color: white;
-  padding: 14px 16px;
-}
-
-/* Change color on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: #4CAF50;
-}
-
-.navbar-right {
-  margin-left: auto;
-  padding: 14px 0;
-}
-
-/* Index navbar */
 .navbar-index {
   padding: 8px 0;
 }
 
-.navbar-index a {
-  font-size: 24px;
-  color: #4CAF50;
+.navbar-login{
+  margin-left: auto;
+  padding: 14px 0;
 }
 
-.navbar-index a:hover {
-  color: white;
-  background-color: inherit;
+.navbar-right {
+  margin-left: auto;
+  padding: 0;
 }
 
-/* Admin navbar */
 .navbar-admin {
   padding: 14px 0;
 }
 
-.navbar-admin a{
-  color: red;
-}
-
-.navbar-admin a:hover {
-  background-color: inherit;
-}
-
+/* Dropdown menu */
 .dropdown {
   float: left;
   overflow: hidden;
@@ -112,7 +81,66 @@ body {
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 480;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #4CAF50;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Navigation bar links */
+.navbar a {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  padding: 14px 16px;
+}
+
+.navbar a:hover {
+  background-color: #4CAF50;
+}
+
+.navbar-index a{
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px;
+  color: #4CAF50;
+}
+
+.navbar-index a:hover {
+  color: white;
+  background-color: inherit;
+}
+
+.navbar-right a {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  padding: 14px 16px;
+}
+
+.navbar-login a {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  padding: 14px 16px;
+}
+
+.navbar-admin a {
+  text-align: center;
+  text-decoration: none;
+  color: red;
+}
+
+.navbar-admin a:hover {
+  background-color: inherit;
 }
 
 .dropdown-content a {
@@ -128,10 +156,6 @@ body {
   background-color: #ddd;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
 /* Column container */
 .row {
   display: -ms-flexbox; /* IE10 */
@@ -145,7 +169,6 @@ body {
 .col-25 {
   -ms-flex: 25%; /* IE10 */
   flex: 25%;
-  max-width: 25%;
 }
 
 .col-50 {
@@ -173,11 +196,32 @@ body {
   text-align: center;
 }
 
-/* Fake image, just for this example */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
+/* Footer */
+.footer {
+  margin_top: 20px;
+  padding: 10px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 700px) {
+  .row, .navbar {
+  flex-direction: column;
+  }
+  .navbar-index, .navbar-login, .navbar-right, .navbar-admin {
+    margin: auto;
+  }
+}
+
+/* Images */
+
+/* Create columns */
+.imgcol-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 3px 6px 3px;
 }
 
 .column img {
@@ -201,24 +245,21 @@ body {
   color: #f1f1f1; /* Grey text */
   text-align: center;
   width: 100%; /* Full width */
-  padding: 20px; /* Some padding */
+  padding: 10px; /* Some padding */
 }
 
-/* Footer */
-.footer {
-  margin_top: 20px;
-  padding: 10px;
-  text-align: center;
-  background: #ddd;
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 700px) {
-  .row, .navbar {
-  flex-direction: column;
-  }
-  .navbar-index, .navbar-right, .navbar-admin {
-    margin: auto;
+@media screen and (max-width: 800px) {
+  .imgcol-25 {
+    flex: 100%;
+    max-width: 100%;
   }
 }
 
@@ -233,11 +274,7 @@ a.left {
   color: #333;
 }
 
-/* everything class title will be grey */
-.title {
-  color: grey;
-}
-
+/* Tables */
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -266,27 +303,7 @@ tr:hover {
   background-color: #ddd;
 }
 
-button {
-  background-color: #4CAF50;
-  font-family: 'Karla', serif;
-  font-size: 15px;
-  color: white;
-  padding: 10px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-/*Buttons in forms with no padding*/
-button.formupdate, button.formreset {
-  background-color: transparent;
-  color: black;
-  padding: 0;
-  text-decoration: none;
-  margin: 0;
-}
-
+/* Forms */
 /* Style the input container */
 .input-container {
   display: flex;
@@ -327,6 +344,34 @@ border-radius: 0;
   border-bottom: 2px solid #ddd;
 }
 
+button {
+  background-color: #4CAF50;
+  font-family: 'Karla', serif;
+  font-size: 15px;
+  color: white;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/*Buttons in forms with no padding*/
+button.formupdate, button.formreset {
+  background-color: transparent;
+  color: black;
+  padding: 0;
+  text-decoration: none;
+  margin: 0;
+}
+
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
@@ -340,11 +385,4 @@ button.formupdate:hover {
 button.formreset:hover {
   font-weight: bold;
   color: #f44336;
-}
-
-/* Extra style for the cancel button (red) */
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
 }

@@ -4,7 +4,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
   echo "<div class=\"navbar-index\">
     <a href=\"index.php\"><i class=\"fas fa-terminal\"></i> <b>LAUOMB</b></a>
   </div>
-  <div class=\"navbar-right\">
+  <div class=\"navbar-login\">
     <a href=\"login.php\"><i class=\"fas fa-sign-in-alt\"></i> Login</a>
   </div>
   <a href=\"register.php\"><i class=\"far fa-plus-square\"></i> Register</a>";
@@ -31,7 +31,13 @@ else {
   echo "</div>
   </div>
   <div class=\"navbar-right\">
-    <a href=\"logout.php\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>
+    <div class=\"dropdown\">
+      <button class=\"dropbtn\"><i class=\"far fa-address-card\"></i>   " . htmlspecialchars($_SESSION['username']) . " <i class=\"fa fa-caret-down\"></i></button>
+      <div class=\"dropdown-content\">";
+        if(in_array("3", $_SESSION['authorizations'])){ echo "<a href=\"memberprofile.php\"><i class=\"far fa-id-badge\"></i> Profile</a>"; }
+        echo "<a href=\"logout.php\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>
+      </div>
+    </div>
   </div>";
   if(in_array("4", $_SESSION['authorizations'])){ echo "<div class=\"navbar-admin\"><a href=\"admin.php\"><i class=\"fas fa-user\"></i> Admin portal</a></div>"; }
 }?>
