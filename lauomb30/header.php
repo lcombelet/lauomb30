@@ -23,8 +23,13 @@ else {
   if(in_array("13", $_SESSION['authorizations'])){ echo "<a href=\"shrdfinances.php\"><i class=\"far fa-money-bill-alt\"></i> Shared finances</a>"; }
   echo "</div>
   </div>
-  <a href=\"portugal.php\"><i class=\"fas fa-suitcase\"></i> Portugal diary</a>
-  <a href=\"media.php\"><i class=\"far fa-images\"></i> Media</a>
+  <div class=\"dropdown\">
+    <button class=\"dropbtn\"><i class=\"far fa-list-alt\"></i> Media <i class=\"fa fa-caret-down\"></i></button>
+    <div class=\"dropdown-content\">";
+  if(in_array("9", $_SESSION['authorizations'])){ echo "<a href=\"media.php\"><i class=\"far fa-images\"></i> Album downloads</a>"; }
+  if(in_array("10", $_SESSION['authorizations'])){ echo "<a href=\"portugal.php\"><i class=\"fas fa-suitcase\"></i> Portugal 2018</a>"; }
+  echo "</div>
+  </div>
   <div class=\"navbar-right\">
     <a href=\"logout.php\"><i class=\"fas fa-sign-out-alt\"></i> Logout</a>
   </div>";

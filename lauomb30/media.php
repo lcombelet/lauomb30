@@ -17,7 +17,7 @@ require_once 'config.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Media";
+	<?php $title = "LauOmb Webserver - Photo albums";
   include 'head.php'; ?>
 </head>
 <body>
@@ -30,64 +30,94 @@ require_once 'config.php';
 </div>
   <div class="col-75">
 		<div class="card">
-      <h1><i class="far fa-images"></i> MEDIA</h1>
+      <h1><i class="far fa-images"></i> ALBUM DOWNLOADS</h1>
 		</div>
-		<div class="card">
-      <h2>Let's bring some pictures into the show</h2>
-      <h5>Because reading is only so so..</h5>
-			<div class="slideshow-container">
-
-        <!-- Full-width images with number and caption text -->
-        <div class="mySlides fade">
-          <img src="/media/images/carousel/carousel1.jpg" style="width:100%">
-          <div class="text">China</div>
-        </div>
-
-        <div class="mySlides fade">
-          <img src="/media/images/carousel/carousel2.jpg" style="width:100%">
-          <div class="text">Australia</div>
-        </div>
-
-        <div class="mySlides fade">
-          <img src="/media/images/carousel/carousel3.jpg" style="width:100%">
-          <div class="text">New Zealand</div>
-        </div>
-
-        <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-      </div>
-      <br>
-
-      <!-- The dots/circles -->
-      <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-      </div>
-
-      <script>
-      var slideIndex = 0;
-      showSlides();
-
-      function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}
-        for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
-        setTimeout(showSlides, 5000); // Change image every 2 seconds
-      }
-      </script>
-    </div>
+		<?php
+		// Private albums
+		if(in_array("10", $_SESSION['authorizations'])){
+		?>
+			<div class="card">
+	      <h2>Private photo albums</h2>
+				<p>Click on the photo to download the album</p>
+				<div class="row">
+					<div class="col-25">
+						<a href="/media/images/private/2018_Wedding_RJ.zip" download="2018_Wedding_RJ">
+							<div class="imgcontainer">
+								<img src="/media/images/private/2018_Wedding_RJ.jpg" style="width:100%">
+								<div class="caption">Wedding Rebecca and Jeroen 2018</div>
+							</div>
+						</a>
+				  </div>
+				  <div class="col-25">
+						<a href="/media/images/shared/2019_Ardennen.zip" download="First">
+							<div class="imgcontainer">
+								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
+								<div class="caption">Ardennen 2019</div>
+							</div>
+						</a>
+				  </div>
+				  <div class="col-25">
+						<a href="/media/images/shared/2019_Ardennen.zip" download="First">
+							<div class="imgcontainer">
+								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
+								<div class="caption">Ardennen 2019</div>
+							</div>
+						</a>
+				  </div>
+					<div class="col-25">
+						<a href="/media/images/shared/2019_Ardennen.zip" download="First">
+							<div class="imgcontainer">
+								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
+								<div class="caption">Ardennen 2019</div>
+							</div>
+						</a>
+					</div>
+				</div>
+	    </div>
+		<?php ; } ?>
+		<?php
+		// Shared albums
+		if(in_array("9", $_SESSION['authorizations'])){
+		?>
+			<div class="card">
+				<h2>Shared photo albums</h2>
+				<p>Click on the photo to download the album. Contact me for the password to open the archive.</p>
+				<div class="row">
+					<div class="col-25">
+						<a href="/media/images/shared/2019_Ardennen.zip" download="2019_Ardennen">
+							<div class="imgcontainer">
+								<img src="/media/images/shared/2019_Ardennen.jpg" style="width:100%">
+								<div class="caption">Ardennen 2019</div>
+							</div>
+						</a>
+				  </div>
+				  <div class="col-25">
+						<a href="/media/images/shared/2018_Rabbit_hill.zip" download="2018_Rabbit_hill">
+							<div class="imgcontainer">
+								<img src="/media/images/shared/2018_Rabbit_hill.jpg" style="width:100%">
+								<div class="caption">Rabbit Hill 2018</div>
+							</div>
+						</a>
+				  </div>
+				  <div class="col-25">
+						<a href="/media/images/shared/2019_Eline_newborn.zip" download="2019_Eline_newborn">
+							<div class="imgcontainer">
+								<img src="/media/images/shared/2019_Eline_newborn.jpg" style="width:100%">
+								<div class="caption">Newborn shoot Eline 2019</div>
+							</div>
+						</a>
+				  </div>
+					<div class="col-25">
+						<a href="/media/images/shared/2019_Daan_newborn.zip" download="2019_Daan_newborn">
+							<div class="imgcontainer">
+								<img src="/media/images/shared/2019_Daan_newborn.jpg" style="width:100%">
+								<div class="caption">Newborn shoot Daan 2019</div>
+							</div>
+						</a>
+					</div>
+				</div>
+	    </div>
+		<?php ; } ?>
   </div>
 </div>
 
