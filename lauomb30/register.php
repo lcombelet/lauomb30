@@ -76,17 +76,19 @@ if(isset($_POST['submit'])) {
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err)){
 
         // Prepare an insert statement
-        $sql = "INSERT INTO `tbl_users` (`username`, `firstname`, `lastname`, `password`, `email`, `activation_code`, `status`, `editable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `tbl_users` (`username`, `firstname`, `lastname`, `password`, `password_date`, `password_reset`, `email`, `activation_code`, `status`, `editable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ssssssss", $param_username, $param_firstname, $param_lastname, $param_password, $param_email, $param_activation_code, $param_status, $param_edit);
+            $stmt->bind_param("ssssssssss", $param_username, $param_firstname, $param_lastname, $param_password, $param_date, $param_reset, $param_email, $param_activation_code, $param_status, $param_edit);
 
             // Set parameters
             $param_username = $username;
 						$param_firstname = trim($_POST['firstname']);
 						$param_lastname = trim($_POST['lastname']);
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+						$param_date = date('Y-m-d H:i:s');;
+						$param_reset = 0;
       			$param_email = $email;
       			$param_activation_code = $activation_code;
       			$param_status = 0;

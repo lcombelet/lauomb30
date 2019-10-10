@@ -20,14 +20,18 @@ $values = array();
 if(isset($_POST['reset'])) {
 	unset($_POST['reset']);
 
-	$param_id = $_POST['id'];
-	$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-
 	// Update Users table
-	$sql = "UPDATE `tbl_users` SET `password`=? WHERE `user_id`=?";
+	$sql = "UPDATE `tbl_users` SET `password`=?, `password_date`=?, `password_reset`=? WHERE `user_id`=?";
 
 	if($stmt = $mysqli->prepare($sql)){
-		$stmt->bind_param("ss", $param_password, $param_id);
+		$stmt->bind_param("ssss", $param_password, $param_date, $param_reset, $param_id);
+
+		// Bind parameters
+		$param_id = $_POST['id'];
+		$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+		$param_date = date('Y-m-d H:i:s');
+		$param_reset = 1;
+
 		$stmt->execute();
 		$reset_err = "Success! New password: " . $password;
 	} else{
@@ -47,12 +51,23 @@ if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 
 		$datecreated = date("d-M Y", strtotime($row['created']));
+		$datepassword = date("d-M Y", strtotime($row['passworddate']));
+
+		switch ($row['reset']) {
+			case 0:
+				$passwordreset = "<i class=\"far fa-user\"></i>";
+				break;
+			case 1:
+				$passwordreset = "<i class=\"fas fa-desktop\"></i>";
+				break;
+		}
+
 		$reset = "<form action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]). "\" method=\"post\">
 										<input type=\"hidden\" name=\"id\" value=\"".$row['id']."\">
-										<button class=\"formreset\" type=\"submit\" name=\"reset\"><i class=\"fas fa-key\"></i></button>
+										<button class=\"formreset\" type=\"submit\" name=\"reset\"><i class=\"fas fa-redo-alt\"></i></button>
 					      	</form>";
 
-		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td>".$reset."</td></tr>";
+		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td>".$datepassword."</td><td>".$passwordreset."</td><td>".$reset."</td></tr>";
 	}
 
 	$user = implode("",$values);
@@ -108,6 +123,8 @@ if($stmt = $mysqli->query($sql)){
 						<th>Name</th>
 						<th>Email</th>
 						<th>Joined</th>
+						<th>Last password change</th>
+						<th>Type</th>
 						<th>Reset</th>
 					</tr>
 					<?php echo $user_err . $user; ?>
