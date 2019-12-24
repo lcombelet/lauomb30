@@ -13,6 +13,7 @@ require_once 'config.php';
 
 // Define variables and initialize with empty values
 $reset_err = $user_err = $role_err = "";
+$param_id = "";
 $password = "Welcome2019";
 $values = array();
 
@@ -46,34 +47,37 @@ if(isset($_POST['maintain'])) {
 	$id = $_POST['id'];
 
 //Fetch user data
-$sql = "SELECT * FROM `vw_user_users` WHERE `id` = $id";
-if($stmt = $mysqli->query($sql)){
-	while($row = mysqli_fetch_array($stmt)) {
+$sql = "SELECT `username`, `firstname`, `lastname`, `email`, `created`, `passworddate`, `reset`, `editable`, `status` FROM `vw_user_users` WHERE `id` = ?";
+if($stmt = $mysqli->prepare($sql)){
+	$stmt->bind_param("s", $param_id);
 
-		$datecreated = date("d-M Y", strtotime($row['created']));
-		$datepassword = date("d-M Y", strtotime($row['passworddate']));
+	$param_id = $id;
 
-		switch ($row['reset']) {
-			case 0:
-				$passwordreset = "<i class=\"far fa-user\"></i>";
-				break;
-			case 1:
-				$passwordreset = "<i class=\"fas fa-desktop\"></i>";
-				break;
+	if($stmt->execute()){
+		$stmt->store_result();
+
+		if($stmt->num_rows == 1){
+			$stmt->bind_result($username, $firstname, $lastname, $email, $created, $passworddate, $reset, $editable, $status);
+			if($stmt->fetch()){
+				$datecreated = date("d-M Y", strtotime($created));
+				$datepassword = date("d-M Y", strtotime($passworddate));
+
+				switch ($reset) {
+					case 0:
+						$passwordreset = "<i class=\"far fa-user\"></i>";
+						break;
+					case 1:
+						$passwordreset = "<i class=\"fas fa-desktop\"></i>";
+						break;
+				}
+			}
+		} else{
+			// Display an error message if username doesn't exist
+			$user_err = "Couldn't fetch user data. Please try again later.";
 		}
-
-		$reset = "<form action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]). "\" method=\"post\">
-										<input type=\"hidden\" name=\"id\" value=\"".$row['id']."\">
-										<button class=\"formreset\" type=\"submit\" name=\"reset\"><i class=\"fas fa-redo-alt\"></i></button>
-					      	</form>";
-
-		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td>".$datepassword."</td><td>".$passwordreset."</td><td>".$reset."</td></tr>";
-	}
-
-	$user = implode("",$values);
-	unset($values);
 	} else{
-	$user_err = "Couldn't fetch user data. Please try again later.";
+		echo "Oops! Something went wrong. Please try again later.";
+	}
 }
 
 // Fetch permissions
@@ -114,20 +118,45 @@ if($stmt = $mysqli->query($sql)){
       <h1><i class="fas fa-user"></i> ADMIN PORTAL</h1>
     </div>
 		<div class="card">
-			<h2>User data</h2>
+			<h2>User details</h2>
 			<?php echo $reset_err; ?>
 			<div class="col-75">
+				<?php echo $user_err; ?>
 				<table style="max-width:75%">
 					<tr>
 						<th>Username</th>
 						<th>Name</th>
 						<th>Email</th>
 						<th>Joined</th>
-						<th>Last password change</th>
+					</tr>
+					<tr>
+						<td><b><?php echo $username; ?></b></td>
+						<td><?php echo $firstname . " " . $lastname; ?></td>
+						<td><?php echo $email; ?></td>
+						<td><?php echo $datecreated; ?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="card">
+			<div class="col-75">
+				<h2>Profile details</h2>
+				<table style="max-width:50%">
+					<tr>
+						<th>Password age</th>
 						<th>Type</th>
 						<th>Reset</th>
 					</tr>
-					<?php echo $user_err . $user; ?>
+					<tr>
+						<td><?php echo $datepassword; ?></td>
+						<td align="center"><?php echo $passwordreset; ?></td>
+						<td>
+							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+							<input type="hidden" name="id" value="<?php echo $id; ?>">
+							<button class="formreset" type="submit" name="reset"><i class="fas fa-redo-alt"></i></button>
+			      	</form>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -143,20 +172,6 @@ if($stmt = $mysqli->query($sql)){
 				</table>
 			</div>
 		</div>
-		<div class="card">
-			<h2>Role Based Access Control</h2>
-			<table>
-				<tr>
-					<th>Something</th>
-					<th>Something</th>
-				</tr>
-				<tr>
-					<td>Something</td>
-					<td>Something</td>
-				</tr>
-			</table>
-		</div>
-
   </div>
 </div>
 

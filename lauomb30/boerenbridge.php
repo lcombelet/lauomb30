@@ -31,22 +31,46 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username']) || !in_array("5
       <h2>This is a work in progress</h2>
       <h5>Don't try anything stupid, the world will end if you do...</h5>
     </div>
-    <?php if(isset($_POST['submitNames'])) { ?>
+    <?php if(isset($_POST['endGame'])) {
+      //update score previous round
+      //summarize score and show analytics
+      //clean up db
+      ?>
       <div class="card">
-        <h2>xxx</h2>
+        <h2>Step 5. All finished!</h2>
         <p>xxx</p>
       </div>
-    <?php } elseif(isset($_POST['submitPlayers']) || isset($_POST['addPlayer'])) {
-      if(isset($_POST['submitPlayers'])) {
-        $_SESSION['players'] = $_POST['players'];
-      }
-      if(isset($_POST['addPlayer'])) {
-        //add player to db query
-      } ?>
+
+    <?php } elseif(isset($_POST['continueGame'])) {
+      //update score previous round
+      //load current round details (dealer, etc)
+      ?>
       <div class="card">
-        <h2>Who is playing this game?</h2>
-        <h5>Note: if the name of a player is not available, register that person first before selecting the players!</h5>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <h2>Step 4. Continue playing</h2>
+        <p>xxx</p>
+      </div>
+
+    <?php } elseif(isset($_POST['startGame'])) {
+      //create all rounds and assign dealer to each round
+      //create score arrays for each player
+      ?>
+      <div class="card">
+        <h2>Step 3. Let's begin!</h2>
+        <p>xxx</p>
+      </div>
+
+    <?php } elseif(isset($_POST['submitPlayers'])) {
+      $_SESSION['players'] = $_POST['players'];
+      $_SESSION['cards'] = $_POST['cards'];
+      //create new game, load gameid from db and store in session variable
+
+      echo $_SESSION['players'];
+      echo $_SESSION['cards']; ?>
+
+      <div class="card">
+        <h2>Step 2. Select your players and first dealer</h2>
+        <h5>Start with the person who drew the highest card, continue clockwise.</h5>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
         <table>
           <?php
             //pull playernames from db and store in datalist that can be pulled in html
@@ -66,30 +90,63 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username']) || !in_array("5
               $x++;
             }
             ?>
-    			<tr><td><input type="submit" name="submitNames" value="Start the game"></td></tr>
+    			<tr><td><input type="submit" name="startGame" value="Start the game"></td></tr>
         </table>
         </form>
       </div>
-      <div class="card">
-        <h2>Add a new player</h2>
-        <h5>Input the first and last name and click the button to add the person.</h5>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <table>
-          <tr><td><label>First name:</label></td><td><input type="text" name="firstname"><?php echo $firstname_err; ?></td></tr>
-          <tr><td><label>Last name:</label></td><td><input type="text" name="lastname"><?php echo $lastname_err; ?></td></tr>
-    			<tr><td><input type="submit" name="addPlayer" value="Add player"></td></tr>
-        </table>
-        </form>
-      </div>
+
     <?php } else { ?>
       <div class="card">
-        <h2>How many players are going to play?</h2>
-        <h5>Note: the maximum number of players is eight.</h5>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <table>
-          <tr><td><label>Players:</label></td><td><input type="range" id="players" name="players" min="2" max="8" step="1" onchange="updatePlayers()"></td><td id="functionResult"></td></tr>
-          <tr><td><input type="submit" name="submitPlayers" value="Select players"></td></tr>
-        </table>
+        <h2>Step 1. Select the number of players and cards</h2>
+        <h5>The maximum number of players is eight, the maximum number of cards is automatically adjusted.</h5>
+        <div class="row">
+        	<div class="col-50">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+              <div class="input-container">
+                <i class="fas fa-users icon"></i>
+                <div class="slidecontainer">
+                  <input type="range" min="2" max="8" value="2" step="1" class="slider" id="playerRange" name="players">
+                </div>
+              </div>
+              <div class="input-container">
+                Value:&nbsp;<span id="playerValue"></span>
+              </div>
+            </div>
+            <div class="col-50">
+              <div class="input-container">
+                <i class="far fa-hand-pointer icon"></i>
+                <div class="slidecontainer">
+                  <input type="range" min="4" max="25" value="4" step="1" class="slider" id="cardRange" name="cards">
+                </div>
+              </div>
+              <div class="input-container">
+                Value:&nbsp;<span id="cardValue"></span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" name="submitPlayers" value="submit">Select players</button>
+        </form>
+
+        <script>
+          var playerSlider = document.getElementById("playerRange");
+          var playerSliderOutput = document.getElementById("playerValue");
+          var cardSlider = document.getElementById("cardRange");
+          var cardSliderOutput = document.getElementById("cardValue");
+
+          playerSliderOutput.innerHTML = playerSlider.value;
+          cardSliderOutput.innerHTML = cardSlider.value;
+
+          playerSlider.oninput = function() {
+            playerSliderOutput.innerHTML = this.value;
+
+            var x = document.getElementById("cardRange").max = Math.floor(51 / this.value);
+          }
+
+          cardSlider.oninput = function() {
+            cardSliderOutput.innerHTML = this.value;
+          }
+        </script>
+
       </div>
     <?php } ?>
   </div>

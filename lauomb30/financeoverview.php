@@ -30,13 +30,15 @@ $sql = "SELECT * FROM `vw_fin_expenses` WHERE (`counterpart` = 1 AND month(`date
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		// Build table
+		$date = date("d-M Y", strtotime($row['date']));
+
 		if($row['key'] == 1){
 			$amount = "(".$row['amount'].")";
 		} else{
 			$amount = $row['amount'];
 		}
 
-		$values[] = "<tr><td>".$row['date']."</td><td>".$row['location']."</td><td>".$row['description']."</td><td>".$row['category']."</td><td>".$row['subcategory']."</td><td>".$amount."</td><td>".ucfirst($row['type_descr'])."</td></tr>";
+		$values[] = "<tr><td>".$date."</td><td>".$row['location']."</td><td>".$row['description']."</td><td>".$row['category']."</td><td>".$row['subcategory']."</td><td>".$amount."</td><td>".ucfirst($row['type_descr'])."</td></tr>";
 	}
 
 	$expenses = implode("",$values);

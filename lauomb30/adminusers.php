@@ -100,7 +100,7 @@ if(isset($_POST['create'])) {
 						$param_firstname = trim($_POST['firstname']);
 						$param_lastname = trim($_POST['lastname']);
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-						$param_date = date('Y-m-d H:i:s');;
+						$param_date = date('Y-m-d H:i:s');
 						$param_reset = 1;
       			$param_email = $email;
       			$param_activation_code = $activation_code;
@@ -128,8 +128,7 @@ if($stmt = $mysqli->query($sql)){
 		$ghost = "";
 
 		if($row['editable'] == 0){
-			$ghost = "<i class=\"fas fa-user-secret\"></i>";
-			$status = "";
+			$status = "<i class=\"fas fa-user-secret\"></i>";
 			$maintainaccount = "";
 	 	} else{
 				switch ($row['status']) {
@@ -157,7 +156,7 @@ if($stmt = $mysqli->query($sql)){
 
 		$datecreated = date("d-M Y", strtotime($row['created']));
 
-		$values[] = "<tr><td>".$ghost."</td><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td>".$status."</td><td>".$maintainaccount."</td></tr>";
+		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td align=\"center\">".$status."</td><td>".$maintainaccount."</td></tr>";
 	}
 
 $users = implode("",$values);
@@ -196,7 +195,6 @@ $stmt->close();
 			<div class="col-75">
 				<table style="max-width:75%">
 					<tr>
-						<th>&nbsp;</th>
 						<th>Username</th>
 						<th>Name</th>
 						<th>Email</th>
