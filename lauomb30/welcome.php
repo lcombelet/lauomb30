@@ -123,7 +123,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <h2><i class="fas fa-headset"></i> CONTACT FORM</h2>
       <h5>Leave me a comment</h5>
       <?php echo $query_result; ?>
-      <p>Please fill in all fields and click Submit. Much appreciated!</p>
+      <p>Please fill in all fields and click Submit. Muchas gracias!</p>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:500px">
         <div class="input-container">
           <i class="fas fa-balance-scale icon"></i>
