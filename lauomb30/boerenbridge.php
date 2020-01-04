@@ -152,33 +152,32 @@ if(isset($_POST['endGame'])) {
 <head>
   <?php $title = "LauOmb Webserver - Boerenbridge database";
   include 'head.php'; ?>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          <?php echo $chartData; ?>
-        ]);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        <?php echo $chartData; ?>
+      ]);
 
-        var options = {
-          hAxis: {
-            title: 'Round'
-          },
-        vAxis: {
-            title: 'Score'
-          },
-          curveType: 'function',
-          pointSize: 6,
-          legend: { position: 'top' }
-        };
+      var options = {
+        hAxis: {
+          title: 'Round'
+        },
+      vAxis: {
+          title: 'Score'
+        },
+        curveType: 'function',
+        pointSize: 6,
+        legend: { position: 'top' }
+      };
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        chart.draw(data, options);
-      }
-    </script>
+      chart.draw(data, options);
+    }
+  </script>
 </head>
 <body>
 
@@ -502,25 +501,8 @@ if(isset($_POST['endGame'])) {
           <button type="submit" name="submitPlayers" value="submit">Continue to next step</button>
         </form>
 
-        <script>
-          var playerSlider = document.getElementById("playerRange");
-          var playerSliderOutput = document.getElementById("playerValue");
-          var cardSlider = document.getElementById("cardRange");
-          var cardSliderOutput = document.getElementById("cardValue");
-
-          playerSliderOutput.innerHTML = playerSlider.value;
-          cardSliderOutput.innerHTML = cardSlider.value;
-
-          playerSlider.oninput = function() {
-            playerSliderOutput.innerHTML = this.value;
-
-            var x = document.getElementById("cardRange").max = Math.floor(51 / this.value);
-          }
-
-          cardSlider.oninput = function() {
-            cardSliderOutput.innerHTML = this.value;
-          }
-        </script>
+        <!-- Reference to js file containing scripts around updating sliders for players and cards -->
+        <script type="text/javascript" src="js/bridge_body.js"></script>
 
       </div>
     <?php } ?>
