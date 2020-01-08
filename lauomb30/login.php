@@ -99,19 +99,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html>
 <head>
-  <?php $title= "LauOmb Webserver";
-  include 'head.php'; ?>
+  <?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-  <div class="col-25">
-    <?php include 'aboutme.php';?>
-  </div>
-  <div class="col-75">
-    <div class="card">
+<div class="container-fluid" style="margin-top:20px">
+  <div class="row">
+    <div class="col-sm-3">
+      <?php include 'aboutme.php';?>
+    </div>
+    <div class="col-sm-9">
       <h2>LOGIN</h2>
       <p>Please fill in your credentials to login.</p>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
@@ -128,7 +127,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       </form>
     </div>
   </div>
-
 </div>
 
 <?php include 'footer.php';?>

@@ -78,25 +78,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html>
 <head>
-  <?php $title= "LauOmb Webserver";
-  include 'head.php'; ?>
+  <?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-  <?php include 'aboutme.php';?>
-  <?php include 'aboutyou.php';?>
-  <?php include 'popular.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
+<div class="container-fluid" style="margin-top:20px">
+  <div class="row">
+    <div class="col-sm-3">
+      <?php include 'aboutme.php';?>
+      <?php include 'aboutyou.php';?>
+      <?php include 'popular.php';?>
+    </div>
+    <div class="col-sm-9">
       <h1><i class="far fa-hand-spock"></i> HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h1>
       <h5>In peace to you I come</h5>
-    </div>
-    <div class="card">
       <h2><i class="fas fa-ban"></i> IN ORDER TO AVOID ANY CLAIMS..</h2>
       <h5>A list of things that make up this website</h5>
       <p>This never-ending project started officially in <a href="https://products.office.com/en/access" target="_blank">MS Access</a>. Teaching myself pretty much everything through online tutorials, below you find a list of functionalities, languages, programmes and features all combined for my, euhm your, entertainment.</p>
@@ -117,9 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           <li>The PROD environment is a Linux based (<a href="https://www.ubuntu.com/" target="_blank">Ubuntu</a>) server running a <a href="https://www.nginx.com/" target="_blank">Nginx</a> webserver.</li>
         </ul>
       </p>
-    </div>
-    <?php if(in_array("2", $_SESSION['authorizations'])){ ?>
-    <div class="card">
+      <?php if(in_array("2", $_SESSION['authorizations'])){ ?>
       <h2><i class="fas fa-headset"></i> CONTACT FORM</h2>
       <h5>Leave me a comment</h5>
       <?php echo $query_result; ?>
@@ -141,8 +136,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         <button type="submit">Submit</button>
       </form>
+    <?php } ?>
     </div>
-  <?php } ?>
   </div>
 </div>
 

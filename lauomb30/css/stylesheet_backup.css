@@ -1,0 +1,427 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Karla', serif;
+  font-size: 15px;
+  margin: 0;
+  background: #f1f1f1;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 20px;
+  z-index: 500;
+  text-align: center;
+  background-color: white;
+}
+
+.header h1 {
+  font-weight: bold;
+  font-size: 40px;
+  color: #4CAF50;
+}
+
+.header p {
+  font-weight: bold;
+  color: #333;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+/* Top navigation bar */
+.navbar {
+  display: flex;
+  z-index: 490;
+  background-color: #333;
+}
+
+.navbar-index {
+  padding: 8px 0;
+}
+
+.navbar-login{
+  margin-left: auto;
+  padding: 14px 0;
+}
+
+.navbar-right {
+  margin-left: auto;
+  padding: 0;
+}
+
+.navbar-admin {
+  padding: 14px 0;
+}
+
+/* Dropdown menu */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+	cursor: pointer;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 480;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #4CAF50;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Navigation bar links */
+.navbar a {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  padding: 14px 16px;
+}
+
+.navbar a:hover {
+  background-color: #4CAF50;
+}
+
+.navbar-index a{
+  text-align: center;
+  text-decoration: none;
+  font-size: 24px;
+  color: #4CAF50;
+}
+
+.navbar-index a:hover {
+  color: white;
+  background-color: inherit;
+}
+
+.navbar-right a {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  padding: 14px 16px;
+}
+
+.navbar-login a {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  padding: 14px 16px;
+}
+
+.navbar-admin a {
+  text-align: center;
+  text-decoration: none;
+  color: red;
+}
+
+.navbar-admin a:hover {
+  background-color: inherit;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Column container */
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+/* Create columns */
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+
+.col-25, .col-50, .col-75 {
+  padding: 0 10px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Footer */
+.footer {
+  margin_top: 20px;
+  padding: 10px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 700px) {
+  .row, .navbar {
+  flex-direction: column;
+  }
+  .navbar-index, .navbar-login, .navbar-right, .navbar-admin {
+    margin: auto;
+  }
+}
+
+/* Images */
+
+/* Create columns */
+.imgcol-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 3px 6px 3px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Container holding the image and the text */
+.imgcontainer {
+  position: relative;
+  margin: 0 auto; /* Center it */
+}
+
+/* Caption text */
+.caption {
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  text-align: center;
+  width: 100%; /* Full width */
+  padding: 10px; /* Some padding */
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .imgcol-25 {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+/* CSS styling for elements in body */
+h2, h3, h4 {
+	font-weight: bold;
+}
+
+a.left {
+  text-decoration: none;
+  font-size: 22px;
+  color: #333;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* Forms */
+/* Style the input container */
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Style the input fields */
+.input-field {
+/* Safari 3-4, iOS 1-3.2, Android 1.6- */
+-webkit-appearance: none;
+-webkit-border-radius: 0px;
+/* Firefox 1-3.6 */
+-moz-appearance: none;
+-moz-border-radius: 0;
+/* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+appearance: none;
+border-radius: 0;
+/*Style elements*/
+  width: 100%;
+  background-color: transparent;
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #4CAF50;
+}
+
+.input-field:focus {
+  border-bottom: 2px solid #ddd;
+}
+
+button {
+  background-color: #4CAF50;
+  font-family: 'Karla', serif;
+  font-size: 15px;
+  color: white;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/*Buttons in forms with no padding*/
+button.formupdate, button.formreset {
+  background-color: transparent;
+  color: black;
+  padding: 0;
+  text-decoration: none;
+  margin: 0;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+button.formupdate:hover {
+  font-weight: bold;
+  color: #4285F4;
+}
+
+button.formreset:hover {
+  font-weight: bold;
+  color: #f44336;
+}
+
+.slidecontainer {
+  width: 80%;
+  padding: 10px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
