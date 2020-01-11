@@ -105,26 +105,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <?php include 'navbar.php';?>
 
-<div class="container-fluid" style="margin-top:20px">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-md-3">
       <?php include 'aboutme.php';?>
     </div>
-    <div class="col-sm-9">
-      <h2>LOGIN</h2>
-      <p>Please fill in your credentials to login.</p>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
-        <div class="input-container">
-          <i class="fas fa-user-circle icon"></i>
-          <input class="input-field" type="text" placeholder="Username" name="username" autocomplete="off" autofocus value="<?php echo $username; ?>"><?php echo $username_err; ?>
-        </div>
-        <div class="input-container">
-          <i class="fas fa-key icon"></i>
-          <input class="input-field" type="password" placeholder="Enter Password" name="password"><?php echo $password_err; ?>
-        </div>
-        <button type="submit">Login</button>
-      	<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-      </form>
+    <div class="col-md-9">
+      <div class="card">
+        <h3>LOGIN</h3>
+        <p>Please fill in your credentials to login.</p>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:300px">
+          <div class="input-container">
+            <i class="fas fa-user-circle icon"></i>
+            <input class="input-field" type="text" placeholder="Username" name="username" autocomplete="off" autofocus value="<?php echo $username; ?>"><?php echo $username_err; ?>
+          </div>
+          <div class="input-container">
+            <i class="fas fa-key icon"></i>
+            <input class="input-field" type="password" placeholder="Enter Password" name="password"><?php echo $password_err; ?>
+          </div>
+          <button type="submit">Login</button>
+        	<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        </form>
+      </div>
     </div>
   </div>
 </div>

@@ -138,88 +138,89 @@ $mysqli->close();
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Personal finances";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'financeside.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
-      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES</h1>
-    </div>
-		<div class="card">
-      <h2>Stuff to work on</h2>
-      <ul>
-				<li>Yearly overview, show graph for entire year and not only for the months in which data is available.</li>
-				<li>Time analysis - Line chart per subcategory on progress of expense/income/savings over time.</li>
-			</ul>
-    </div>
-    <div class="card">
-      <a name="addexpense"></a><h2>Add an expense</h2>
-      <?php echo $update_err; ?>
-			<div class="row">
-      	<div class="col-50">
-		      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-						<div class="input-container">
-							<i class="far fa-calendar-alt icon"></i>
-							<input class="input-field" type="date" name="date" autofocus><?php echo $date_err; ?>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	<?php include 'financeside.php';?>
+	</div>
+	  <div class="col-md-9">
+	    <div class="card">
+	      <h2><i class="far fa-credit-card"></i> PERSONAL FINANCES</h2>
+	    </div>
+			<div class="card">
+	      <h3>Stuff to work on</h3>
+	      <ul>
+					<li>Yearly overview, show graph for entire year and not only for the months in which data is available.</li>
+					<li>Time analysis - Line chart per subcategory on progress of expense/income/savings over time.</li>
+				</ul>
+	    </div>
+	    <div class="card">
+	      <h3>Add an expense</h3>
+	      <?php echo $update_err; ?>
+				<div class="row">
+	      	<div class="col-md-6">
+			      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+							<div class="input-container">
+								<i class="far fa-calendar-alt icon"></i>
+								<input class="input-field" type="date" name="date" autofocus><?php echo $date_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-location-arrow icon"></i>
+								<input class="input-field" list="locations" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50">
+									<datalist id="locations">
+										<?php echo $locations; ?>
+									</datalist>
+								<?php echo $location_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-search icon"></i>
+								<input class="input-field" list="descriptions" name="description" placeholder="Description" autocomplete="off" maxlength="45" size="50">
+									<datalist id="descriptions">
+										<?php echo $descriptions; ?>
+									</datalist>
+								<?php echo $description_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="far fa-list-alt icon"></i>
+								<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
+							</div>
 						</div>
-						<div class="input-container">
-							<i class="fas fa-location-arrow icon"></i>
-							<input class="input-field" list="locations" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50">
-								<datalist id="locations">
-									<?php echo $locations; ?>
-								</datalist>
-							<?php echo $location_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="fas fa-search icon"></i>
-							<input class="input-field" list="descriptions" name="description" placeholder="Description" autocomplete="off" maxlength="45" size="50">
-								<datalist id="descriptions">
-									<?php echo $descriptions; ?>
-								</datalist>
-							<?php echo $description_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="far fa-list-alt icon"></i>
-							<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
+		      	<div class="col-md-6">
+							<div class="input-container">
+								<i class="fas fa-euro-sign icon"></i>
+								<input class="input-field" type="number" name="amount" placeholder="Amount" min="0" step="0.01"><?php echo $amount_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-balance-scale icon"></i>
+								<select class="input-field" name="key">
+									<option value="1">Credit</option>
+									<option value="2" selected>Debit</option>
+								</select><?php echo $key_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-chart-bar icon"></i>
+								<select class="input-field" name="type">
+									<option value="2">Business</option>
+									<option value="0" selected>Personal</option>
+									<option value="3">Savings</option>
+									<option value="1">Shared</option>
+								</select><?php echo $type_err; ?>
+							</div>
 						</div>
 					</div>
-	      	<div class="col-50">
-						<div class="input-container">
-							<i class="fas fa-euro-sign icon"></i>
-							<input class="input-field" type="number" name="amount" placeholder="Amount" min="0" step="0.01"><?php echo $amount_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="fas fa-balance-scale icon"></i>
-							<select class="input-field" name="key">
-								<option value="1">Credit</option>
-								<option value="2" selected>Debit</option>
-							</select><?php echo $key_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="fas fa-chart-bar icon"></i>
-							<select class="input-field" name="type">
-								<option value="2">Business</option>
-								<option value="0" selected>Personal</option>
-								<option value="3">Savings</option>
-								<option value="1">Shared</option>
-							</select><?php echo $type_err; ?>
-						</div>
-					</div>
-				</div>
 
-				<button type="submit" name="submit" value="submit">Submit expense</button>
+					<button class="formbtn" type="submit" name="submit" value="submit">Submit expense</button>
 
-      </form>
-    </div>
-  </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>

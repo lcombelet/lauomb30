@@ -84,58 +84,63 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <?php include 'navbar.php';?>
 
-<div class="container-fluid" style="margin-top:20px">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3">
-      <?php include 'aboutme.php';?>
+    <div class="col-md-3">
       <?php include 'aboutyou.php';?>
       <?php include 'popular.php';?>
     </div>
-    <div class="col-sm-9">
-      <h1><i class="far fa-hand-spock"></i> HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h1>
-      <h5>In peace to you I come</h5>
-      <h2><i class="fas fa-ban"></i> IN ORDER TO AVOID ANY CLAIMS..</h2>
-      <h5>A list of things that make up this website</h5>
-      <p>This never-ending project started officially in <a href="https://products.office.com/en/access" target="_blank">MS Access</a>. Teaching myself pretty much everything through online tutorials, below you find a list of functionalities, languages, programmes and features all combined for my, euhm your, entertainment.</p>
-      <p>One word beforehand, I am definitely not the most technical skilled person! I just like to learn new things and mess around with code programming until I get frustrated and throw everything away. There are a billion people on this planet that can do things faster and better. I am in it for the fun.</p>
-      <p>So here we go..</p>
-      <p>Basic stuff first: this website uses a combination of HTML, PHP, MySQL and CSS. For me this is complex enough, and provides me with all that I currently need as far as functionality goes. There are some javascript functions included, but they are mainly taken from templates and I am still learning how to write that code. All the other languages I learnt from <a href="https://www.w3schools.com/" target="_blank">W3 Schools</a> and <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a>. </p>
-      <p>With regards to external sources that I use. They are:
-        <ul>
-          <li>The font (Karla) is taken from <a href="https://fonts.google.com/specimen/Karla" target="_blank">Google Fonts</a>, integrated through CSS. It's simple, clearly readable and looks nice.</li>
-          <li>The icons I use everywhere are taken from <a href="https://fontawesome.com" target="_blank">Font Awesome</a>, also through CSS. The interface is very easy to use, and since all icons are font-based they remain sharp even when scaled.</li>
-          <li>The entire two column layout is actually one of the basic templates from <a href="https://www.w3schools.com/css/css_website_layout.asp" target="_blank">W3 School</a>. I chose this layout as it is pretty straigtforward and minimalistic.</li>
-          <li>Colorscheme is made up by myself. As I am colorblind the palette might not be the best ever. At least I am able to see the different colors so I don't care, hehe.</li>
-          <li><a href="http://jqueryui.com/" target="_blank">JQuery</a> is used for form manipulations, easy to integrate and a sh*tload of functions that I can use.</li>
-          <li>I used <a href="https://www.highcharts.com/" target="_blank">Highcharts</a> in the past for table formatting. As I started all over with the current layout I am considering customizing my own table layout. It worked for me in the past but at the moment not a priority.</li>
-          <li><a href="https://developers.google.com/chart/" target="_blank">Google Charts</a> everywhere! Pretty much all database integrations are focused on data visualizations. Still learning to work with the required format but over time only this channel will be used.</li>
-          <li>Everything is built in <a href="https://atom.io/" target="_blank">Atom</a> in a DEV environment. This is a Windows based machine with locally installed servers for testing.</li>
-          <li>When a functionality is finished, I use <a href="https://github.com/" target="_blank">GitHub</a> integration for versioning and push the functionality to the PROD environment.</li>
-          <li>The PROD environment is a Linux based (<a href="https://www.ubuntu.com/" target="_blank">Ubuntu</a>) server running a <a href="https://www.nginx.com/" target="_blank">Nginx</a> webserver.</li>
-        </ul>
-      </p>
+    <div class="col-md-9">
+      <div class="card">
+        <h2><i class="far fa-hand-spock"></i> HI <b><?php echo strtoupper(htmlspecialchars($_SESSION['username'])); ?></b>!</h2>
+        <h5>In peace to you I come</h5>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-ban"></i> IN ORDER TO AVOID ANY CLAIMS..</h3>
+        <h5>A list of things that make up this website</h5>
+        <p>This never-ending project started officially in <a href="https://products.office.com/en/access" target="_blank">MS Access</a>. Teaching myself pretty much everything through online tutorials, below you find a list of functionalities, languages, programmes and features all combined for my, euhm your, entertainment.</p>
+        <p>One word beforehand, I am definitely not the most technical skilled person! I just like to learn new things and mess around with code programming until I get frustrated and throw everything away. There are a billion people on this planet that can do things faster and better. I am in it for the fun.</p>
+        <p>So here we go..</p>
+        <p>Basic stuff first: this website uses a combination of HTML, PHP, SQL and CSS. For me this is complex enough, and provides me with all that I currently need as far as functionality goes. There are some javascript functions included, I am still learning how to write that code. All the other languages I learnt from <a href="https://www.w3schools.com/" target="_blank">W3 Schools</a> and <a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a>. </p>
+        <p>With regards to external sources that I use. They are:
+          <ul>
+            <li>The font (Karla) is taken from <a href="https://fonts.google.com/specimen/Karla" target="_blank">Google Fonts</a>, integrated through CSS. It's simple, clearly readable and looks nice.</li>
+            <li>The icons I use everywhere are taken from <a href="https://fontawesome.com" target="_blank">Font Awesome</a>, also through CSS. The interface is very easy to use, and since all icons are font-based they remain sharp even when scaled.</li>
+            <li>The entire two column layout is based on a W3shools template, built with Bootstrap: <a href="https://www.w3schools.com/css/css_website_layout.asp" target="_blank">W3 School</a>. I chose this layout as it is pretty straigtforward and minimalistic.</li>
+            <li>Colorscheme is made up by myself. As I am colorblind the palette might not be the best ever. At least I am able to see the different colors so I don't care, hehe.</li>
+            <li><a href="http://jqueryui.com/" target="_blank">JQuery</a> is used for form manipulations, easy to integrate and a sh*tload of functions that I can use.</li>
+            <li>I used <a href="https://www.highcharts.com/" target="_blank">Highcharts</a> in the past for table formatting. As I started all over with the current layout I am considering customizing my own table layout. It worked for me in the past but at the moment not a priority.</li>
+            <li><a href="https://developers.google.com/chart/" target="_blank">Google Charts</a> everywhere! Pretty much all database integrations are focused on data visualizations. Still learning to work with the required format but over time only this channel will be used.</li>
+            <li>Everything is built in <a href="https://atom.io/" target="_blank">Atom</a> in a DEV environment. This is a Windows based machine with locally installed servers for testing.</li>
+            <li>When a functionality is finished, I use <a href="https://github.com/" target="_blank">GitHub</a> integration for versioning and push the functionality to the PROD environment.</li>
+            <li>The PROD environment is a Linux based (<a href="https://www.ubuntu.com/" target="_blank">Ubuntu</a>) server running a <a href="https://www.nginx.com/" target="_blank">Nginx</a> webserver.</li>
+          </ul>
+        </p>
+      </div>
       <?php if(in_array("2", $_SESSION['authorizations'])){ ?>
-      <h2><i class="fas fa-headset"></i> CONTACT FORM</h2>
-      <h5>Leave me a comment</h5>
-      <?php echo $query_result; ?>
-      <p>Please fill in all fields and click Submit. Muchas gracias!</p>
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:500px">
-        <div class="input-container">
-          <i class="fas fa-balance-scale icon"></i>
-          <select class="input-field" name="type" value="<?php echo $type; ?>">
-            <option value="Feedback">Feedback</option>
-            <option value="Improvement">Improvement</option>
-            <option value="Question">Question</option>
-            <option value="Other">Other</option>
-          </select><?php echo $type_err; ?>
-        </div>
-        <div class="input-container">
-          <i class="far fa-calendar-alt icon"></i>
-          <textarea class="input-field" name="comments" placeholder="Comments" maxlength="1000" cols="25" rows="6"></textarea><?php echo $comments_err; ?>
-        </div>
+        <div class="card">
+          <h3><i class="fas fa-headset"></i> CONTACT FORM</h3>
+          <h5>Leave me a comment</h5>
+          <?php echo $query_result; ?>
+          <p>Please fill in all fields and click Submit. Muchas gracias!</p>
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:500px">
+            <div class="input-container">
+              <i class="fas fa-balance-scale icon"></i>
+              <select class="input-field" name="type" value="<?php echo $type; ?>">
+                <option value="Feedback">Feedback</option>
+                <option value="Improvement">Improvement</option>
+                <option value="Question">Question</option>
+                <option value="Other">Other</option>
+              </select><?php echo $type_err; ?>
+            </div>
+            <div class="input-container">
+              <i class="far fa-calendar-alt icon"></i>
+              <textarea class="input-field" name="comments" placeholder="Comments" maxlength="1000" cols="25" rows="6"></textarea><?php echo $comments_err; ?>
+            </div>
 
-        <button type="submit">Submit</button>
-      </form>
+            <button class="formbtn" type="submit">Submit</button>
+          </form>
+        </div>
     <?php } ?>
     </div>
   </div>

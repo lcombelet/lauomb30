@@ -152,8 +152,8 @@ $mysqli->close();
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Personal finances";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
+
 	<script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart', 'bar']});
 	google.charts.setOnLoadCallback(drawOverview);
@@ -215,49 +215,71 @@ $mysqli->close();
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'financeside.php';?>
-<?php include 'financeperiod.php';?>
-</div>
-  <div class="col-75">
-		<div class="card">
-      <h1><i class="far fa-credit-card"></i> PERSONAL FINANCES - <?php echo strtoupper(date('F Y', strtotime($year . "-" . $month . "-01"))); ?></h1>
-    </div>
-		<div class="card">
-      <h2>Total expenses</h2>
-      <div id="overview" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
-		</div>
-		<div class="card">
-      <h2>Breakdown personal expenses</h2>
-			<div id="personal" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
-			<p>Total expenses: <?php echo $personaldebittotal; ?><br />
-			<p>Total earnings: <?php echo $personalcredittotal; ?></p>
-		</div>
-		<div class="card">
-			<h2>Breakdown business expenses</h2>
-			<div id="business" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
-			<p>Total expenses: <?php echo $busidebittotal; ?><br />
-			<p>Total earnings: <?php echo $busicredittotal; ?></p>
-		</div>
-		<div class="card">
-			<h2>Expense overview</h2>
-			<table>
-      	<tr>
-          <th>Date</th>
-          <th>Location</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Subcategory</th>
-          <th>Amount</th>
-          <th>Type</th>
-        </tr>
-      	<?php echo $expenses; ?>
-      </table>
-    </div>
-  </div>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+		<?php include 'financeside.php';?>
+		<?php include 'financeperiod.php';?>
+	</div>
+	  <div class="col-md-9">
+			<div class="card">
+	      <h2><i class="far fa-credit-card"></i> <?php echo strtoupper(date('F Y', strtotime($year . "-" . $month . "-01"))); ?></h2>
+	    </div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="card">
+			      <h3>Total expenses</h3>
+			      <div id="overview" style="z-index: 1; width: 99%; height: 400px; display: inline-block;"></div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="card">
+			      <h3>Something</h3>
+			      <p>Something else</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="card">
+			      <h3>Breakdown personal expenses</h3>
+						<div id="personal" style="z-index: 1; width: 99%; height: auto; display: inline-block;"></div>
+						<p>Total expenses: <?php echo $personaldebittotal; ?><br />
+						<p>Total earnings: <?php echo $personalcredittotal; ?></p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="card">
+						<h3>Breakdown business expenses</h3>
+						<div id="business" style="z-index: 1; width: 99%; height: auto; display: inline-block;"></div>
+						<p>Total expenses: <?php echo $busidebittotal; ?><br />
+						<p>Total earnings: <?php echo $busicredittotal; ?></p>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<h3>Expense overview</h3>
+				<table class="table table-condensed table-striped table-hover">
+					<thead class="bg-logreen text-white">
+		      	<tr>
+		          <th>Date</th>
+		          <th>Location</th>
+		          <th>Description</th>
+		          <th>Category</th>
+		          <th>Subcategory</th>
+		          <th>Amount</th>
+		          <th>Type</th>
+		        </tr>
+					</thead>
+					<tbody>
+	      		<?php echo $expenses; ?>
+					</tbody>
+	      </table>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>

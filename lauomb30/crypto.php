@@ -155,87 +155,88 @@ $mysqli->close();
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Crypto currencies";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'cryptoside.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
-      <h1><i class="fab fa-btc"></i> CRYPTO CURRENCIES</h1>
-    </div>
-		<div class="card">
-      <h2>Stuff to work on</h2>
-      <ul>
-				<li>Current value of portfolio, connect to Coinbase API</li>
-				<li>Historical transaction overview</li>
-			</ul>
-    </div>
-		<div class="card">
-      <h2>Current portfolio</h2>
-      <p>Stuff here.</p>
-    </div>
-		<div class="card">
-      <a name="addtransaction"></a><h2>Add a transaction</h2>
-      <?php echo $update_err; ?>
-			<div class="row">
-      	<div class="col-50">
-		      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-						<div class="input-container">
-							<i class="far fa-calendar-alt icon"></i>
-							<input class="input-field" type="date" name="date"><?php echo $date_err; ?>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	<?php include 'cryptoside.php';?>
+	</div>
+	  <div class="col-md-9">
+	    <div class="card">
+	      <h2><i class="fab fa-btc"></i> CRYPTO CURRENCIES</h2>
+	    </div>
+			<div class="card">
+	      <h3>Stuff to work on</h3>
+	      <ul>
+					<li>Current value of portfolio, connect to Coinbase API</li>
+					<li>Historical transaction overview</li>
+				</ul>
+	    </div>
+			<div class="card">
+	      <h3>Current portfolio</h3>
+	      <p>Stuff here.</p>
+	    </div>
+			<div class="card">
+	      <a name="addtransaction"></a><h3>Add a transaction</h3>
+	      <?php echo $update_err; ?>
+				<div class="row">
+	      	<div class="col-md-6">
+			      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+							<div class="input-container">
+								<i class="far fa-calendar-alt icon"></i>
+								<input class="input-field" type="date" name="date"><?php echo $date_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-location-arrow icon"></i>
+								<input class="input-field" list="locations" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50">
+									<datalist id="locations">
+										<?php echo $locations; ?>
+									</datalist>
+								<?php echo $location_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-search icon"></i>
+								<input class="input-field" list="descriptions" name="description" placeholder="Description" autocomplete="off" maxlength="45" size="50">
+									<datalist id="descriptions">
+										<?php echo $descriptions; ?>
+									</datalist>
+								<?php echo $description_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="far fa-list-alt icon"></i>
+								<select class="input-field" name="currency"><?php echo $currencies; ?></select><?php echo $currency_err; ?>
+							</div>
 						</div>
-						<div class="input-container">
-							<i class="fas fa-location-arrow icon"></i>
-							<input class="input-field" list="locations" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50">
-								<datalist id="locations">
-									<?php echo $locations; ?>
-								</datalist>
-							<?php echo $location_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="fas fa-search icon"></i>
-							<input class="input-field" list="descriptions" name="description" placeholder="Description" autocomplete="off" maxlength="45" size="50">
-								<datalist id="descriptions">
-									<?php echo $descriptions; ?>
-								</datalist>
-							<?php echo $description_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="far fa-list-alt icon"></i>
-							<select class="input-field" name="currency"><?php echo $currencies; ?></select><?php echo $currency_err; ?>
+		      	<div class="col-md-6">
+							<div class="input-container">
+								<i class="fas fa-euro-sign icon"></i>
+								<input class="input-field" type="number" name="curramount" placeholder="Amount" min="0" step="0.00000001"><?php echo $curramount_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-euro-sign icon"></i>
+								<input class="input-field" type="number" name="amount" placeholder="Value" min="0" step="0.01"><?php echo $amount_err; ?>
+							</div>
+							<div class="input-container">
+								<i class="fas fa-balance-scale icon"></i>
+								<select class="input-field" name="key">
+									<option value="1">Sell crypto</option>
+									<option value="2" selected>Buy crypto</option>
+								</select><?php echo $key_err; ?>
+							</div>
 						</div>
 					</div>
-	      	<div class="col-50">
-						<div class="input-container">
-							<i class="fas fa-euro-sign icon"></i>
-							<input class="input-field" type="number" name="curramount" placeholder="Amount" min="0" step="0.00000001"><?php echo $curramount_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="fas fa-euro-sign icon"></i>
-							<input class="input-field" type="number" name="amount" placeholder="Value" min="0" step="0.01"><?php echo $amount_err; ?>
-						</div>
-						<div class="input-container">
-							<i class="fas fa-balance-scale icon"></i>
-							<select class="input-field" name="key">
-								<option value="1">Sell crypto</option>
-								<option value="2" selected>Buy crypto</option>
-							</select><?php echo $key_err; ?>
-						</div>
-					</div>
-				</div>
 
-				<button type="submit" name="submit" value="submit">Submit transaction</button>
+					<button class="formbtn" type="submit" name="submit" value="submit">Submit transaction</button>
 
-      </form>
-    </div>
-  </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>

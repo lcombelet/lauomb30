@@ -131,8 +131,8 @@ $mysqli->close();
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Personal finances";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
+
 	<script type="text/javascript">
 		google.charts.load('current', {'packages':['corechart', 'bar', 'calendar']});
 		google.charts.setOnLoadCallback(drawChart);
@@ -214,29 +214,31 @@ $mysqli->close();
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'financeside.php';?>
-<?php include 'financeyear.php';?>
-</div>
-  <div class="col-75">
-		<div class="card">
-			<h1><i class="far fa-credit-card"></i> PERSONAL FINANCES - <?php echo $year; ?></h1>
-		</div>
-		<div class="card">
-			<h2>Monthly summary</h2>
-			<div id="chart" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
-		</div>
-		<div class="card">
-			<h2>Daily overview</h2>
-			<h3>Net result</h3>
-			<div id="calendar" style="z-index: 1; width: 99%; height: 250px; display: inline-block;"></div>
-			<h3>Transactions</h3>
-			<div id="transactions" style="z-index: 1; width: 99%; height: 250px; display: inline-block;"></div>
-		</div>
-  </div>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	<?php include 'financeside.php';?>
+	<?php include 'financeyear.php';?>
+	</div>
+	  <div class="col-md-9">
+			<div class="card">
+				<h2><i class="far fa-credit-card"></i> <?php echo $year; ?> OVERVIEW</h2>
+			</div>
+			<div class="card">
+				<h3>Monthly summary</h3>
+				<div id="chart" style="z-index: 1; width: 99%; height: 500px; display: inline-block;"></div>
+			</div>
+			<div class="card">
+				<h3>Daily overview</h3>
+				<h5>Net result</h5>
+				<div id="calendar" style="z-index: 1; width: 99%; height: 250px; display: inline-block;"></div>
+				<h5>Transactions</h5>
+				<div id="transactions" style="z-index: 1; width: 99%; height: 250px; display: inline-block;"></div>
+			</div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>

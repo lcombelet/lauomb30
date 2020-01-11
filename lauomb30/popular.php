@@ -1,5 +1,5 @@
 <div class="card">
-  <h2 class="center"><i class="far fa-thumbs-up"></i> POPULAIR POSTS</h2>
+  <h3 class="text-center text-logreen font-weight-bold"><i class="far fa-thumbs-up"></i> TOP POSTS</h3>
   <div class="fakeimg"><p>Image</p></div>
   <div class="fakeimg"><p>Image</p></div>
   <div class="fakeimg"><p>Image</p></div>
