@@ -31,14 +31,15 @@ require_once 'config.php';
 	</div>
 	  <div class="col-md-9">
 			<div class="card">
-	      <h1><i class="far fa-images"></i> ALBUM DOWNLOADS</h1>
+	      <h2><i class="far fa-images"></i> ALBUM DOWNLOADS</h2>
 			</div>
 			<?php
 			if(in_array("10", $_SESSION['authorizations'])){ // Private albums
 			?>
 				<div class="card">
-		      <h2>Private photo albums</h2>
+		      <h3>Private photo albums</h3>
 					<p>Click on the photo to download the album</p>
+					<a href="photoalbum.php">Test</a>
 					<div class="row">
 						<div class="col-md-3">
 							<a href="/media/images/private/2018_Wedding_RJ.zip" download="2018_Wedding_RJ">
@@ -64,7 +65,7 @@ require_once 'config.php';
 			if(in_array("9", $_SESSION['authorizations'])){ // Shared albums
 			?>
 				<div class="card">
-					<h2>Shared photo albums</h2>
+					<h3>Shared photo albums</h3>
 					<p>Click on the photo to download the album. Contact me for the password to open the archive.</p>
 					<div class="row">
 						<div class="col-md-3">

@@ -261,7 +261,7 @@ $mysqli->close();
 			</div>
 			<div class="card">
 				<h3>Expense overview</h3>
-				<table class="table table-condensed table-striped table-hover">
+				<table class="table table-sm table-striped table-hover">
 					<thead class="bg-logreen text-white">
 		      	<tr>
 		          <th>Date</th>

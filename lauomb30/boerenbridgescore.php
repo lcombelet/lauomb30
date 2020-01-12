@@ -1,11 +1,14 @@
 <?php if(isset($_POST['endGame']) || isset($_POST['continueGame'])) { ?>
   <div class="card">
-    <h3><i class="far fa-chart-bar"></i> GAME STATISTICS</h3>
+    <h3 class="text-center text-logreen font-weight-bold"><i class="far fa-chart-bar"></i> GAME STATISTICS</h3>
     <?php if(isset($_POST['endGame'])) {
       //stuff here
-      echo "<h4>Game finished!</h4>";
-      echo "<table>";
+      echo "<h5>Game finished!</h5>";
+      echo "<table class=\"table table-sm table-striped table-hover\">";
+      echo "<thead class=\"bg-logreen text-white\">";
       echo "<tr><th>Player</th><th>Score</th></tr>";
+      echo "</thead>";
+      echo "<tbody>";
 
       //loop over player array
       foreach($_SESSION['players'] as $key=>$value) {
@@ -13,13 +16,16 @@
       }
 
       //close table
+      echo "</tbody>";
       echo "</table>";
 
     } elseif(isset($_POST['continueGame'])) {
       //fix header
-      echo "<h4>Score tracker</h4>";
-      echo "<table>";
+      echo "<h3>Score tracker</h3>";
+      echo "<table class=\"table table-sm table-striped table-hover\">";
       echo "<tr><th>Player</th><th>Score</th></tr>";
+      echo "</thead>";
+      echo "<tbody>";
 
       //loop over player array
       foreach($_SESSION['players'] as $key=>$value) {
@@ -80,6 +86,7 @@
       }
 
       //close table
+      echo "</tbody>";
       echo "</table>";
 
       //close round in db

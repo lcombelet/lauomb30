@@ -97,7 +97,7 @@ if(isset($_POST['submit'])) {
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
-                header("location: login.php");
+                header("location: index.php");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
@@ -115,58 +115,59 @@ if(isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-  <?php $title= "LauOmb Webserver";
-  include 'head.php'; ?>
+  <?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-  <?php include 'aboutme.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
-      <h2>SIGN UP</h2>
-    	<p>Please fill this form to create an account.</p>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	  <?php include 'aboutme.php';?>
+	</div>
+	  <div class="col-md-9">
+	    <div class="card">
+	      <h2>SIGN UP</h2>
+	    	<p>Please fill this form to create an account.</p>
 
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:50%">
-        <div class="row">
-          <div class="col-50">
-            <div class="input-container">
-              <i class="fas fa-user-circle icon"></i>
-              <input class="input-field" type="text" placeholder="Username" name="username" autofocus autocomplete="off" value="<?php echo $username; ?>"><?php echo $username_err; ?>
-            </div>
-            <div class="input-container">
-              <i class="far fa-user icon"></i>
-              <input class="input-field" type="text" placeholder="First name" name="firstname" autocomplete="off" value="<?php echo $firstname; ?>"><?php echo $firstname_err; ?>
-            </div>
-            <div class="input-container">
-              <i class="fas fa-user icon"></i>
-              <input class="input-field" type="text" placeholder="Last name" name="lastname" autocomplete="off" value="<?php echo $lastname; ?>"><?php echo $lastname_err; ?>
-            </div>
-          </div>
-          <div class="col-50">
-            <div class="input-container">
-              <i class="fas fa-at icon"></i>
-              <input class="input-field" type="text" placeholder="Email" name="email" autocomplete="off" value="<?php echo $email; ?>"><?php echo $email_err; ?>
-            </div>
-            <div class="input-container">
-              <i class="fas fa-key icon"></i>
-              <input class="input-field" type="password" placeholder="Choose password" name="password" autocomplete="off" value="<?php echo $password; ?>"><?php echo $password_err; ?>
-            </div>
-            <div class="input-container">
-              <i class="fas fa-key icon"></i>
-              <input class="input-field" type="password" placeholder="Confirm password" name="confirm_password" autocomplete="off" value="<?php echo $confirm_password; ?>"><?php echo $confirm_password_err; ?>
-            </div>
-          </div>
-        <button type= "submit" name="submit">Submit form</button>
-        </div>
-      </form>
-      <p>Already have an account? <a href="login.php">Login here</a>.</p>
-    </div>
-  </div>
+	      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:50%">
+	        <div class="row">
+	          <div class="col-md-6">
+	            <div class="input-container">
+	              <i class="fas fa-user-circle icon"></i>
+	              <input class="input-field" type="text" placeholder="Username" name="username" autofocus autocomplete="off" value="<?php echo $username; ?>"><?php echo $username_err; ?>
+	            </div>
+	            <div class="input-container">
+	              <i class="far fa-user icon"></i>
+	              <input class="input-field" type="text" placeholder="First name" name="firstname" autocomplete="off" value="<?php echo $firstname; ?>"><?php echo $firstname_err; ?>
+	            </div>
+	            <div class="input-container">
+	              <i class="fas fa-user icon"></i>
+	              <input class="input-field" type="text" placeholder="Last name" name="lastname" autocomplete="off" value="<?php echo $lastname; ?>"><?php echo $lastname_err; ?>
+	            </div>
+	          </div>
+	          <div class="col-md-6">
+	            <div class="input-container">
+	              <i class="fas fa-at icon"></i>
+	              <input class="input-field" type="text" placeholder="Email" name="email" autocomplete="off" value="<?php echo $email; ?>"><?php echo $email_err; ?>
+	            </div>
+	            <div class="input-container">
+	              <i class="fas fa-key icon"></i>
+	              <input class="input-field" type="password" placeholder="Choose password" name="password" autocomplete="off" value="<?php echo $password; ?>"><?php echo $password_err; ?>
+	            </div>
+	            <div class="input-container">
+	              <i class="fas fa-key icon"></i>
+	              <input class="input-field" type="password" placeholder="Confirm password" name="confirm_password" autocomplete="off" value="<?php echo $confirm_password; ?>"><?php echo $confirm_password_err; ?>
+	            </div>
+	          </div>
+	        <button class="formbtn" type= "submit" name="submit">Submit form</button>
+	        </div>
+	      </form>
+	      <p>Already have an account? <a href="login.php">Login here</a>.</p>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>
