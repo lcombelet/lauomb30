@@ -39,8 +39,15 @@ require_once 'config.php';
 				<div class="card">
 		      <h3>Private photo albums</h3>
 					<p>Click on the photo to download the album</p>
-					<a href="photoalbum.php">Test</a>
 					<div class="row">
+						<div class="col-md-3">
+							<a href="photoalbum.php">
+								<div class="imgcontainer">
+									<img src="/media/images/private/world_tour_highlights.jpg" style="width:100%">
+									<div class="caption">World tour highlights</div>
+								</div>
+							</a>
+					  </div>
 						<div class="col-md-3">
 							<a href="/media/images/private/2018_Wedding_RJ.zip" download="2018_Wedding_RJ">
 								<div class="imgcontainer">
@@ -48,9 +55,6 @@ require_once 'config.php';
 									<div class="caption">Wedding Rebecca and Jeroen 2018</div>
 								</div>
 							</a>
-					  </div>
-						<div class="col-md-3">
-							&nbsp
 					  </div>
 						<div class="col-md-3">
 							&nbsp
