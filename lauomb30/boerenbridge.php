@@ -238,13 +238,13 @@ if(isset($_POST['endGame'])) {
                 <h4><?php echo $playername; ?></h4>
               </div>
               <div class="row">
-              	<div class="col-md-6">
+              	<div class="col-sm-6 col-lg-4">
                   <div class="input-container">
                     <i class="far fa-lightbulb icon"></i>
                     <input class="input-field" type="number" name="p_<?php echo $value; ?>" min="0" step="1">
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-6 col-lg-4">
                   <div class="input-container">
                     <i class="far fa-check-square icon"></i>
                     <input class="input-field" type="number" name="a_<?php echo $value; ?>" min="0" step="1">
@@ -373,27 +373,27 @@ if(isset($_POST['endGame'])) {
                 <h4><?php echo $playername; ?></h4>
               </div>
               <div class="row">
-              	<div class="col-md-6">
+              	<div class="col-sm-6 col-lg-4">
                   <div class="input-container">
                     <i class="far fa-lightbulb icon"></i>
                     <input class="input-field" type="number" name="p_<?php echo $value; ?>" min="0" step="1">
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-6 col-lg-4">
                   <div class="input-container">
                     <i class="far fa-check-square icon"></i>
                     <input class="input-field" type="number" name="a_<?php echo $value; ?>" min="0" step="1">
                   </div>
                 </div>
               </div>
-              <?php
-            }
+              <?php }
 
             // Close connection
             $mysqli->close();
             ?>
 
             <button class="formbtn" type="submit" name="continueGame" value="submit">Continue</button>
+
           </form>
         </div>
 
@@ -471,7 +471,7 @@ if(isset($_POST['endGame'])) {
           <h3>Step 1. Select the number of players and cards</h3>
           <p>The maximum number of players is eight, the maximum number of cards is automatically adjusted.</p>
           <div class="row">
-          	<div class="col-md-6">
+          	<div class="col-sm-6 col-lg-4">
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="input-container">
     							<i class="far fa-calendar-alt icon"></i>
@@ -481,8 +481,9 @@ if(isset($_POST['endGame'])) {
                   <i class="fas fa-location-arrow icon"></i>
                   <input class="input-field" type="text" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50"><?php echo $location_err; ?>
                 </div>
+                <button class="formbtn" type="submit" name="submitPlayers" value="submit">Continue to next step</button>
               </div>
-              <div class="col-md-6">
+              <div class="col-sm-6 col-lg-4">
                 <div class="input-container">
                   <i class="fas fa-users icon"></i>
                   <div class="slidecontainer">
@@ -499,7 +500,6 @@ if(isset($_POST['endGame'])) {
                 </div>
               </div>
             </div>
-            <button class="formbtn" type="submit" name="submitPlayers" value="submit">Continue to next step</button>
           </form>
 
           <!-- Reference to js file containing scripts around updating sliders for players and cards -->

@@ -33,7 +33,7 @@ foreach($files as $key=>$value) {
 		$preFix = "<div class=\"row\">";
 	}
 
-	$galleryLink = "<a class=\"col-sm-3 padding-xs\" href=\"" . $fullFile . "\" data-toggle=\"lightbox\" data-gallery=\"gallery\"><img class=\"img-fluid\" src=\"" . $fullFile . "\" style=\"width:100%;\"></a>";
+	$galleryLink = "<a class=\"col-sm-6 col-lg-3 padding-xs\" href=\"" . $fullFile . "\" data-toggle=\"lightbox\" data-gallery=\"gallery\"><img class=\"img-fluid\" src=\"" . $fullFile . "\" style=\"width:100%;\"></a>";
 
 	if($count%4 == 0) {
 		$afterFix = $afterFix . "</div>";

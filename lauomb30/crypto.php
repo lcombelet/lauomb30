@@ -185,7 +185,7 @@ $mysqli->close();
 	      <a name="addtransaction"></a><h3>Add a transaction</h3>
 	      <?php echo $update_err; ?>
 				<div class="row">
-	      	<div class="col-md-6">
+	      	<div class="col-sm-6 col-lg-4">
 			      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div class="input-container">
 								<i class="far fa-calendar-alt icon"></i>
@@ -212,7 +212,7 @@ $mysqli->close();
 								<select class="input-field" name="currency"><?php echo $currencies; ?></select><?php echo $currency_err; ?>
 							</div>
 						</div>
-		      	<div class="col-md-6">
+		      	<div class="col-sm-6 col-lg-4">
 							<div class="input-container">
 								<i class="fas fa-euro-sign icon"></i>
 								<input class="input-field" type="number" name="curramount" placeholder="Amount" min="0" step="0.00000001"><?php echo $curramount_err; ?>
@@ -228,11 +228,9 @@ $mysqli->close();
 									<option value="2" selected>Buy crypto</option>
 								</select><?php echo $key_err; ?>
 							</div>
+							<button class="formbtn" type="submit" name="submit" value="submit">Submit transaction</button>
 						</div>
 					</div>
-
-					<button class="formbtn" type="submit" name="submit" value="submit">Submit transaction</button>
-
 	      </form>
 	    </div>
 	  </div>

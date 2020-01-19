@@ -25,32 +25,6 @@ if(isset($_POST['submit'])) {
 	$year = date('Y');
 }
 
-// Pull expenses
-$sql = "SELECT * FROM `vw_fin_expenses` WHERE (`counterpart` = 1 AND month(`date`) = '$month' AND year(`date`) = '$year')";
-if($stmt = $mysqli->query($sql)){
-	while($row = mysqli_fetch_array($stmt)) {
-		// Build table
-		$date = date("d-M Y", strtotime($row['date']));
-
-		if($row['key'] == 1){
-			$amount = "(".$row['amount'].")";
-		} else{
-			$amount = $row['amount'];
-		}
-
-		$values[] = "<tr><td>".$date."</td><td>".$row['location']."</td><td>".$row['description']."</td><td>".$row['category']."</td><td>".$row['subcategory']."</td><td>".$amount."</td><td>".ucfirst($row['type_descr'])."</td></tr>";
-	}
-
-	$expenses = implode("",$values);
-
-	} else{
-	echo "Couldn't fetch expenses. Please try again later.";
-}
-
-// Clear variables
-unset($values);
-$stmt->close();
-
 // Pull chart data
 $chart = array();
 
@@ -230,8 +204,8 @@ $mysqli->close();
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="card">
-			      <h3>Total expenses</h3>
-			      <div id="overview" style="z-index: 1; width: 99%; height: 400px; display: inline-block;"></div>
+			      <h3>Overview</h3>
+			      <div id="overview" style="z-index: 1; width: 100%; height: auto; display: inline-block;"></div>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -245,42 +219,25 @@ $mysqli->close();
 				<div class="col-lg-6">
 					<div class="card">
 			      <h3>Breakdown personal expenses</h3>
-						<div id="personal" style="z-index: 1; width: 99%; height: auto; display: inline-block;"></div>
-						<p>Total expenses: <?php echo $personaldebittotal; ?><br />
-						<p>Total earnings: <?php echo $personalcredittotal; ?></p>
+						<div id="personal" style="z-index: 1; width: 100%; height: auto; display: inline-block;"></div>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="card">
 						<h3>Breakdown business expenses</h3>
-						<div id="business" style="z-index: 1; width: 99%; height: auto; display: inline-block;"></div>
-						<p>Total expenses: <?php echo $busidebittotal; ?><br />
-						<p>Total earnings: <?php echo $busicredittotal; ?></p>
+						<div id="business" style="z-index: 1; width: 100%; height: auto; display: inline-block;"></div>
 					</div>
 				</div>
 			</div>
-			<div class="card">
-				<h3>Expense overview</h3>
-				<table class="table table-sm table-striped table-hover">
-					<thead class="bg-logreen text-white">
-		      	<tr>
-		          <th>Date</th>
-		          <th>Location</th>
-		          <th>Description</th>
-		          <th>Category</th>
-		          <th>Subcategory</th>
-		          <th>Amount</th>
-		          <th>Type</th>
-		        </tr>
-					</thead>
-					<tbody>
-	      		<?php echo $expenses; ?>
-					</tbody>
-	      </table>
-	    </div>
 	  </div>
 	</div>
 </div>
+
+<script>
+window.addEventListener('resize', drawOverview, false);
+window.addEventListener('resize', drawPersonal, false);
+window.addEventListener('resize', drawBusiness, false);
+</script>
 
 <?php include 'footer.php';?>
 

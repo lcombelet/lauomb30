@@ -164,7 +164,7 @@ $mysqli->close();
 	      <h3>Add an expense</h3>
 	      <?php echo $update_err; ?>
 				<div class="row">
-	      	<div class="col-md-6">
+	      	<div class="col-sm-6 col-lg-4">
 			      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 							<div class="input-container">
 								<i class="far fa-calendar-alt icon"></i>
@@ -191,7 +191,7 @@ $mysqli->close();
 								<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
 							</div>
 						</div>
-		      	<div class="col-md-6">
+		      	<div class="col-sm-6 col-lg-4">
 							<div class="input-container">
 								<i class="fas fa-euro-sign icon"></i>
 								<input class="input-field" type="number" name="amount" placeholder="Amount" min="0" step="0.01"><?php echo $amount_err; ?>
@@ -212,11 +212,10 @@ $mysqli->close();
 									<option value="1">Shared</option>
 								</select><?php echo $type_err; ?>
 							</div>
+
+							<button class="formbtn" type="submit" name="submit" value="submit">Submit expense</button>
 						</div>
 					</div>
-
-					<button class="formbtn" type="submit" name="submit" value="submit">Submit expense</button>
-
 	      </form>
 	    </div>
 	  </div>
