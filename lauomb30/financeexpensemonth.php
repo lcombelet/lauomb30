@@ -98,7 +98,12 @@ $mysqli->close();
 				<div class="col">
 					<div class="card">
 						<h3>Expense overview</h3>
-						<table class="table table-sm table-striped table-hover">
+						<div class="input-container">
+							<i class="fas fa-search icon"></i>
+							<input type="text" id="myInput" onkeyup="searchTable()" placeholder="Search expenses.."></p>
+						</div>
+
+						<table class="table table-sm table-striped table-hover" id="myTable">
 							<thead class="bg-logreen text-white">
 				      	<tr>
 				          <th>Date</th>
@@ -120,6 +125,30 @@ $mysqli->close();
 	  </div>
 	</div>
 </div>
+
+<script>
+function searchTable() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 
 <?php include 'footer.php';?>
 
