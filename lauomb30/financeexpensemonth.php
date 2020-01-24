@@ -100,7 +100,7 @@ $mysqli->close();
 						<h3>Expense overview</h3>
 						<div class="input-container">
 							<i class="fas fa-search icon"></i>
-							<input type="text" id="myInput" onkeyup="searchTable()" placeholder="Search expenses.."></p>
+							<input class="input-field" type="text" id="myInput" onkeyup="searchTable()" placeholder="Search expenses.."></p>
 						</div>
 
 						<table class="table table-sm table-striped table-hover" id="myTable">
