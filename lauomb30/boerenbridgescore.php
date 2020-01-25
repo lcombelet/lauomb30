@@ -23,6 +23,7 @@
       //fix header
       echo "<h3>Score tracker</h3>";
       echo "<table class=\"table table-sm table-striped table-hover\">";
+      echo "<thead class=\"bg-logreen text-white\">";
       echo "<tr><th>Player</th><th>Score</th></tr>";
       echo "</thead>";
       echo "<tbody>";
