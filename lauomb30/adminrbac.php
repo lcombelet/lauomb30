@@ -36,35 +36,40 @@ $stmt->close();
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Admin portal";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'adminside.php';?>
-<?php include 'serverdetails.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
-      <h1><i class="fas fa-user"></i> ADMIN PORTAL</h1>
-    </div>
-		<div class="card">
-			<h2>Permissions</h2>
-			<div class="col-75">
-				<table style="max-width:75%">
-					<tr>
-						<th>Role</th>
-						<th>Permission</th>
-					</tr>
-					<?php echo $permission_err . $permissions; ?>
-				</table>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	<?php include 'adminside.php';?>
+	<?php include 'serverdetails.php';?>
+	</div>
+	  <div class="col-md-9">
+	    <div class="card">
+	      <h2><i class="fas fa-user"></i> ADMIN PORTAL</h2>
+	    </div>
+			<div class="card">
+				<h3>Permissions</h3>
+				<div class="col-md-9">
+					<table class="table table-sm table-striped table-hover" id="myTable">
+						<thead class="bg-logreen text-white">
+							<tr>
+								<th>Role</th>
+								<th>Permission</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php echo $permission_err . $permissions; ?>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-  </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>

@@ -15,31 +15,32 @@ require_once 'config.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Admin portal";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'adminside.php';?>
-<?php include 'serverdetails.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
-      <h1><i class="fas fa-user"></i> ADMIN PORTAL</h1>
-    </div>
-		<div class="card">
-      <h2>Stuff to work on</h2>
-      <ul>
-				<li>User management.</li>
-				<li>RBAC.</li>
-			</ul>
-			<?php print_r($_SESSION['authorizations']); ?>
-    </div>
-  </div>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	<?php include 'adminside.php';?>
+	<?php include 'serverdetails.php';?>
+	</div>
+	  <div class="col-md-9">
+	    <div class="card">
+	      <h2><i class="fas fa-user"></i> ADMIN PORTAL</h2>
+	    </div>
+			<div class="card">
+	      <h3>Stuff to work on</h3>
+	      <ul>
+					<li>User management.</li>
+					<li>RBAC.</li>
+				</ul>
+				<?php print_r($_SESSION['authorizations']); ?>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>

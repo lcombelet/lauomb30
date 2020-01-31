@@ -92,8 +92,9 @@ button.formupdate, button.formreset {
   background-color: transparent;
   color: black;
   padding: 0;
-  text-decoration: none;
   margin: 0;
+  border: none;
+  text-decoration: none;
 }
 
 /* Add a hover effect for buttons */

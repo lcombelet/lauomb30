@@ -101,78 +101,91 @@ if($stmt = $mysqli->prepare($sql)){
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Admin portal";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'adminside.php';?>
-<?php include 'serverdetails.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
-      <h1><i class="fas fa-user"></i> ADMIN PORTAL</h1>
-    </div>
-		<div class="card">
-			<h2>User details</h2>
-			<?php echo $reset_err; ?>
-			<div class="col-75">
-				<?php echo $user_err; ?>
-				<table style="max-width:75%">
-					<tr>
-						<th>Username</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Joined</th>
-					</tr>
-					<tr>
-						<td><b><?php echo $username; ?></b></td>
-						<td><?php echo $firstname . " " . $lastname; ?></td>
-						<td><?php echo $email; ?></td>
-						<td><?php echo $datecreated; ?></td>
-					</tr>
-				</table>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	<?php include 'adminside.php';?>
+	<?php include 'serverdetails.php';?>
+	</div>
+	  <div class="col-md-9">
+	    <div class="card">
+	      <h2><i class="fas fa-user"></i> ADMIN PORTAL</h2>
+	    </div>
+			<div class="card">
+				<h3>User details</h3>
+				<?php echo $reset_err; ?>
+				<div class="col-md-9">
+					<?php echo $user_err; ?>
+					<table class="table table-sm table-striped table-hover">
+						<thead class="bg-logreen text-white">
+							<tr>
+								<th>Username</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Joined</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><b><?php echo $username; ?></b></td>
+								<td><?php echo $firstname . " " . $lastname; ?></td>
+								<td><?php echo $email; ?></td>
+								<td><?php echo $datecreated; ?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-		<div class="card">
-			<div class="col-75">
-				<h2>Profile details</h2>
-				<table style="max-width:50%">
-					<tr>
-						<th>Password age</th>
-						<th>Type</th>
-						<th>Reset</th>
-					</tr>
-					<tr>
-						<td><?php echo $datepassword; ?></td>
-						<td align="center"><?php echo $passwordreset; ?></td>
-						<td>
-							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-							<input type="hidden" name="id" value="<?php echo $id; ?>">
-							<button class="formreset" type="submit" name="reset"><i class="fas fa-redo-alt"></i></button>
-			      	</form>
-						</td>
-					</tr>
-				</table>
+			<div class="card">
+				<div class="col-md-3">
+					<h3>Profile details</h3>
+					<table class="table table-sm table-striped table-hover">
+						<thead class="bg-logreen text-white">
+							<tr>
+								<th>Password age</th>
+								<th>Type</th>
+								<th>Reset</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><?php echo $datepassword; ?></td>
+								<td align="center"><?php echo $passwordreset; ?></td>
+								<td>
+									<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+									<input type="hidden" name="id" value="<?php echo $id; ?>">
+									<button class="formreset" type="submit" name="reset"><i class="fas fa-redo-alt"></i></button>
+					      	</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-		<div class="card">
-			<h2>Assigned roles</h2>
-			<?php echo $activate_err; ?>
-			<div class="col-75">
-				<table style="max-width:25%">
-					<tr>
-						<th>Role</th>
-					</tr>
-					<?php echo $role_err . $roles; ?>
-				</table>
+			<div class="card">
+				<h3>Assigned roles</h3>
+				<?php echo $activate_err; ?>
+				<div class="col-md-3">
+					<table class="table table-sm table-striped table-hover">
+						<thead class="bg-logreen text-white">
+							<tr>
+								<th>Role</th>
+							</tr>
+						</thead>
+						<tboy>
+							<?php echo $role_err . $roles; ?>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-  </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>

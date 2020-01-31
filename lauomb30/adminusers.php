@@ -38,6 +38,37 @@ if(isset($_POST['activate'])) {
 	$stmt->close();
 }
 
+// Block account
+if(isset($_POST['block'])) {
+	unset($_POST['block']);
+
+	$id = $_POST['id'];
+
+	// Update Blocked table
+	$sql = "INSERT INTO `tbl_users_unknown` SELECT * FROM `tbl_users` WHERE `user_id`=?";
+
+	if($stmt = $mysqli->prepare($sql)){
+		$stmt->bind_param("s", $id);
+		$stmt->execute();
+
+		// Remove from user table
+		$sql = "DELETE FROM `tbl_users` WHERE `user_id`=?";
+
+		if($stmt = $mysqli->prepare($sql)){
+			$stmt->bind_param("s", $id);
+			$stmt->execute();
+		} else{
+				$activate_err = "Could not delete user.";
+		}
+
+	} else{
+			$activate_err = "Could not add user to blacklist.";
+	}
+
+	// Close statement
+	$stmt->close();
+}
+
 // Create new account
 if(isset($_POST['create'])) {
 	unset($_POST['create']);
@@ -130,6 +161,7 @@ if($stmt = $mysqli->query($sql)){
 		if($row['editable'] == 0){
 			$status = "<i class=\"fas fa-user-secret\"></i>";
 			$maintainaccount = "";
+			$blockaccount = "";
 	 	} else{
 				switch ($row['status']) {
 					case 0:
@@ -152,11 +184,16 @@ if($stmt = $mysqli->query($sql)){
 					<input type=\"hidden\" name=\"id\" value=\"".$row['id']."\">
 					<button class=\"formupdate\" type=\"submit\" name=\"maintain\"><i class=\"far fa-edit\"></i></button>
 					</form>";
+
+					$blockaccount = "<form action=\"" . htmlspecialchars($_SERVER["PHP_SELF"]). "\" method=\"post\">
+						<input type=\"hidden\" name=\"id\" value=\"".$row['id']."\">
+						<button class=\"formupdate\" type=\"submit\" name=\"block\"><i class=\"fas fa-ban\"></i></button>
+						</form>";
 	 		}
 
 		$datecreated = date("d-M Y", strtotime($row['created']));
 
-		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td align=\"center\">".$status."</td><td>".$maintainaccount."</td></tr>";
+		$values[] = "<tr><td><b>".$row['username']."</b></td><td>".$row['firstname']." ".$row['lastname']."</td><td>".$row['email']."</td><td>".$datecreated."</td><td align=\"center\">".$status."</td><td align=\"center\">".$maintainaccount."</td><td align=\"center\">".$blockaccount."</td></tr>";
 	}
 
 $users = implode("",$values);
@@ -173,45 +210,50 @@ $stmt->close();
 <!DOCTYPE html>
 <html>
 <head>
-	<?php $title = "LauOmb Webserver - Admin portal";
-  include 'head.php'; ?>
+	<?php include 'head.php'; ?>
 </head>
 <body>
 
-<?php include 'header.php';?>
+<?php include 'navbar.php';?>
 
-<div class="row">
-<div class="col-25">
-<?php include 'adminside.php';?>
-<?php include 'serverdetails.php';?>
-</div>
-  <div class="col-75">
-    <div class="card">
-      <h1><i class="fas fa-user"></i> ADMIN PORTAL</h1>
-    </div>
-		<div class="card">
-			<h2>User overview</h2>
-			<?php echo $activate_err; ?>
-			<div class="col-75">
-				<table style="max-width:75%">
-					<tr>
-						<th>Username</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Joined</th>
-						<th>Status</th>
-						<th>Manage</th>
-					</tr>
-					<?php echo $users; ?>
-				</table>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-3">
+	<?php include 'adminside.php';?>
+	<?php include 'serverdetails.php';?>
+	</div>
+	  <div class="col-md-9">
+	    <div class="card">
+	      <h2><i class="fas fa-user"></i> ADMIN PORTAL</h2>
+	    </div>
+			<div class="card">
+				<h3>User overview</h3>
+				<?php echo $activate_err; ?>
+				<div class="col-md-9">
+					<table class="table table-sm table-striped table-hover" id="myTable">
+						<thead class="bg-logreen text-white">
+							<tr>
+								<th>Username</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Joined</th>
+								<th>Status</th>
+								<th>Edit</th>
+								<th>Ban</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php echo $users; ?>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
-		<div class="card">
-			<h2>Create user</h2>
-			<?php echo $create_err; ?>
+			<div class="card">
+				<h3>Create user</h3>
+				<?php echo $create_err; ?>
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" style="max-width:50%">
 					<div class="row">
-						<div class="col-50">
+						<div class="col-sm-6 col-lg-4">
 							<div class="input-container">
 								<i class="far fa-user icon"></i>
 								<input class="input-field" type="text" placeholder="First name" name="firstname" autofocus autocomplete="off" value="<?php echo $firstname; ?>"><?php echo $firstname_err; ?>
@@ -225,7 +267,7 @@ $stmt->close();
 								<input class="input-field" type="text" placeholder="Email" name="email" autocomplete="off" value="<?php echo $email; ?>"><?php echo $email_err; ?>
 							</div>
 						</div>
-						<div class="col-50">
+						<div class="col-sm-6 col-lg-4">
 							<div class="input-container">
 								<i class="fas fa-user-circle icon"></i>
 								<input class="input-field" type="text" placeholder="Username" name="username" autocomplete="off" value="<?php echo $username; ?>"><?php echo $username_err; ?>
@@ -237,12 +279,13 @@ $stmt->close();
 									<option value="1" selected>Normal account</option>
 								</select><?php echo $editable_err; ?>
 							</div>
+							<button class="formbtn" type= "submit" name="create">Create user</button>
 						</div>
-					<button type= "submit" name="create">Create user</button>
-				</div>
-			</form>
-    </div>
-  </div>
+					</div>
+				</form>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <?php include 'footer.php';?>
