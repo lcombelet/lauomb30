@@ -50,23 +50,26 @@ if(isset($_POST['block'])) {
 	if($stmt = $mysqli->prepare($sql)){
 		$stmt->bind_param("s", $id);
 		$stmt->execute();
+	} else{
+			$activate_err = "Could not add user to blacklist.";
+	}
 
-		// Remove from user table
+// Remove from user table when block is success
+	if(empty($active_err)){
 		$sql = "DELETE FROM `tbl_users` WHERE `user_id`=?";
 
 		if($stmt = $mysqli->prepare($sql)){
 			$stmt->bind_param("s", $id);
 			$stmt->execute();
+
+			$active_err = "User blocked.";
 		} else{
 				$activate_err = "Could not delete user.";
 		}
-
-	} else{
-			$activate_err = "Could not add user to blacklist.";
 	}
 
-	// Close statement
-	$stmt->close();
+		// Close statement
+		$stmt->close();
 }
 
 // Create new account
