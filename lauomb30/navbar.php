@@ -102,12 +102,16 @@
   	              <input class="input-field" type="text" placeholder="Email" name="email" autocomplete="off" value="<?php echo $email; ?>"><?php echo $email_err; ?>
   	            </div>
   	            <div class="input-container">
-  	              <i class="fas fa-key icon"></i>
+  	              <i class="fas fa-fingerprint icon"></i>
   	              <input class="input-field" type="password" placeholder="Choose password" name="password" autocomplete="off" value="<?php echo $password; ?>"><?php echo $password_err; ?>
   	            </div>
   	            <div class="input-container">
-  	              <i class="fas fa-key icon"></i>
+  	              <i class="fas fa-fingerprint icon"></i>
   	              <input class="input-field" type="password" placeholder="Confirm password" name="confirm_password" autocomplete="off" value="<?php echo $confirm_password; ?>"><?php echo $confirm_password_err; ?>
+  	            </div>
+                <div class="input-container">
+  	              <i class="fas fa-fingerprint icon"></i>
+  	              <input class="input-field" type="text" placeholder="Registration code" name="registration_code" autocomplete="off" value="<?php echo $registration_code; ?>"><?php echo $registration_code_err; ?>
   	            </div>
       	        <button class="formbtn" type= "submit" name="submit">Submit form</button>
       	        <p>Already have an account? <a href="login.php">Login here</a>.</p>
