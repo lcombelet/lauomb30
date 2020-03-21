@@ -28,7 +28,8 @@
       if(in_array("9", $_SESSION['authorizations'])){ echo "<a class=\"dropdown-item\" href=\"media.php\"><i class=\"far fa-images\"></i> Photo albums</a>"; }
       if(in_array("10", $_SESSION['authorizations'])){ echo "<a class=\"dropdown-item\" href=\"portugal.php\"><i class=\"fas fa-suitcase\"></i> Portugal 2018</a>"; }
       echo "</div>
-      </li>"; } ?>
+      </li>"; }
+      if(in_array("15", $_SESSION['authorizations'])){ echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"files.php\"><i class=\"fas fa-download\"></i> Files</a></li>"; } ?>
   </ul>
   <ul class="navbar-nav ml-auto">
     <?php

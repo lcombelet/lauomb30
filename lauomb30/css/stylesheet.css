@@ -184,3 +184,11 @@ button.formreset:hover {
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+.uploader {
+  font-size: 4cm;
+  color: #4CAF50;
+}
+.uploader.highlight {
+  color: #333;
+}

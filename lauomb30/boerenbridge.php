@@ -473,33 +473,33 @@ if(isset($_POST['endGame'])) {
           <div class="row">
           	<div class="col-sm-6 col-lg-4">
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="input-container">
-    							<i class="far fa-calendar-alt icon"></i>
-    							<input class="input-field" type="date" name="gamedate" autofocus><?php echo $gamedate_err; ?>
-    						</div>
-                <div class="input-container">
-                  <i class="fas fa-location-arrow icon"></i>
-                  <input class="input-field" type="text" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50"><?php echo $location_err; ?>
-                </div>
-                <button class="formbtn" type="submit" name="submitPlayers" value="submit">Continue to next step</button>
+              <div class="input-container">
+  							<i class="far fa-calendar-alt icon"></i>
+  							<input class="input-field" type="date" name="gamedate" autofocus><?php echo $gamedate_err; ?>
+  						</div>
+              <div class="input-container">
+                <i class="fas fa-location-arrow icon"></i>
+                <input class="input-field" type="text" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50"><?php echo $location_err; ?>
               </div>
-              <div class="col-sm-6 col-lg-4">
-                <div class="input-container">
-                  <i class="fas fa-users icon"></i>
-                  <div class="slidecontainer">
-                    <input type="range" min="2" max="8" value="2" step="1" class="slider" id="playerRange" name="playercount">
-                  </div>
-                  Players:&nbsp;<span id="playerValue"></span>
+              <button class="formbtn" type="submit" name="submitPlayers" value="submit">Continue to next step</button>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="input-container">
+                <i class="fas fa-users icon"></i>
+                <div class="slidecontainer">
+                  <input type="range" min="2" max="8" value="2" step="1" class="slider" id="playerRange" name="playercount">
                 </div>
-                <div class="input-container">
-                  <i class="far fa-hand-pointer icon"></i>
-                  <div class="slidecontainer">
-                    <input type="range" min="4" max="25" value="4" step="1" class="slider" id="cardRange" name="cardcount">
-                  </div>
-                  Cards:&nbsp;<span id="cardValue"></span>
+                Players:&nbsp;<span id="playerValue"></span>
+              </div>
+              <div class="input-container">
+                <i class="far fa-hand-pointer icon"></i>
+                <div class="slidecontainer">
+                  <input type="range" min="4" max="25" value="4" step="1" class="slider" id="cardRange" name="cardcount">
                 </div>
+                Cards:&nbsp;<span id="cardValue"></span>
               </div>
             </div>
+          </div>
           </form>
 
           <!-- Reference to js file containing scripts around updating sliders for players and cards -->
