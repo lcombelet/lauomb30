@@ -60,6 +60,20 @@ if(isset($_POST['submit'])) {
 	$stmt->close();
 }
 
+//Pull categories
+$sql = "SELECT * FROM `tbl_fin_category`";
+if($stmt = $mysqli->query($sql)){
+	while($row = mysqli_fetch_array($stmt)) {
+		$values[] = "<option value=\"".$row['id']."\">".$row['description']."</option>";
+	}
+
+	$categories = implode("",$values);
+
+	} else{
+	echo "Couldn't fetch categories. Please try again later.";
+}
+
+
 // Pull subcategories
 $sql = "SELECT * FROM `vw_fin_subcategory`";
 if($stmt = $mysqli->query($sql)){
@@ -139,6 +153,25 @@ $mysqli->close();
 <html>
 <head>
 	<?php include 'head.php'; ?>
+	<script>
+	$(document).ready(function(){
+	    $('#category').on('change', function(){
+	        var categoryID = $(this).val();
+	        if(categoryID){
+	            $.ajax({
+	                type:'POST',
+	                url:'finance_ajaxData.php',
+	                data:'category_id='+categoryID,
+	                success:function(html){
+	                    $('#subcategory').html(html);
+	                }
+	            });
+	        }else{
+	            $('#subcategory').html('<option value="">Select category first</option>');
+	        }
+	    });
+	});
+	</script>
 </head>
 <body>
 
@@ -187,8 +220,12 @@ $mysqli->close();
 								<?php echo $description_err; ?>
 							</div>
 							<div class="input-container">
+								<i class="fas fa-list icon"></i>
+								<select class="input-field" id="category" name="category"><option value="">Select category</option><?php echo $categories; ?></select><?php echo $category_err; ?>
+							</div>
+							<div class="input-container">
 								<i class="far fa-list-alt icon"></i>
-								<select class="input-field" name="subcategory"><?php echo $subcategories; ?></select><?php echo $subcategory_err; ?>
+								<select class="input-field" id="subcategory" name="subcategory"><option value="">Select category first</option></select><?php echo $subcategory_err; ?>
 							</div>
 						</div>
 		      	<div class="col-sm-6 col-lg-4">

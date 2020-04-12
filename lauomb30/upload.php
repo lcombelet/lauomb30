@@ -11,7 +11,7 @@ if (file_exists($destination)) {
 
 // ALLOWED FILE EXTENSIONS
 if ($error == "") {
-  $allowed = ["jpg", "jpeg", "png", "gif"];
+  $allowed = ["7z", "gif", "jpeg", "jpg", "png", "rar", "zip"];
   $ext = strtolower(pathinfo($_FILES["file-upload"]["name"], PATHINFO_EXTENSION));
   if (!in_array($ext, $allowed)) {
     $error = "$ext file type not allowed - " . $_FILES["file-upload"]["name"];
