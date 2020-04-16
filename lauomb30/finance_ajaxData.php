@@ -4,7 +4,7 @@ require_once 'config.php';
 
 if(!empty($_POST["category_id"])){
     // Fetch state data based on the specific country
-    $query = "SELECT * FROM tbl_fin_subcategory WHERE fin_category_id = ".$_POST['category_id']."";
+    $query = "SELECT * FROM tbl_fin_subcategory WHERE fin_category_id = ".$_POST['category_id']." ORDER BY `description`";
     $result = $mysqli->query($query);
 
     // Generate HTML of state options list

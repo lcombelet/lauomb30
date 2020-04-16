@@ -61,7 +61,7 @@ if(isset($_POST['submit'])) {
 }
 
 //Pull categories
-$sql = "SELECT * FROM `tbl_fin_category`";
+$sql = "SELECT * FROM `tbl_fin_category` ORDER BY `description`";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		$values[] = "<option value=\"".$row['id']."\">".$row['description']."</option>";
