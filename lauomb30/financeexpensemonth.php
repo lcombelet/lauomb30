@@ -26,19 +26,19 @@ if(isset($_POST['submit'])) {
 }
 
 // Pull expenses
-$sql = "SELECT * FROM `vw_fin_expenses` WHERE (`counterpart` = 1 AND month(`date`) = '$month' AND year(`date`) = '$year')";
+$sql = "SELECT * FROM `vw_fin_expenses` WHERE (month(`date`) = '$month' AND year(`date`) = '$year')";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		// Build table
 		$date = date("d-M Y", strtotime($row['date']));
 
-		if($row['key'] == 1){
+		if($row['sold_from'] == 39){
 			$amount = "(".$row['amount'].")";
 		} else{
 			$amount = $row['amount'];
 		}
 
-		$values[] = "<tr><td>".$date."</td><td>".$row['location']."</td><td>".$row['description']."</td><td>".$row['category']."</td><td>".$row['subcategory']."</td><td>".$amount."</td><td>".ucfirst($row['type_descr'])."</td></tr>";
+		$values[] = "<tr><td>".$date."</td><td>".$row['sold_from']."</td><td>".$row['sold_to']."</td><td>".$row['description']."</td><td>".$row['category']."</td><td>".$row['subcategory']."</td><td>".$amount."</td><td>".ucfirst($row['type_descr'])."</td></tr>";
 	}
 
 	$expenses = implode("",$values);
@@ -109,7 +109,8 @@ $mysqli->close();
 							<thead class="bg-logreen text-white">
 				      	<tr>
 				          <th>Date</th>
-				          <th>Location</th>
+				          <th>Sold from</th>
+				          <th>Sold to</th>
 				          <th>Description</th>
 				          <th>Category</th>
 				          <th>Subcategory</th>

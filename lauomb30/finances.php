@@ -20,40 +20,69 @@ $balance = array();
 if(isset($_POST['submit'])) {
 	unset($_POST['submit']);
 
+	// Get POST data
 	$date = $_POST['date'];
-	$location = $_POST['location'];
+	$counterpart = $_POST['counterpart'];
+	$client_type = 2;
 	$description = $_POST['description'];
 	$subcategory = $_POST['subcategory'];
 	$amount = $_POST['amount'];
-	$counterpart = 1;
 	$key = $_POST['key'];
 	$type = $_POST['type'];
 
-	// Update Expense table
-	$sql = "INSERT INTO `tbl_fin_expenses` (`date`, `location`, `description`, `subcategory`, `amount`, `type`) VALUES (?, ?, ?, ?, ?, ?)";
+	// Determine if Counterpart already exists
+	$sql = "SELECT `clt_id` FROM `tbl_fin_clients` WHERE `clt_name` LIKE '".$counterpart."%' LIMIT 1";
 
-	if($stmt = $mysqli->prepare($sql)){
-		$stmt->bind_param("ssssss", $date, $location, $description, $subcategory, $amount, $type);
-		$stmt->execute();
-	}
+	if ($stmt = $mysqli->prepare($sql)){
+		if($stmt->execute()){
+			$stmt->store_result();
 
-	// Pull ID from Expense table for updating Payments table
-	$sql = "SELECT * FROM `vw_fin_most_recent_transaction`";
+			$stmt->bind_result($client);
+			$stmt->fetch();
 
-	if($stmt = $mysqli->query($sql)){
-		while($row = mysqli_fetch_array($stmt)) {
-			$fin_expense_id = $row['id'];
+			if ($stmt->num_rows == 1){
+				// Counterpart exists
+				} else{
+				// Add client to db
+				$sql= "INSERT INTO `tbl_fin_clients` (`clt_name`, `clt_client_type`) VALUES (?, ?)";
+
+				if($stmt = $mysqli->prepare($sql)){
+					$stmt->bind_param("ss", $counterpart, $client_type);
+					$stmt->execute();
+
+					$client = $stmt->insert_id;
+				}
+
+				// Close statement
+				$stmt->close();
+			}
 		}
 	}
 
-	// Update Payment table
-	$sql = "INSERT INTO `tbl_fin_payments` (`fin_expenses_id`, `counterpart`, `key`) VALUES (?, ?, ?)";
+	// Close statement
+	$stmt->close();
+
+	// Determine sold from and sold to
+	if($key==1){
+		$soldfrom = $client;
+		$soldto = 39;
+	} else{
+		$soldfrom = 39;
+		$soldto = $client;
+	}
+
+	// Update Expense table
+	$sql = "INSERT INTO `tbl_fin_expenses` (`exp_date`, `exp_sold_from`, `exp_sold_to`, `exp_description`, `exp_category`, `exp_amount`, `exp_type`) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 	if($stmt = $mysqli->prepare($sql)){
-		$stmt->bind_param("sss", $fin_expense_id, $counterpart, $key);
+		$stmt->bind_param("sssssss", $date, $soldfrom, $soldto, $description, $subcategory, $amount, $type);
 		$stmt->execute();
 
-		$update_err = "<h5>Update complete!</h5>";
+		$update_id = $stmt->insert_id;
+
+		$update_err = "<h5>Update completed (".$update_id.")</h5>";
+	} else{
+		$update_err = "<h5>Error updating database</h5>";
 	}
 
 	// Close statement
@@ -73,6 +102,9 @@ if($stmt = $mysqli->query($sql)){
 	echo "Couldn't fetch categories. Please try again later.";
 }
 
+// Clear variables
+unset($values);
+$stmt->close();
 
 // Pull subcategories
 $sql = "SELECT * FROM `vw_fin_subcategory`";
@@ -91,36 +123,17 @@ if($stmt = $mysqli->query($sql)){
 unset($values);
 $stmt->close();
 
-// Pull Counterparts
-$sql = "SELECT * FROM `vw_fin_counterparts`";
+// Pull clients
+$sql = "SELECT * FROM `tbl_fin_clients` ORDER BY `clt_name` ASC";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
-		$values[] = "<option value=\"".$row['id']."\">".$row['name']."</option>";
+		$values[] = "<option value=\"".$row['clt_name']."\">";
 	}
 
-	$counterparts = implode("",$values);
-	unset($values);
+	$counterpart = implode("",$values);
 
 	} else{
-	echo "Couldn't fetch subcategories. Please try again later.";
-}
-
-// Clear variables
-unset($values);
-$stmt->close();
-
-// Pull Locations
-$sql = "SELECT * FROM `vw_fin_locations`";
-if($stmt = $mysqli->query($sql)){
-	while($row = mysqli_fetch_array($stmt)) {
-		$values[] = "<option value=\"".$row['location']."\">";
-	}
-
-	$locations = implode("",$values);
-	unset($values);
-
-	} else{
-	echo "Couldn't fetch locations. Please try again later.";
+	echo "Couldn't fetch counterpart. Please try again later.";
 }
 
 // Clear variables
@@ -135,7 +148,6 @@ if($stmt = $mysqli->query($sql)){
 	}
 
 	$descriptions = implode("",$values);
-	unset($values);
 
 	} else{
 	echo "Couldn't fetch descriptions. Please try again later.";
@@ -186,13 +198,6 @@ $mysqli->close();
 	    <div class="card">
 	      <h2><i class="far fa-credit-card"></i> PERSONAL FINANCES</h2>
 	    </div>
-			<div class="card">
-	      <h3>Stuff to work on</h3>
-	      <ul>
-					<li>Yearly overview, show graph for entire year and not only for the months in which data is available.</li>
-					<li>Time analysis - Line chart per subcategory on progress of expense/income/savings over time.</li>
-				</ul>
-	    </div>
 	    <div class="card">
 	      <h3>Add an expense</h3>
 	      <?php echo $update_err; ?>
@@ -205,9 +210,9 @@ $mysqli->close();
 							</div>
 							<div class="input-container">
 								<i class="fas fa-location-arrow icon"></i>
-								<input class="input-field" list="locations" name="location" placeholder="Location" autocomplete="off" maxlength="45" size="50">
-									<datalist id="locations">
-										<?php echo $locations; ?>
+								<input class="input-field" list="counterpart" name="counterpart" placeholder="Counterpart" autocomplete="off" maxlength="45" size="50">
+									<datalist id="counterpart">
+										<?php echo $counterpart; ?>
 									</datalist>
 								<?php echo $location_err; ?>
 							</div>
@@ -244,9 +249,7 @@ $mysqli->close();
 								<i class="fas fa-chart-bar icon"></i>
 								<select class="input-field" name="type">
 									<option value="2">Business</option>
-									<option value="0" selected>Personal</option>
-									<option value="3">Savings</option>
-									<option value="1">Shared</option>
+									<option value="1" selected>Personal</option>
 								</select><?php echo $type_err; ?>
 							</div>
 
