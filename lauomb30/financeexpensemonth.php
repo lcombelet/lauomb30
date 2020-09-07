@@ -26,7 +26,7 @@ if(isset($_POST['submit'])) {
 }
 
 // Pull expenses
-$sql = "SELECT * FROM `vw_fin_expenses` WHERE (month(`date`) = '$month' AND year(`date`) = '$year')";
+$sql = "SELECT * FROM `vw_fin_transactions` WHERE (month(`date`) = '$month' AND year(`date`) = '$year')";
 if($stmt = $mysqli->query($sql)){
 	while($row = mysqli_fetch_array($stmt)) {
 		// Build table
